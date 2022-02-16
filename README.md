@@ -26,6 +26,7 @@
 ### Computer Science
 
 * Computer Architecture
+  - [1장 컴퓨터구조 Overview](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Computer%20Science/Computer%20Architecture/01_Computer_Architecture_Overview.md)
 * Data structure
 * Database
 * Operating System
