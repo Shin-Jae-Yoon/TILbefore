@@ -84,6 +84,10 @@ print ( format(float_data3_pi, ".1f") )
 
 <br>
 
+추가적인 내용은 [3장 파이썬 문자열 기본](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/03_Python_string.md) 3-8을 참조하라.
+
+<br>
+
 파이썬에서 입력은 `input()`함수를 사용하면 된다.
 
 ```python
