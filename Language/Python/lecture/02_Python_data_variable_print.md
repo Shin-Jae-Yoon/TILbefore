@@ -151,3 +151,13 @@ print(type(glass))
 - 부동소숫점 : float
 - 문자열 : str
 - Boolean : bool
+
+<br>
+
+타입 검사를 하기 위한 Tip
+
+```python
+a = 1
+if (str(type(a)) == "<class 'int'>"):
+    print("정수 타입이 맞습니다.")
+```
