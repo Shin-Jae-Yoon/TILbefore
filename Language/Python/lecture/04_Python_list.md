@@ -145,6 +145,25 @@ print(a[3][:2])
 출력결과 : ['a', 'b']
 ```
 
+<br>
+
+### split()으로 리스트 다루기
+
+<br>
+
+> 사용자로부터 주민등록번호를 입력 받고, 사용자가 남성인지 여성인지 출력하시오. (주민등록번호 뒷자리의 시작이 1이거나 3이면 남성, 2이거나 4이면 여성이다.)
+
+```python
+data = input("주민등록번호를 '-' 포함해서 입력하세요. ")
+
+if (int(data.split('-')[1][0]) == 1) or (int(data.split('-')[1][0]) == 3):
+    print("남성입니다.")
+elif (int(data.split('-')[1][0]) == 2) or (int(data.split('-')[1][0]) == 4):
+    print("여성입니다.")
+else:
+    print("잘못된 주민등록번호 입니다.")
+```
+
 <br><br>
 
 ## 03. 리스트 연산하기
@@ -292,6 +311,8 @@ print(a)
     - 리스트 요소 역순으로 뒤집기 (순서대로 정렬하고 뒤집기 X)
 - index()
     - 리스트에 해당 값이 있으면 그 위치를 반환
+- find()
+    - 리스트에 해당 값이 있으면 그 위치를 반환
 - count()
     - 리스트에 포함된 요소의 개수 세기
 - extend()
@@ -335,6 +356,41 @@ print(a.index(5))
 출력결과 : 2
 출력결과 : ValueError: 5 is not in list
 ```
+
+<br>
+
+**index()와 find() 비교**
+- 이 둘은 비슷한 역할을 하는 것 같지만, 조금 다르다.
+```python
+# index()의 경우
+letters = input()
+var = letters.index('n')
+if var >= 0:
+    print("입력한 문자에 n이 있습니다.")
+else:
+    print("입력한 문자에 n이 없습니다.")
+
+출력결과 : n이 있으면 -> 입력한 문자에 n이 있습니다.
+출력결과 : n이 없으면 -> Value Error
+
+# find()의 경우
+letters = input()
+var = letters.find('n')
+if var >= 0:
+    print("입력한 문자에 n이 있습니다.")
+else:
+    print("입력한 문자에 n이 없습니다.")
+
+출력결과 : n이 있으면 -> 입력한 문자에 n이 있습니다.
+출력결과 : n이 없으면 -> 입력한 문자에 n이 없습니다.
+```
+<br>
+
+사용자가 입력한 것에 n이 있다면 정상적으로 "입력한 문자에 n이 있습니다."라고 출력 되지만, n이 없는 경우, `index()`는 Value Error가 출력되고 `find()`는 정상적으로 값이 출력된다.
+
+<br>
+
+이는, [3장 파이썬 문자열 자료형 기본 - 다양한 함수](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Language/Python/lecture/03_Python_string.md#05-%EB%AC%B8%EC%9E%90%EC%97%B4-%EB%8B%A4%EC%96%91%ED%95%9C-%ED%95%A8%EC%88%98%EB%93%A4)에 기록되어있는 내용인데, `find()`는 없는 값을 찾으면 -1을 반환하지만, `index()`는 없는 값을 찾으면 오류를 반환하기 때문이다.
 
 <br>
 
