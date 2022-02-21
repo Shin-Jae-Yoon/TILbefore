@@ -40,5 +40,6 @@
   - [2장 파이썬 데이터 타입, 변수, 그리고 출력](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/02_Python_data_variable_print.md)
   - [3장 파이썬 문자열 자료형 기본](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/03_Python_string.md)
   - [4장 파이썬 리스트 자료형 기본](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/04_Python_list.md)
+  - [5장 파이썬 튜플 자료형 기본](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/05_Python_tuple.md)
 * Java
 * JavaScript
