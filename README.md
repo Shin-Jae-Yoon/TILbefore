@@ -41,5 +41,6 @@
   - [3장 파이썬 문자열 자료형 기본](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/03_Python_string.md)
   - [4장 파이썬 리스트 자료형 기본](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/04_Python_list.md)
   - [5장 파이썬 튜플 자료형 기본](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/05_Python_tuple.md)
+  - [6장 파이썬 딕셔너리 자료형 기본](ttps://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/06_Python_dictionary.md)
 * Java
 * JavaScript
