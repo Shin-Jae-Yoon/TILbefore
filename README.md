@@ -43,5 +43,7 @@
   - [5장 파이썬 튜플 자료형 기본](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/05_Python_tuple.md)
   - [6장 파이썬 딕셔너리 자료형 기본](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/06_Python_dictionary.md)
   - [7장 파이썬 집합 자료형 기본](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/07_Python_set.md)
+  - [8장 파이썬 불 자료형 기본](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/08_Python_bool.md)
+  - [9장 파이썬 변수와 메모리](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/09_Python_variable.md)
 * Java
 * JavaScript
