@@ -30,6 +30,7 @@
 * Data structure
 * Database
 * Operating System
+  - [운영체제 학교수업 1강](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Computer%20Science/Operating%20System/pukyong/2022.03.04(%EA%B8%88)%20-%201%EA%B0%95.md)
 
 <br>
 
