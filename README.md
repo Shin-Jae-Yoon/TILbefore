@@ -47,6 +47,7 @@
   - [8장 파이썬 불 자료형 기본](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/08_Python_bool.md)
   - [9장 파이썬 변수와 메모리](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/09_Python_variable.md)
   - [10장 파이썬 조건문](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/10_Python_condition.md)
-  - [11장 파이썬 반복문](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/11_Python_loop.md)
+  - [11장 파이썬 반복문(for문)](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/11_Python_for.md)
+  - [12장 파이썬 반복문(while문)](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/12_Python_while.md)
 * Java
 * JavaScript
