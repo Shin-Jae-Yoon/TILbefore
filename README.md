@@ -51,3 +51,11 @@
   - [12장 파이썬 반복문(while문)](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/12_Python_while.md)
 * Java
 * JavaScript
+
+<br>
+
+### Problem Solving
+
+* CodeUp
+  - [코드업 파이썬 기초 100제](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Problem_Solving/CodeUp/Basic100.md)
+* Baekjoon
