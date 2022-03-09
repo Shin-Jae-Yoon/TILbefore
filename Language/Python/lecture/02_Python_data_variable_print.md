@@ -3,6 +3,7 @@
 > Contents <br>
 >   01. 출력과 입력
 >   02. 변수, 데이터 타입
+>   03. print() 문의 옵션
 
 <br><br>
 
@@ -179,4 +180,94 @@ print(type(glass))
 a = 1
 if (str(type(a)) == "<class 'int'>"):
     print("정수 타입이 맞습니다.")
+```
+
+<br><br>
+
+## 03. print() 문의 옵션
+
+<br>
+
+출력문에서 사용하는 print() 함수에는 옵션을 여러 가지 설정할 수 있다.
+
+1. sep(separation)
+   단어 뜻 그대로 분리하여, 출력한다는 의미이다. 갈라놓을 문자를 지정할 수 있는데 이것을 `구분자`라고 한다.
+
+- `sep=' '` 형식으로 사용
+- 클론 기호`' '`를 사이에 두고 값을 출력
+
+```python
+print('S','E','P', sep='@')
+
+출력 : S@E@P
+```
+
+```python
+a, b = input().split(':')
+print(a, b, sep=':')
+
+입력 : 3:16
+출력 : 3:16
+```
+
+- 아무것도 없는 빈(empty) 문자는 그냥 `''`
+- join() 함수, 반복문 섞어서도 가능
+```python
+(a, b) = input().split("-")
+print(a, b, sep="")
+
+a = input().split("-")
+result = ''.join(s for s in a)
+print(result)
+
+입력 : 000907-1121112
+출력 : 0009071121112
+```
+
+<br>
+
+2. end
+   단어 뜻 그대로 마지막이라는 의미이다. 줄바꿈을 하지 않고 이어서 출력하겠다는 뜻이다.
+
+```python
+print("I like", end=" ")
+print("money")
+
+출력 : I like money
+```
+
+- end=' ' 사이에 무언가를 입력하면, sep와 비슷한 기능을 한다.(구분자를 사용할 수 있다) 첫번째 출력문과, 두번째 출력문 사이에 end에 넣어준 문자열이 출력된다.
+
+```python
+print("I like", end=" gold and ")
+print("money")
+
+출력 : I like gold and money
+```
+
+<br>
+
+3. format
+    format 함수를 이용한 print() 다루기는 [3장 문자열](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Language/Python/lecture/03_Python_string.md#03-format-%ED%95%A8%EC%88%98-%EC%9D%B4%EC%9A%A9-%ED%8F%AC%EB%A7%A4%ED%8C%85) 에서 상세히 설명한다.
+
+- `.format() 이용`
+
+```python
+print("{0}월{1}일 입니다.".format(3,9))
+
+출력 : 3월 9일 입니다.
+```
+
+- `%` 이용 포맷팅 (가장 많이 사용할 듯)
+
+```python
+print("%s을 %d개 주세요." % ("초콜렛", 10))
+
+출력 : 초콜렛을 10개 주세요.
+```
+
+```python
+print("%d + %d = %d" % (1, 2, 3))
+
+출력 : 1 + 2 = 3
 ```
