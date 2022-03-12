@@ -31,6 +31,8 @@
 * Database
 * Operating System
   - [운영체제 학교수업 1강](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Computer%20Science/Operating%20System/pukyong/2022.03.04(%EA%B8%88)%20-%201%EA%B0%95.md)
+  - [운영체제 학교수업 2강](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Computer%20Science/Operating%20System/pukyong/2022.03.10(%EB%AA%A9)%20-%202%EA%B0%95.md)
+  - [운영체제 학교수업 3강](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Computer%20Science/Operating%20System/pukyong/2022.03.11(%EA%B8%88)%20-%203%EA%B0%95.md)
 
 <br>
 
@@ -51,11 +53,3 @@
   - [12장 파이썬 반복문(while문)](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/Python/lecture/12_Python_while.md)
 * Java
 * JavaScript
-
-<br>
-
-### Problem Solving
-
-* CodeUp
-  - [코드업 파이썬 기초 100제](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Problem_Solving/CodeUp/Basic100.md)
-* Baekjoon
