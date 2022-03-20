@@ -34,6 +34,8 @@
   - [운영체제 학교수업 1강](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Computer%20Science/Operating%20System/pukyong/2022.03.04(%EA%B8%88)%20-%201%EA%B0%95.md)
   - [운영체제 학교수업 2강](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Computer%20Science/Operating%20System/pukyong/2022.03.10(%EB%AA%A9)%20-%202%EA%B0%95.md)
   - [운영체제 학교수업 3강](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Computer%20Science/Operating%20System/pukyong/2022.03.11(%EA%B8%88)%20-%203%EA%B0%95.md)
+  - [운영체제 학교수업 4강](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Computer%20Science/Operating%20System/pukyong/2022.03.17(%EB%AA%A9)%20-%204%EA%B0%95.md)
+  - [운영체제 학교수업 5강](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Computer%20Science/Operating%20System/pukyong/2022.03.18(%EA%B8%88)%20-%205%EA%B0%95.md)
 
 <br>
 
