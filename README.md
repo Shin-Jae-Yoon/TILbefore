@@ -30,6 +30,7 @@
 * Data structure
 * Database
   - [인터넷DB 응용 학교수업 1강](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Computer%20Science/Database/pukyong/2022.03.15.md)
+  - [인터넷DB 응용 학교수업 2강](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Computer%20Science/Database/pukyong/2022.03.22.md)
 * Operating System
   - [운영체제 학교수업 1강](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Computer%20Science/Operating%20System/pukyong/2022.03.04(%EA%B8%88)%20-%201%EA%B0%95.md)
   - [운영체제 학교수업 2강](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Computer%20Science/Operating%20System/pukyong/2022.03.10(%EB%AA%A9)%20-%202%EA%B0%95.md)
