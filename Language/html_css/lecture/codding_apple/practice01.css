@@ -1,0 +1,63 @@
+/* 프로필 상단 */
+
+.profile_top {
+    text-align: center;
+}
+
+.profile_top h2 {
+    margin-bottom: 0;
+}
+
+.profile_top p {
+    margin-top: 0;
+    margin-bottom: 50px;
+    font-size: 20px;
+}
+
+.profile_top p span {
+    font-size: 32px;
+    color: blue;
+}
+
+.profile_top div {
+    margin: 20px;
+    padding: 40px;
+    background-color: lightgrey;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 5px 5px rgb(144, 144, 144);
+}
+
+/* box float practice */
+
+.box_practice {
+    margin-top: 50px;
+    display: block;
+}
+
+.box_practice .navbar {
+    background-color: rgb(70,216,233);
+    width: 100%;
+    height: 300px;
+}
+
+.box_practice .article01 {
+    background-color: rgb(102,132,233);
+    width: 50%;
+    height: 500px;
+    float: left;
+}
+
+.box_practice .article02 {
+    background-color: rgb(245,137,111);
+    width: 50%;
+    height: 500px;
+    float: right;
+}
+
+.box_practice .footer {
+    background-color: rgb(116,115,116);
+    width: 100%;
+    height: 300px;
+    clear: both;
+}
