@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+}
+
+html {
+    line-height: 1.15;
+}
+
+div, input, textarea {
+    box-sizing: border-box;
+}
+
+p {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.form-background {
+    background-color: black;
+    padding: 30px;
+}
+
+.form-white {
+    background-color: white;
+    padding: 30px;
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.w-50 {
+    width: 50%;
+    float: left;
+    padding: 10px;
+}
+
+.w-100 {
+    width: 100%;
+    padding: 10px;
+}
+
+textarea {
+    resize: none;
+}
+
+.form-long {
+    height: 200px;
+}
+
+.yellow-button {
+    padding: 10px 30px;
+    float: right;
+    background-color: rgb(255,191,53);
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}

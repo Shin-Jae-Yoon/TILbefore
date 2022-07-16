@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    background-color: gray;
+}
+
+div {
+    box-sizing:content-box
+}
+
+html {
+    line-height: 1.15;
+}
+
+.main-signup {
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 100px;
+    background-color: white;
+    width: 500px;
+    height: 600px;
+    padding: 1px;
+}
+
+.signup-title {
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
+.signup-content {
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
+p {
+    margin-bottom: 0;
+    font-size: 18px;
+}
+
+input {
+    margin-top: 8px;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.first-name {
+    display: inline-block;
+}
+
+.last-name {
+    display: inline-block;
+}
+
+input[type=email] {
+    width: 80%;
+}
+
+input[type=name] {
+    width: 150px;
+    margin-right: 35px;
+
+}
+
+.input-message textarea {
+    width: 85%;
+    margin-top: 8px;
+    font-size: 16px;
+    resize: none;
+}
+
+.content-footer {
+    margin-top: 20px;
+}
+
+.content-footer button {
+    padding: 8px 50px;
+    background-color: rgb(255,191,53);
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 140px;
+}
