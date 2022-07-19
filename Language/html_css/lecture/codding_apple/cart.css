@@ -10,11 +10,89 @@ html {
     line-height: 1.15;
 }
 
-td, th {
-    border: 1px solid black;
+table {
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.container {
+    background-color: rgb(178, 204, 214);
+    height: 600px;
+    width: 80%;
+    margin: auto;
+    margin-top: 100px;
+    padding: 1px;
+}
+
+.header {
+    color: rgb(49, 84, 119);
+    margin-left: 80px;
+    margin-top: 40px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.content {
+    margin-left: 80px;
+    margin-top: 40px;
 }
 
 table {
-    border-collapse: collapse;
-    font-size: 40px;
+    width: 80%;
+    max-width: 800px;
+    height: 300px;
+    font-weight: bold;
+}
+
+thead {
+    text-align: left;
+    color: rgb(163, 177, 194);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+td {
+    padding: 10px;
+}
+
+tbody {
+    border: 1px solid rgb(178, 204, 214);
+    text-align: right;
+}
+
+tbody span {
+    font-size: 13px;
+    color: rgb(153, 185, 197);
+}
+
+tbody td {
+    color: rgb(153, 185, 197);
+}
+
+.table_total {
+    color: rgb(46, 78, 115);
+}
+
+tr {
+    border: 1px solid rgb(178, 204, 214);
+}
+
+.footer {
+    margin-left: 80px;
+    margin-top: 20px;
+}
+
+.footer a {
+    color: rgb(57, 91, 125);
+    font-weight: bold;
+}
+
+.footer button {
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(19, 55, 97);
+    color: white;
+    margin-left: 170px;
 }

@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+}
+
+div {
+    box-sizing: border-box;
+}
+
+html {
+    line-height: 1.15;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+tr,
+td {
+    border: 1px solid black;
+}
+
+.cart-background {
+    width: 100%;
+    background-color: #c2d3de;
+    padding: 30px;
+}

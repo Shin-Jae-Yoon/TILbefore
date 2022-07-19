@@ -8,36 +8,56 @@
         <link rel="stylesheet" href="./cart.css" />
     </head>
     <body>
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <p>안녕하세요</p>
-                            <p>신재윤입니다.</p>
-                        </td>
-                        <td style="vertical-align: middle">2</td>
-                        <td>3</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div>
-            <img
-                src="https://mdn.mozillademos.org/files/12245/frame_image.svg"
-                width="32"
-                height="32"
-            />
-            <span style="vertical-align: middle"
-                >image with a default alignment.</span
-            >
+        <div class="container">
+            <div class="header">
+                <p>Your shopping cart</p>
+            </div>
+            <div class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>ITEM</td>
+                            <td>AMOUNT</td>
+                            <td>PRICE</td>
+                            <td>TOTAL</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="./img/cart_img01.png" alt="" /></td>
+                            <th style="text-align: left">
+                                SONY<span><br />FE 70-200 mm F2.8 GM OSS</span>
+                            </th>
+                            <td>1</td>
+                            <td>1979.00</td>
+                            <td class="table_total">1979.00</td>
+                        </tr>
+                        <tr>
+                            <td><img src="./img/cart_img02.png" alt="" /></td>
+                            <th style="text-align: left">
+                                SONY<span><br />Sonnar T* E 24mm F1.8 ZA</span>
+                            </th>
+                            <td>1</td>
+                            <td>989.00</td>
+                            <td class="table_total">989.00</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="table_total">2968.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer">
+                <div class="footer_link">
+                    <a href="#">Edit your shopping cart</a>
+                    <button>Choose payment method</button>
+                </div>
+            </div>
         </div>
     </body>
 </html>
