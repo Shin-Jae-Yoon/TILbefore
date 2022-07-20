@@ -12,16 +12,93 @@ html {
 
 table {
     border-collapse: collapse;
-    border: 1px solid black;
-}
-
-tr,
-td {
-    border: 1px solid black;
 }
 
 .cart-background {
     width: 100%;
     background-color: #c2d3de;
-    padding: 30px;
+    padding: 2rem;
+}
+
+.cart-navbar {
+    width: 100%;
+    max-width: 46rem;
+    min-width: 46rem;
+    margin: auto;
+}
+
+.cart-table {
+    width: 100%;
+    max-width: 46rem;
+    min-width: 46rem;
+    margin: auto;
+    background-color: white;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #7296ad;
+}
+
+.cart-table span {
+    color: black;
+}
+
+.cart-table td,
+.cart-table th {
+    padding: 1rem;
+    border-bottom: 0.063rem solid #c2d3de;
+}
+
+.cart-table th:nth-child(2) {
+    width: 25rem;
+}
+
+.cart-table td:nth-child(n + 3) {
+    text-align: right;
+}
+
+.cart-table td:nth-child(5) {
+    color: rgb(2, 77, 163);
+}
+
+.cart-footer {
+    width: 100%;
+    max-width: 46rem;
+    min-width: 46rem;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.cart-footer a {
+    color: rgb(2, 77, 163);
+    float: left;
+    margin-top: 1rem;
+    text-decoration: none;
+}
+
+.cart-footer button {
+    color: white;
+    background-color: rgb(2, 77, 163);
+    border: none;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    float: right;
+    cursor: pointer;
+}
+
+.cart-footer button:hover {
+    background-color: #407697;
+}
+
+.cart-footer button:focus {
+    background-color: #349ee0;
+}
+
+.input-test {
+    font-size: 20px;
+}
+
+.cart-footer .input-test:focus {
+    outline: none;
+    border: 2px solid rgb(2, 77, 163);
 }

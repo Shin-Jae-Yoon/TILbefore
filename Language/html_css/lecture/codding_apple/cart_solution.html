@@ -9,41 +9,52 @@
     </head>
     <body>
         <div class="cart-background">
-            <h3>Your shopping cart</h3>
-            <table>
+            <div class="cart-navbar"><h3>Your shopping cart</h3></div>
+            <table class="cart-table">
                 <thead>
                     <tr>
-                        <td></td>
-                        <td>ITEM</td>
-                        <td>AMMOUNT</td>
-                        <td>PRICE</td>
-                        <td>TOTAL</td>
+                        <th></th>
+                        <th>ITEM</th>
+                        <th>AMMOUNT</th>
+                        <th>PRICE</th>
+                        <th>TOTAL</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><img src="./img/cart_img01.png" alt="" /></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            <img src="./img/cart_img01.png" width="100px" />
+                        </td>
+                        <td><span>SONY</span><br />FE 70-200 mm F2.8 GM OSS</td>
+                        <td>1</td>
+                        <td>$1979.00</td>
+                        <td>$1979.00</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            <img src="./img/cart_img02.png" width="100px" />
+                        </td>
+                        <td><span>SONY</span><br />Sonnar T* E 24mm F1.8 ZA</td>
+                        <td>1</td>
+                        <td>$989.00</td>
+                        <td>$989.00</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td
+                            colspan="5"
+                            style="text-align: right; color: rgb(2, 77, 163)"
+                        >
+                            $2968.00
+                        </td>
                     </tr>
                 </tbody>
             </table>
+            <div class="cart-footer">
+                <a href="cart_solution.html">Edit your shopping cart</a>
+                <button>Choose payment method</button>
+                <div style="clear: both"></div>
+                <input type="text" class="input-test" />
+            </div>
         </div>
     </body>
 </html>
