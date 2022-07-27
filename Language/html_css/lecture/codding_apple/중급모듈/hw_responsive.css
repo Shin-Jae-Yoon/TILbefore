@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+}
+
+p,
+h4,
+h3,
+h2,
+h1,
+span,
+button {
+    transform: rotate(0.03deg);
+}
+
+html {
+    line-height: 1.15;
+}
+
+div,
+input,
+textarea {
+    box-sizing: border-box;
+}
+
+.flex-container {
+    display: flex;
+    height: 200px;
+    justify-content: space-between;
+    padding: 50px;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+}
+
+.flex-item {
+    width: 25%;
+}
+
+@media screen and (max-width: 1200px) {
+    .flex-item {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .flex-item {
+        width: 100%;
+    }
+}
