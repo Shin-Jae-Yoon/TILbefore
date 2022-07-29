@@ -270,3 +270,97 @@ em (내 폰트 사이즈의 몇배)
 ```
 
 반응형 웹에서 breakpoint 기준은 **1200px, 992px, 768px, 576px** 단위를 많이 사용한다. 보통 1200px 부터 태블릿, 768px부터 모바일 이런식으로 많이 사용한다. breakpoint는 4개 이상으로 넘어가면 복잡해진다.
+
+<br><br>
+
+### 크롬 개발자 도구 (디버깅)
+
+<br>
+
+-   css 스타일링을 바꿨는데 바뀌지 않는 오류가 있다면, 파일을 찾기보다 크롬 개발자 도구를 사용하자
+-   **우선 적용중인 스타일을 맨 위에서 보여준다**
+-   html의 style 속성 (1000점)
+-   css의 id 속성 (100점)
+-   css의 class 속성 (10점)
+
+<br><br>
+
+### Font Awesome
+
+<br>
+
+평소에 자주 사용하던 폰트어썸 사이트, 간단한 아이콘을 폰트 취급하여 사용
+
+<br>
+
+사용방법
+
+1. 웹 Kit 방식 : 폰트 어썸 사이트에서 kit 생성하고 html head 파일에 삽입하는 방식. 서버 용량이 많지 않거나 귀찮을때 그냥 사용한다. 간단한 프로젝트에서 보통 많이 사용함.
+
+<br>
+
+2. CDN 방식 : Content Delivery Network (콘텐츠 전송 네트워크) 방식으로 폰트 어썸이 호스팅하는 서버에서 아이콘들을 받아와서 사용하는 방식이다.
+
+<br>
+
+    사실 kit 방식과 cdn 방식이 어떤 차이인지 모르겠다.
+    kit 방식은 회원가입 후 발급받은 킷을 이용했고
+    cdn 방식은 구글에 fontawesome cdn 검색해서 나오는
+    cdnjs 사이트에서 그 링크를 이용했다.
+
+    cdnjs에서 가져온 링크는 로그인 할 필요도 없이 바로
+    사용할 수 있었다.
+
+<br>
+
+3. css 파일 다운로드 : 위의 두 방식은 폰트어썸 측의 서버가 다운되면 나에게도 영향이 끼친다는 의미이다. 이를 방지하고자 css 파일을 다운로드 받고 사용하는 방식이 있다. 강의에서는 다운받은 zip 파일에서 css 폴더의 `all.css`, `all.min.css`, `webfonts 폴더` 빼고 모두 지웠다. 그리고 웹폰트 폴더에서도 용량이 적은 woff만 사용했다.
+
+<br>
+
+Font Awesome 사용할 때 css 파일에서 font-size를 조절 혹은 html의 style 속성에서 font-size를 조절하곤 했는데, 간단한 약어로 아이콘 크기 조정, 회전, 애니메이션 효과, 아이콘 끼리 중첩 등이 가능했다. 보통 크기 조절은 간단하게 `<i class="fa-solid fa-cart-shopping fa-3x"></i>`와 같이 `fa-1x` 부터 `fa-5x`까지 되는 것 같았다.
+
+<br>
+
+-   [FontAwesome 스타일링 간단 사용법](https://nuknukhan.tistory.com/38)
+-   [FontAwesome DOCS](https://fontawesome.com/docs/web/style/styling)
+
+<br><br>
+
+### 애니메이션 만드는 원리
+
+<br>
+
+one-way 애니메이션 만드는 방법 <br>
+
+1. 시작스타일 만들기
+2. 최종스타일 만들기
+3. 언제 최종스타일로 변하는지 (ex. 마우스로 올렸을 때)
+4. transition으로 애니메이션 속성 주기
+
+<br>
+transition 세부 속성
+
+```css
+.box {
+    transition-delay: 1s; /* 시작 전 딜레이 */
+    transition-duration: 0.5s; /* transition 작동 속도 */
+    transition-property: opacity; /* 어떤 속성에 transition 입힐 지 */
+    transition-timing-function: ease-in; /* 동작 속도 그래프 조정 */
+}
+```
+
+<br>
+
+[애니메이션 실습 예제는 hw_responsive 파일에 있음](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Language/html_css/lecture/codding_apple/%EC%A4%91%EA%B8%89%EB%AA%A8%EB%93%88/hw_responsive.css)
+
+<br>
+
+[애니메이션 숙제 예제 hw2_animation](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Language/html_css/lecture/codding_apple/%EC%A4%91%EA%B8%89%EB%AA%A8%EB%93%88/hw2_animation.css)
+
+<br>
+
+흘러넘치는거 숨겨주는 `overflow: hidden` 속성 까먹지 말자. overflow 속성은 박스의 폭이나 높이를 초과하는 내부요소를 처리하기 위한 속성이다. 만약 `overflow: visible`하면 넘치는 부분 보여주고 `overflow: scroll`하면 넘치는 요소를 보기 위한 스크롤 바가 생성된다.
+
+<br>
+
+추가로 다른 사이트에서 애니메이션 작동원리 보려면 크롬 개발자 도구에서 마우스로 찍은 후에 점 세개 눌러서 more tools에서 animations 탭을 보면 어떤 속성이 어느 정도의 시간에 거쳐서 변화하는지 보여준다.
