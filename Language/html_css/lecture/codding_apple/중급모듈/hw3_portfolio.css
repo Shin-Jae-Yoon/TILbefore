@@ -1,0 +1,225 @@
+body {
+    margin: 0;
+}
+
+html {
+    line-height: 1.15;
+}
+
+div {
+    box-sizing: border-box;
+}
+
+p,
+h4,
+h3,
+h2,
+h1,
+span,
+button {
+    transform: rotate(0.03deg);
+}
+
+.black-btn {
+    background-color: rgb(68, 68, 69);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+}
+
+.black-btn:hover {
+    background-color: rgb(101, 101, 102);
+    cursor: pointer;
+}
+
+.navbar-bg {
+    background: linear-gradient(rgb(73, 151, 220), rgb(90, 55, 218));
+    color: white;
+    display: flex;
+    padding: 4rem;
+    padding-bottom: 0rem;
+    width: 100%;
+}
+
+.navbar-left {
+    width: 80%;
+    margin-bottom: 4rem;
+}
+
+.navbar-left .navbar-head {
+    font-size: 2rem;
+}
+
+.navbar-left .navbar-content {
+    font-size: 1rem;
+}
+
+.navbar-right {
+    margin-right: 2rem;
+    max-width: 30%;
+    min-width: 30%;
+    overflow: hidden;
+}
+
+.navbar-right img {
+    position: relative;
+    width: 100%;
+    top: 5%;
+}
+
+@media screen and (max-width: 1200px) {
+    .navbar-bg {
+        flex-direction: column;
+    }
+
+    .navbar-left {
+        text-align: center;
+        margin: auto;
+        margin-bottom: 3rem;
+    }
+
+    .navbar-left .navbar-head {
+        font-size: 1.75rem;
+    }
+
+    .navbar-left .navbar-content {
+        font-size: 0.75rem;
+    }
+
+    .navbar-right {
+        margin: auto;
+    }
+}
+
+.content {
+    width: 100%;
+    text-align: center;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.content-head {
+    font-size: 1.1rem;
+}
+
+.content-content {
+    font-size: 0.9rem;
+}
+
+.content-btn {
+    margin-top: 0.6rem;
+}
+
+.menu_icon {
+    text-align: center;
+    background-color: rgb(78, 97, 192);
+    margin-top: 3rem;
+    padding: 1rem;
+    color: white;
+}
+
+.menu_icon_head {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.menu_icon_head p {
+    font-size: 1.4rem;
+    margin: 0.4rem;
+}
+
+.menu_icon_container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.menu_icon_item {
+    margin: auto;
+    margin-bottom: 4rem;
+    width: 25%;
+}
+
+.menu_icon_item i {
+    background-color: white;
+    width: 5rem;
+    height: 5rem;
+    color: rgb(78, 97, 192);
+    border-radius: 50%;
+    padding-top: 1rem;
+    box-sizing: border-box;
+}
+
+.menu_icon_item p {
+    margin-bottom: 0;
+}
+
+.menu_icon_item p:nth-child(3) {
+    margin-top: 0.2rem;
+    font-size: 0.8rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .menu_icon_item {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .menu_icon_item {
+        width: 100%;
+    }
+}
+
+.menu_img {
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.menu_img_content p {
+    margin-bottom: 0;
+}
+
+.menu_img_content h3 {
+    margin-top: 0.2rem;
+}
+
+.menu_img_container {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left;
+    margin: auto;
+    max-width: 1200px;
+    color: white;
+}
+
+.menu_img_item {
+    position: relative;
+    background-image: url(./img/portfolio02.png);
+    width: 50%;
+    height: 40vh;
+    background-size: cover;
+}
+
+.text-box {
+    padding: 5rem;
+}
+
+.white-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    border: 0px solid white;
+    transition: border 0.5s;
+}
+
+.menu_img_item:hover .white-box {
+    border: 30px solid white;
+}
+
+@media screen and (max-width: 768px) {
+    .menu_img_item {
+        width: 100%;
+    }
+}
