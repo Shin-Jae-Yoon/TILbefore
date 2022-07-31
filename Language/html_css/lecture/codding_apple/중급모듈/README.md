@@ -364,3 +364,32 @@ transition 세부 속성
 <br>
 
 추가로 다른 사이트에서 애니메이션 작동원리 보려면 크롬 개발자 도구에서 마우스로 찍은 후에 점 세개 눌러서 more tools에서 animations 탭을 보면 어떤 속성이 어느 정도의 시간에 거쳐서 변화하는지 보여준다.
+
+<br>
+
+### Bootstrap
+
+<br>
+
+-   html, css 개발 속도를 빠르게 해주는 것
+-   css와 js cdn을 복사해서 붙혀넣기 하면 사용할 수 있다. css는 head 태그, js는 body 태그
+-   유용한 키워드 : Navbar, Card, Carousel, Modal, Badge, Media Object, Shadow
+
+<br>
+
+개발시간 단축하는 Utility class가 제공된다.
+
+-   container 클래스를 사용하면 여백 가진 박스가 생성된다.
+-   margin-top 같은 경우 `mt-3`이라고 하면 margin-top이 3정도 들어간다. 1~5까지 있다.
+-   padding-left와 right의 경우 `ps-5`, `pe-5`라고 한다. start와 end의 약자이다.
+-   가운데 정렬은 `text-center`하면 된다.
+-   폰트 사이즈는 `fs-3`로 하면된다. 1~6까지 있다.
+-   width는 `w-50`으로 하면 된다. %수치라서 100%까지 된다.
+-   부트스트랩 홈페이지에서 Utilities에서 유틸리티 클래스 명을 찾을 수 있다.
+
+```html
+<div class="container">카드 같은거 ~</div>
+<h5 class="card-title mt-3">Card title</h5>
+<h5 class="card-title text-center">Card title</h5>
+<h5 class="card-title fs-5">Card title</h5>
+```
