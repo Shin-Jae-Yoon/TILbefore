@@ -279,9 +279,11 @@ em (내 폰트 사이즈의 몇배)
 
 -   css 스타일링을 바꿨는데 바뀌지 않는 오류가 있다면, 파일을 찾기보다 크롬 개발자 도구를 사용하자
 -   **우선 적용중인 스타일을 맨 위에서 보여준다**
+-   css의 !important 속성 (10000점)
 -   html의 style 속성 (1000점)
 -   css의 id 속성 (100점)
 -   css의 class 속성 (10점)
+-   html의 태그를 css에서 셀렉터 이용 (1점)
 
 <br><br>
 
@@ -416,11 +418,16 @@ transition 세부 속성
 
 <br>
 
-### Bootstrap 세로정렬
+    반응형 웹을 디자인 할 때, 모바일 화면을 먼저
+    설계하는 것이 편하다.
 
 <br>
 
-[bootstrap2.html](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Language/html_css/lecture/codding_apple/%EC%A4%91%EA%B8%89%EB%AA%A8%EB%93%88/bootstrap2.html) 예제에서 사진과 글자를 세로정렬할 때의 문제이다. css를 다룰 때 고질적으로 겪었던 오류이다. 부트스트랩의 `align-middle`을 아무리 써봐도 글자가 수직정렬 되지 않았다. 근본적인 해결책을 찾고자 한다.
+### Bootstrap 수직정렬
+
+<br>
+
+[bootstrap2.html](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Language/html_css/lecture/codding_apple/%EC%A4%91%EA%B8%89%EB%AA%A8%EB%93%88/bootstrap2.html) 예제에서 사진과 글자를 수직정렬할 때의 문제이다. css를 다룰 때 고질적으로 겪었던 오류이다. 부트스트랩의 `align-middle`을 아무리 써봐도 글자가 수직정렬 되지 않았다. 근본적인 해결책을 찾고자 한다.
 
 <br>
 
@@ -436,3 +443,84 @@ transition 세부 속성
 <br>
 
 추가로, flex 박스의 순서를 부여하고자 할 때는 `order`를 이용하도록 한다. 물론 order 클래스 역시 조건문을 달아서 반응형으로 제작 가능하다. `order-lg-3`의 형태로 !
+
+<br>
+
+### CSS 레거시 코드 수정 방법
+
+<br>
+
+원본 CSS 파일을 건들기 애매한 경우 CSS를 덮어쓰는 방법이 있다.
+
+1. 같은 클래스명 하단에 작성
+2. 우선순위 높이기
+3. specificity 높이기
+
+먼저, 1번의 방법을 설명하겠다. HTML 파일에서 main.css를 link하고 있다고 하자. 그러면 그 아래에 main2.css를 한 번 더 link 하는 방식이다.
+
+```css
+/* main.css */
+.custom {
+    color: green;
+}
+
+/* main2.css */
+.custom {
+    color: blue;
+}
+```
+
+이렇게 작성하면 결과적으로 색깔이 blue로 바뀔 것이다. **같은 class면 더 밑에 있는게 우선 적용되는 원리이다.** 즉, css 파일이 나뉘어져 있어도 밑에 있으면 더 우선적으로 적용되는 성질이다. media query도 밑에 작성하는 이유도 바로 이것이다.
+
+<br>
+
+2번의 방법은 우선순위를 높이는 것이다. 위에서 **html의 style 속성 (1000점), css의 id 속성 (100점), css의 class 속성 (10점), html 태그 셀렉터 (1점)** 방법을 이용한다. 사실 10000점 짜리도 있다. `!important`가 붙은것은 무조건 최우선적으로 적용된다.
+
+```css
+.custom {
+    color: red !important;
+}
+```
+
+그러나, 우선순위를 높이는 방식은 근본적인 해결방법이 아니다. 계속 우선순위를 높여갈 수 없지 않은가? 따라서 이 방법은 급할 때 사용하되 가능한 사용하지 않도록 한다.
+
+<br>
+
+마지막으로 specificity 점수를 높이는 것이다. 클래스 명을 더 세부적으로 적어서 점수를 찔끔찔끔 올리는 방식이다.
+
+```css
+/* 태그 셀렉터 1점 + class 10점 + class 10점 = 21점 */
+div.main-background .custom {
+    color: green;
+}
+
+/* class 10점 = 10점 */
+.custom {
+    color: red;
+}
+```
+
+따라서, .custom이 아래에 있다고 해도 위가 최종적으로 점수가 높기 때문에 위의 코드가 적용된다. 그러면 애초에 위처럼 누가 작성해놨다고 하면?
+
+```css
+/* 남이 짜놓은 레거시 코드, 21점 */
+div.main-background .custom {
+    color: green;
+}
+
+/* 조금이라도 점수 올리기 위한 발악, 22점 */
+div.main-background p.custom {
+    color: red;
+}
+```
+
+그래서, 처음부터 셀렉터를 너무 정확하게 적어놓으면 나중에 덮어쓰기 힘들 수 있다. 그래서 클래스명 하나를 작성하는 방식을 처음에 사용하도록 노력하자.
+
+<br>
+
+**좋은 코드의 기준**
+
+1. 나중에 수정/관리가 쉬운 코드
+2. 확장성이 좋은 코드
+
+즉, 재활용 가능하고 확장해서 다른 class 만들기 쉽다면 좋은 css 코드라고 할 수 있다.
