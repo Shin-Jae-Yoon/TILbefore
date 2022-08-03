@@ -393,3 +393,46 @@ transition 세부 속성
 <h5 class="card-title text-center">Card title</h5>
 <h5 class="card-title fs-5">Card title</h5>
 ```
+
+<br>
+
+부트스트랩은 특히 **반응형 레이아웃**에 관한 개발속도를 향상시킨다. container 박스 안에 row와 col을 적절하게 배열하면 된다. 보통 한 행 기준 12칸으로 쪼개는데 `col-4`로 하면 정확하게 3등분 되는 것이다.
+
+<br>
+
+```html
+<div class="container">
+    <div class="row text-center">
+        <div class="col-4">안녕하세요</div>
+        <div class="col-4">안녕하세요</div>
+        <div class="col-4">안녕하세요</div>
+    </div>
+</div>
+```
+
+<br>
+
+여기서 반응형을 추가하는 방법은 **조건문**을 더하면 된다. 현재, 웹 사이즈에서는 가로로 배열되어있는데 모바일에서는 세로로 배열하고 싶다고 하자. 그때 `-md`를 달아본다. md는 768px 이상에서만 저 조건을 실행해달라는 의미이다. 추가적인 자료는 [Bootstrap 공식 문서 Grid system](https://getbootstrap.com/docs/5.1/layout/grid/)에서 확인한다.
+
+<br>
+
+### Bootstrap 세로정렬
+
+<br>
+
+[bootstrap2.html](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Language/html_css/lecture/codding_apple/%EC%A4%91%EA%B8%89%EB%AA%A8%EB%93%88/bootstrap2.html) 예제에서 사진과 글자를 세로정렬할 때의 문제이다. css를 다룰 때 고질적으로 겪었던 오류이다. 부트스트랩의 `align-middle`을 아무리 써봐도 글자가 수직정렬 되지 않았다. 근본적인 해결책을 찾고자 한다.
+
+<br>
+
+먼저, 글은 p 태그로 작성한 상태이다. [티스토리 블로그 글](https://programmer-ririhan.tistory.com/83)에서 css를 통한 수직 정렬을 하는 vertical-align 속성은 block 요소가 아닌 inline 혹은 inline-block에서만 사용 가능하다는 점이다. 아차! 싶었다. p 태그는 display 기본 속성이 block 속성이다. 그래서 [Bootstrap docs Vertical alignment](https://getbootstrap.com/docs/5.1/utilities/vertical-align/)도 살펴보면, `To vertically center non-inline content (like <div>s and more), use our flex box utilities.`라고 떡하니 나와있었다. block 속성은 flex box utilities를 이용하라고..
+<br>
+
+또 vertical-align 속성에 대한 잘못된 지식이 있었음을 알 수 있었다. 하나의 div 박스가 있고 그 박스에 `text-align : middle;`속성을 줬을 때 가운데 정렬이 되었던 경험을 살려 `vertical-align: middle;`하면 되겠지~ 싶었는데 서로 다른 느낌이다. text-align은 말 그대로 박스 안의 가운데 정렬이 맞지만, vertical-align은 간단한 inline 내에서 높낮이 정도 조절하는 것이다. [text-align MDN 공식문서](https://developer.mozilla.org/ko/docs/Web/CSS/text-align)에서 **블록 요소나 표의 칸 상자의 가로 정렬을 설정한다**고 떡하니 나와있고, [vertical-align MDN 공식문서](https://developer.mozilla.org/ko/docs/Web/CSS/vertical-align)에서 **inline 또는 table-cell box에서의 수직 정렬을 지정한다**고 떡하니 나와있다. 내가 가진 개념은 오개념이었다.
+
+<br>
+
+[Bootstrap docs align](https://getbootstrap.com/docs/5.1/utilities/flex/#align-items)에서는 정의한다. `align-items-center`를 이용하여 flex 아이템들을 정렬시키든 `align-self-center`를 이용하여 정렬시키는 방법이 떡하니 나와있었다. 예제의 경우 `row` 클래스의 행 속성에 `align-items-center`를 이용하여 아이템들을 가운데 정렬 시키든가 혹은 `col`클래스의 열 속성에 `align-self-center`를 이용하여 가운데 정렬 시키든가 두 방법 중 하나를 선택하면 된다.
+
+<br>
+
+추가로, flex 박스의 순서를 부여하고자 할 때는 `order`를 이용하도록 한다. 물론 order 클래스 역시 조건문을 달아서 반응형으로 제작 가능하다. `order-lg-3`의 형태로 !
