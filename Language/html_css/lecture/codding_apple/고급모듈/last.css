@@ -82,7 +82,9 @@ textarea {
     margin-right: 100px;
 }
 
-.pseudo {
+.pseudo::first-letter {
+    color: red;
+    font-style: 4rem;
 }
 
 .flex-container {
