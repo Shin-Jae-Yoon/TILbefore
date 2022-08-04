@@ -137,6 +137,11 @@ button {
 
 <br>
 
+-   [1분 코딩 css-flex](https://studiomeal.com/archives/197)
+-   [1분 코딩 css-grid](https://studiomeal.com/archives/533)
+
+<br>
+
 ### HTML head 태그
 
 <br>
@@ -420,6 +425,12 @@ transition 세부 속성
 
     반응형 웹을 디자인 할 때, 모바일 화면을 먼저
     설계하는 것이 편하다.
+
+<br>
+
+-   [hw4_snsProfile](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Language/html_css/lecture/codding_apple/%EC%A4%91%EA%B8%89%EB%AA%A8%EB%93%88/hw4_snsProfile.html) 실습은 99% 부트스트랩으로 제작했음
+-   부트스트랩에서 flex의 shrink, grow가 헷갈린다? [1분 코딩 css-flex](https://studiomeal.com/archives/197), [티스토리 블로그](https://darrengwon.tistory.com/130) 참고
+-   부트스트랩의 d-flex 등 다양한 레이아웃은 [여기](https://espania.tistory.com/142) 참조
 
 <br>
 
