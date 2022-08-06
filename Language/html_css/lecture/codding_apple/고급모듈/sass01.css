@@ -1,0 +1,17 @@
+.box-green, .box-blue, .box-red {
+  width: 200px;
+  height: 200px;
+  padding: 20px;
+}
+
+.box-red {
+  background: red;
+}
+
+.box-blue {
+  background: blue;
+}
+
+.box-green {
+  background: green;
+}/*# sourceMappingURL=sass01.css.map */

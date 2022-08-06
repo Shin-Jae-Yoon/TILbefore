@@ -1,0 +1,24 @@
+$빨강: red;
+$초록: green;
+$파랑: blue;
+
+%box-design {
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+}
+
+.box-red {
+    @extend %box-design;
+    background: $빨강;
+}
+
+.box-blue {
+    @extend %box-design;
+    background: $파랑;
+}
+
+.box-green {
+    @extend %box-design;
+    background: $초록;
+}
