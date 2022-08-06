@@ -82,6 +82,11 @@ textarea {
     margin-right: 100px;
 }
 
+.pseudo::first-letter {
+    color: red;
+    font-size: 2rem;
+}
+
 .flex-container {
     display: flex;
     justify-content: space-between;
