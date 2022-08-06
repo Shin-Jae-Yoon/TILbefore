@@ -1,0 +1,125 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "nanum";
+  font-weight: 400;
+  src: url(../../중급모듈/font/NanumSquareR.woff);
+}
+@font-face {
+  font-family: "nanum";
+  font-weight: 700;
+  src: url(../../중급모듈/font/NanumSquareB.woff);
+}
+@font-face {
+  font-family: "nanum";
+  font-weight: 800;
+  src: url(../../중급모듈/font/NanumSquareEB.woff);
+}
+@font-face {
+  font-family: "nanum";
+  font-weight: 300;
+  src: url(../../중급모듈/font/NanumSquareR.woff);
+}
+body {
+  margin: 0;
+  font-family: "nanum";
+}
+
+p,
+h4,
+h3,
+h2,
+h1,
+span,
+ul,
+li,
+button {
+  transform: rotate(0.03deg);
+}
+
+html {
+  line-height: 1.15;
+}
+
+li {
+  list-style: none;
+}
+
+div,
+input,
+textarea {
+  box-sizing: border-box;
+}
+
+.container, .responsive-container, .alert-container, .list-container {
+  padding: 30px;
+  margin: auto;
+}
+
+.list-container ul {
+  padding: 0;
+}
+.list-container li {
+  font-weight: bold;
+  padding: 20px;
+  border: 1px solid #eee;
+}
+.list-container li:hover {
+  background-color: #08f;
+  color: white;
+}
+
+.alert-container span {
+  font-weight: 800;
+  margin-left: 1rem;
+}
+.alert-container .alert--green {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: rgb(223, 240, 215);
+  color: rgb(92, 121, 74);
+}
+.alert-container .alert--blue {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: rgb(217, 237, 246);
+  color: rgb(49, 112, 148);
+}
+.alert-container .alert--yellow {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: rgb(251, 248, 227);
+  color: rgb(139, 116, 82);
+}
+
+.responsive-container .col-2, .responsive-container .col-3, .responsive-container .col-4, .responsive-container .col-6 {
+  border: 1px solid black;
+  padding: 1rem;
+}
+
+.responsive-container {
+  text-align: center;
+}
+.responsive-container .row {
+  width: 100%;
+  display: flex;
+  border: 1px solid black;
+  margin-bottom: 1rem;
+}
+.responsive-container .col-6 {
+  width: 50%;
+}
+.responsive-container .col-4 {
+  width: 33.3333333333%;
+}
+.responsive-container .col-3 {
+  width: 25%;
+}
+.responsive-container .col-2 {
+  width: 16.6666666667%;
+}/*# sourceMappingURL=hw_scss.css.map */

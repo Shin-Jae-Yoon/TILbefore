@@ -1,0 +1,91 @@
+@use 'setting.scss';
+
+.container {
+    padding: 30px;
+    margin: auto;
+}
+
+.list-container {
+    @extend .container;
+
+    ul {
+        padding: 0;
+    }
+
+    li {
+        font-weight: bold;
+        padding: 20px;
+        border: 1px solid #eee;
+        &:hover {
+            background-color: #08f;
+            color: white;
+        }
+    }
+}
+
+@mixin alert박스($배경색깔, $글자색깔) {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: $배경색깔;
+    color: $글자색깔;
+}
+
+.alert-container {
+    @extend .container;
+
+    span {
+        font-weight: 800;
+        margin-left: 1rem;
+    }
+
+    .alert--green {
+        @include alert박스(rgb(223, 240, 215), rgb(92, 121, 74));
+    }
+
+    .alert--blue {
+        @include alert박스(rgb(217, 237, 246), rgb(49, 112, 148));
+    }
+
+    .alert--yellow {
+        @include alert박스(rgb(251, 248, 227), rgb(139, 116, 82));
+    }
+}
+
+%col-setting {
+    border: 1px solid black;
+    padding: 1rem;
+}
+
+.responsive-container {
+    @extend .container;
+    text-align: center;
+
+    .row {
+        width: 100%;
+        display: flex;
+        border: 1px solid black;
+        margin-bottom: 1rem;
+    }
+
+    .col-6 {
+        width: (100% / 2);
+        @extend %col-setting;
+    }
+
+    .col-4 {
+        width: (100% / 3);
+        @extend %col-setting;
+    }
+
+    .col-3 {
+        width: (100% / 4);
+        @extend %col-setting;
+    }
+
+    .col-2 {
+        width: (100% / 6);
+        @extend %col-setting;
+    }
+}

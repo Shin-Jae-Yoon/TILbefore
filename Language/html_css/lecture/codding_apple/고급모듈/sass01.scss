@@ -1,6 +1,4 @@
-$빨강: red;
-$초록: green;
-$파랑: blue;
+@use '_reset';
 
 %box-design {
     width: 200px;
@@ -10,15 +8,15 @@ $파랑: blue;
 
 .box-red {
     @extend %box-design;
-    background: $빨강;
+    background: reset.$빨강;
 }
 
 .box-blue {
     @extend %box-design;
-    background: $파랑;
+    background: reset.$파랑;
 }
 
 .box-green {
     @extend %box-design;
-    background: $초록;
+    background: reset.$초록;
 }

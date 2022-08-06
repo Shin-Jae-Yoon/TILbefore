@@ -359,19 +359,315 @@ $기본사이즈: 16px;
 2. `@extend`로 필요할 때 복사한다.
 
 ```scss
-.btn {
+%btn {
     width: 100px;
     height: 100px;
     padding: 20px;
 }
 
 .btn-green {
-    @extend .btn;
+    @extend %btn;
     color: green;
 }
 
 .btn-red {
-    @extend .btn;
+    @extend %btn;
     color: red;
 }
 ```
+
+```css
+/* 위의 scss에서 컴파일된 css 결과 */
+.btn-green,
+.btn-red {
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+}
+
+.btn-green {
+    background: green;
+}
+
+.btn-red {
+    background: red;
+}
+```
+
+<br>
+
+**문법04. 코드를 한 단어로 축약하는 @mixin**
+
+-   약간 함수 같은 느낌
+-   `@mixin`으로 선언, `@include`로 불러오기, `$ 변수 사용해서 파라미터`
+-   `@extend`와 비슷해보이지만 파라미터 때문에 `@mixin`을 더 많이 사용함
+
+```scss
+@mixin 버튼기본디자인() {
+    font-size: 16px;
+    padding: 10px;
+}
+
+.btn-green {
+    @include 버튼기본디자인();
+    background: green;
+}
+```
+
+```scss
+@mixin 버튼기본디자인($구멍1, $구멍2) {
+    font-size: 16px;
+    padding: 10px;
+    background: $구멍1;
+    color: $구멍2;
+}
+
+.btn-green {
+    @include 버튼기본디자인(green, black);
+}
+```
+
+```css
+/* 컴파일된 css 파일 */
+.btn-green {
+    font-size: 16px;
+    padding: 10px;
+    background: green;
+    color: black;
+}
+```
+
+만약, 글자 중간에 `$변수` 혹은 `$파라미터` 넣고 싶으면 `#{ $변수명 }`을 사용한다.
+
+```scss
+@mixin 폰트기본스타일($구멍1, $구멍2) {
+    font-size: $구멍1;
+    #{ $구멍2 }: -1px;
+}
+
+h2 {
+    @include 폰트기본스타일(40px, letter-spacing);
+}
+```
+
+```css
+/* 컴파일 된 css */
+h2 {
+    font-size: 40px;
+    letter-spacing: -1px;
+}
+```
+
+<br>
+
+**문법05. 다른 파일에 있는 내용 가져오는 @use 문법**
+
+-   파이썬의 `@import`같은 느낌이다.
+-   예를 들어, 여러 파일에 공통적으로 사용되는 css 기본 세팅같은거 파일 저장해놓고 불러와서 사용
+-   css 기본 문법에도 `@import` 있음 scss에서는 `@use` 쓰는거
+-   컴파일을 원하지 않는 파일은 `_파일명.scss`로 작명한다.
+-   `@use '파일명'` 할 때 컴파일 안되게 언더바 붙힌 파일에서 언더바는 빼도 된다
+    -   예를 들어, `sass01.scss` 파일에서 `_reset.scss` 파일 `@use`할 때, `@use 'reset'` 이까지만 적어도 되는거
+
+<br>
+
+    뭐 기본세팅 .scss 파일은 종속적인 파일이니까
+    굳이 매번 .css로 컴파일 할 필요가 없잖아?
+    그러니까 언더바(_) 붙혀서 컴파일 못하게 하자.
+
+<br>
+
+파일을 불러오면 거기에 있던 `@mixin`, `$변수` 이런거 다 사용 가능
+
+1. 다른 파일의 `$변수` 사용
+
+    - `파일명.$변수`
+
+2. 다른 파일의 `@mixin` 사용
+    - `@include 파일명.mixin이름`
+
+<br>
+
+### HTML video, audio
+
+<br>
+
+-   `<video src="영상.mp4"></video>`의 형태로 넣음
+-   `<video src="영상.mp4" controls></video>` 하면 재생버튼 생김 **controls**
+-   근데 영상 넣을때 `source`를 따로 넣는게 더 나음
+
+<br>
+
+**source 태그**를 이용해서 따로 넣는 방식의 장점은 **호환성을 챙길 수 있다**는 것이다. 비디오의 형식이 mp4, webM, mkv 등 브라우저마다 지원하는 비디오 확장자가 다르다. 따라서, 아래와 같은 코드로 작성하면 위에거 틀어보고 안되면 밑에거 틀어보세요~ 이런 말이다.
+
+```html
+<!-- 보통 용량이 작은 확장자부터 위에 작성한다. -->
+<video controls>
+    <source src="영상-m.webm" type="video/mp4" />
+    <source src="영상-m.???" type="video/mp4" />
+    <source src="영상.mp4" type="video/mp4" />
+</video>
+```
+
+<br>
+
+**autoplay**는 크롬 브라우저에서 자동재생 정책상 그냥 `autoplay` 작성하면 안되고 `autoplay muted`해야 된다.
+
+```html
+<video controls autoplay muted>
+    <source src="영상.mp4" type="video/mp4" />
+</video>
+```
+
+<br>
+
+**preload**는 브라우저 로딩 시 영상을 미리 다운받을지, 말지, 적당히 받을지에 관한 속성 `<video preload="metadata">`
+
+-   `preload="none"` : 미리 다운로드 X
+-   `preload="auto"` : 미리 다운로드 O
+-   `preload="metadata"` : 미리 다운로드 적당히, 초반 썸네일과 영상 초반부 약간 로딩. 제일 추천
+
+<br>
+
+**poster**는 비디오 썸네일 결정 가능 `<video poster="이미지.jpg"></video>`
+
+<br>
+
+**loop**은 비디오 무한 재생 `<video loop></video>`
+
+<br>
+
+**audio**도 마찬가지, `<audio src="음악.mp3" controls></audio>` 추가로, autoplay 자동재생 기능은 애초에 안된다. 자바스크립트로 조작하면 가능
+
+<br>
+
+### 궁극의 가운데 정렬
+
+<br>
+
+어떤 요소를 진짜 극한으로 가운데 정렬할 때 사용하는 방법
+
+```css
+/* 어떤 요소 위 빈 박스 */
+.box {
+    height: 500px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.container {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+```
+
+<br>
+
+### 애니메이션 만들기 심화 (@keyframes)
+
+<br>
+
+[중급모듈 애니메이션 만들기](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/html_css/lecture/codding_apple/%EC%A4%91%EA%B8%89%EB%AA%A8%EB%93%88)에서 one-way 애니메이션 만드는 방법을 배웠었다. 그때는 a에서 b로만 가능했다. 아래와 같이 복잡한 애니메이션은 `@keyframes`로 구현한다. `transition`은 one-way 밖에 안되서이다.
+
+1. a -> b -> c
+2. a -> b -> a
+3. a -> 1초정지 -> b
+
+<br>
+
+먼저, **transform**에 관하여 알아야한다.
+
+-   `transform: rotate(숫자deg)` : 각도만큼 회전
+-   `transform: translateX(숫자px)`: 숫자px 만큼 X축 좌표이동 (animation 줄 경우 margin-left 같은걸로 이동하는 것보다 부드럽게 이동함)
+-   `transform: scale(숫자)` 숫자만큼 크기 변화 줌, 2라고 하면 2배 키워줌
+-   `transform: skew(숫자deg)` : 각도만큼 비틀기
+
+<br>
+
+**왜 복잡한 애니메이션을 만드는데 transform을 쓰면 좋다는 것인가?** 간단하다. 성능이 좋아서이다. 애니메이션이 느리고 버벅이면 역효과 일으키기 때문이다. 즉, `@keyframes`안에다가 transform을 안쓰고 margin을 쓰더라도 애니메이션을 만들 수 있겠지만, margin 변경은 transform에 비하여 느리다.
+
+<br>
+
+**transform의 성능이 좋은 이유가 뭘까?** 웹브라우저는 HTML, CSS 코드를 2D 그래픽으로 바꿔주는 간단한 프로그램인데, 이때 브라우저가 그림 그리는 순서가 있다. 첫번째로 HTML, CSS를 쭉 읽으면서 Render Tree를 만든다. Render tree는 그림 그리기 전 CSS를 쭉 정리한 참고자료 느낌이다. 이걸보고 그림그리기 시작한다. 먼저 박스를 그리며 어디에 위치하는지 Layout을 잡고 다음으로 픽셀 하나하나에 색을 입히는 Paint를 하고 쓸데없는 Composite 단계의 css 속성들을 처리한다.
+
+<br>
+
+정리하자면 1단계 Rander tree 그리면서 css 속성들 정리 2단계 Layout 잡기에 margin, padding, width, height 같은 속성들을 처리하고 3단계 Paint에서 background-color 같은거 처리하고 4단계 Composite 처리 단계에서 transform, opacity 같은거 처리한다.
+
+    브라우저가 그림 그리는 순서 (렌더링 과정)
+    1. Render tree
+    2. Layout 잡기
+    3. Paint 하기
+    4. Composite 처리
+
+<br>
+
+그러면, 만약 margin을 갑자기 변경했다고 하자. 그럼 브라우저는 margin을 변경하기 위하여 2단계 Layout 잡기 단계를 해야한다. 그러면 3단계, 4단계도 다시 해야하는 것이다. 즉, 다시 **렌더링** 된다는 말이다. 그러면 transform을 갑자기 변경하면? **4단계 composite 처리만 다시 하면 되니까 부담이 훨씬 덜하게 되는 것**이다. 결과적으로 transform의 성능이 margin보다 좋은 것이다. 특히, 자바스크립트가 너무 많은 사이트는 애니메이션을 항상 transform으로 줘야한다.
+
+<br>
+
+추가로, **transform이 더 빠른 두 번째 이유**가 있다. 원래 웹 브라우저는 HTML, CSS 처리건 자바스크립트 실행이건 쓰레드 1개만 사용한다. 그런데, composite 처리 단계에 있는 css 속성들은 **다른 쓰레드에서 처리해준다.** 자바스크립트가 아무리 많아도 애초에 다른 쓰레드에서 처리하기 때문에 transform이 빠른 것이다.
+
+<br>
+
+다음으로, **keyframes**는 몇 퍼센트 진행했는지 진행도에 따라 나눠서 코드를 작성하면 된다. 그 이후, 사용하고자 하는 클래스에 `animation-name: 작명;` , `animation-duration: 몇초;`와 같은 식으로 작성하면 된다.
+
+```css
+@keyframes 작명 {
+    0% {
+    }
+    50% {
+    }
+    100% {
+    }
+}
+```
+
+**animation 관련 속성**
+
+```css
+.box:hover {
+    animation-name: 움찔움찔;
+    animation-duration: 1s;
+    animation-timing-function: linear; /*베지어 주기 (처음에 실행할 지 나중에 실행할 지)*/
+    animation-delay: 1s; /*시작 전 딜레이*/
+    animation-iteration-count: 3; /*몇회 반복할것인가*/
+    animation-play-state: paused; /*애니메이션을 멈추고 싶은 경우 자바스크립트로 이거 조정*/
+    animation-fill-mode: forwards; /*애니메이션 끝난 후에 원상복구 하지말고 정지*/
+}
+```
+
+<br>
+
+### 애니메이션 성능 잡는 방법들
+
+<br>
+
+1. `will-change` 사용
+
+```css
+.box {
+    will-change: transform;
+}
+```
+
+애니메이션을 주는 `.box`가 약간 느리게 동작할 때 `will-change: 애니메이션 줄 속성`을 써놓으면 성능개선이 가능하다. 이는 **바뀔 내용을 미리 렌더링 해주는 속성**이기 때문이다. 애니메이션이 이상하게 버벅이면 사용하고 잘 작동하면 굳이 쓸 필요는 없다. 왜냐하면 많이쓰면 오히려 더 느려질 수 있기 때문이다. 이와 관련된 내용과 will-change에 관한 추가적인 내용은 [여기](https://dev.opera.com/articles/ko/css-will-change-property/)에 있다.
+
+<br>
+
+2. 하드웨어 가속
+
+애니메이션이 많아서 CPU만으로 연산이 불가능하면 GPU의 도움을 받으면 된다.
+
+```css
+.box {
+    transform: translate3d(0, 0, 0);
+}
+```
+
+이와 같이 쓰면 3D 이동도 가능한데, 이때 GPU를 사용해서 연산한다. 그래서 이걸 이용한 꼼수인데 `translate3d(0, 0, 0)`으로 사용하면 아무곳으로 이동하지 않는 3D 이동 명령을 주고 뒤에 필요한 transform을 적용한다면 GPU를 이용해서 box 클래스가 가진 transform 속성들을 연산하는 원리이다.

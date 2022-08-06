@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    height: 10rem;
+    margin-top: 1rem;
+    background-color: #eee;
+    text-align: center;
+}
+
+.ani-text {
+    padding-top: 4rem;
+}
+
+.ani-text:hover {
+    animation-name: 왔다갔다;
+    animation-duration: 1s;
+}
+
+@keyframes 왔다갔다 {
+    0% {
+        transform: translateX(0px);
+    }
+    30% {
+        transform: translateX(-100px);
+    }
+    60% {
+        transform: translateX(100px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+.btn {
+    padding: 1rem;
+    font-size: 1rem;
+    color: white;
+    background-color: skyblue;
+    border: none;
+    border-radius: 0.5rem;
+    margin-top: 3rem;
+}
+
+.btn:hover {
+    animation-name: 흔들흔들;
+    animation-duration: 0.5s;
+}
+
+@keyframes 흔들흔들 {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-10deg);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+    75% {
+        transform: rotate(-10deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.rotate_plus {
+    padding: 1px;
+}
+
+.plus {
+    margin: 3rem auto;
+    width: 3rem;
+    font-size: 3rem;
+}
+
+.plus:hover {
+    animation-name: 커진다;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes 커진다 {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-25deg);
+    }
+    100% {
+        transform: rotate(45deg) scale(1.5);
+    }
+}
+
+.navbar {
+    width: 200px;
+    height: 100%;
+    padding: 25px;
+    background-color: black;
+    color: white;
+    position: fixed;
+    z-index: 5;
+    transform: translateX(-150px);
+    text-align: right;
+    transition: all 1s;
+}
+
+.navbar p {
+    text-align: center;
+}
+
+.navbar:hover {
+    transform: translate(0px);
+    text-align: center;
+}
+
+.navbar:hover p {
+    animation-name: 이동이동;
+    animation-duration: 1s;
+}
+
+@keyframes 이동이동 {
+    0% {
+        transform: translateX(-250px);
+    }
+    50% {
+        transform: translateX(50px) skewX(-30deg);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
