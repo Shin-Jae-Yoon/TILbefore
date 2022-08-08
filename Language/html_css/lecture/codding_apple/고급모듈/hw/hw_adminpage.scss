@@ -1,0 +1,52 @@
+@use '_setting.scss';
+
+%bg-purple {
+    background-color: #484bb3;
+}
+
+.sidebar-container {
+    position: fixed;
+    width: 12rem;
+    height: 100vh;
+    font-size: 1.2rem;
+    color: white;
+    z-index: 5;
+    @extend %bg-purple;
+
+    a{
+        text-decoration: none;
+    }
+
+    a:visited {
+        text-decoration: none;
+        color: white;
+    }
+
+    ul {
+        padding-left: 0;
+
+        .sidebar-item {
+            margin : 2rem 0 0 1rem;
+        }
+
+        span {
+            margin-left: 1.4rem;
+        }
+    }
+
+    transition: all 0.5s;
+    transform: translateX(-8rem);
+
+    &:hover {
+        transform: translateX(0rem);
+    }
+
+    i {
+        transition: all 0.5s;
+        transform: translateX(8rem);
+    }
+
+    &:hover i {
+        transform: translateX(0rem);
+    }
+}

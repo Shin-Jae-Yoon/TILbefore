@@ -671,3 +671,188 @@ h2 {
 ```
 
 이와 같이 쓰면 3D 이동도 가능한데, 이때 GPU를 사용해서 연산한다. 그래서 이걸 이용한 꼼수인데 `translate3d(0, 0, 0)`으로 사용하면 아무곳으로 이동하지 않는 3D 이동 명령을 주고 뒤에 필요한 transform을 적용한다면 GPU를 이용해서 box 클래스가 가진 transform 속성들을 연산하는 원리이다.
+
+<br>
+
+### Css Grid
+
+<br>
+
+- `display: grid`는 격자 모눈종이가 있다면 색칠해나가는 방식으로 생각
+- 부모 div에 `display: grid`, `grid-template-columns: `, `grid-template-rows: ` 주면 자식들은 모눈종이가 된다.
+- rows는 가로칸 갯수, 사이즈 columns는 세로칸 갯수, 사이즈
+- `grid-gap: `은 격자 간격
+
+<br>
+
+가로 2칸, 세로 3칸짜리 모눈종이
+
+```html
+    <div class="grid-container">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+```
+
+```css
+.grid-container {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows : 100px 100px;
+}
+```
+
+<p align="center"><img src="./img/img_grid01.png"></img></p>
+
+<br>
+
+grid 컨테이너에서 사용하기 좋은 단위는 **fr(fraction)** 이다. 그리드 트랙 사이즈로 사용 되는 fr 단위는 유연한 단위로 그리드 컨테이너의 여유 공간을 비율로 나눠 설정한다. 퍼센트(%) 단위와 유사해 보일 수 있으나, 퍼센트 값과 다르게 길이가 아니다. **fr은 몇 배수**로 이해한다.
+
+<br>
+
+```css
+/* 이러면 전체 가로에 대해 1배, 1배, 1배 */
+/* rows는 높이의 개념이라 height 속성이 있어야 fr 먹을거임 */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100px 100px;
+}
+```
+
+<br>
+
+**grid 이용한 레이아웃 만들 때**
+
+1. 내부 박스 크기 조절
+2. 그냥 부모 건드리기
+
+<br> 
+
+**1번 방법**. 자식 div 높이와 폭을 조정하는 방법이다. 내부 박스에게 그냥 `grid-column`이나 `grid-row`를 줘본다. 
+
+```css
+.grid-nav {
+    grid-column: 1 / 4;
+}
+```
+
+`grid-column`은 세로 선을 의미한다. 이때 `display: grid`의 자식들에만 사용 가능하다. 따라서 여기서는 여러 div 박스를 의미한다. ` 1 / 4 `가 의미하는 바는 세로선 1~4 만큼 차지해달라는 뜻이다.
+
+<p align="center"><img src="./img/img_grid02.png"></img></p>
+
+```css
+.grid-nav {
+    grid-row: 1 / 3;
+}
+```
+
+`grid-row`은 가로 선을 의미한다. 이때 `display: grid`의 자식들에만 사용 가능하다. 따라서 여기서는 여러 div 박스를 의미한다. ` 1 / 3 `가 의미하는 바는 가로선 1~3 만큼 차지해달라는 뜻이다.
+
+<p align="center"><img src="./img/img_grid03.png"></img></p>
+
+<br>
+
+이런식으로 작성하고 최종적으로 나머지 div박스 지운다.
+
+```html
+<div class="grid-container">
+    <div class="grid-nav"></div>
+    <div class="grid-sidebar"></div>
+    <div class="grid-content"></div>
+</div>
+```
+
+```css
+.grid-container {
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+}
+
+.grid-container div {
+    border: 1px solid black;
+}
+
+.grid-nav {
+    grid-column: 1 / 5;
+}
+
+.grid-sidebar {
+    grid-row: 2 / 4;
+}
+
+.grid-content {
+    grid-column: 2 / 5;
+    grid-row: 2 / 4;
+}
+```
+
+<br>
+
+**2번 방법**. 자식에 이름 쓰고 부모는 색칠하기
+
+<br>
+
+```css
+.grid-nav {
+    grid-area: 헤더;
+}
+
+.grid-sidebar {
+    grid-area: 사이드;
+}
+```
+
+`grid-area: `는 자식에 이름짓는 속성이다. 그리고 이후에 `grid-template-areas: " " ` 형태로 배치해주면 된다. 배치할 때 기억자 같이 배치는 안되고 사각형 모양으로만 가능하다.
+
+```css
+.grid-container {
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+    grid-template-areas: 
+        "헤더 헤더 헤더 헤더"
+        "사이드 . . ."
+        "사이드 . . ."
+}
+```
+
+<br>
+
+**Grid 숙제 관련**
+
+<br>
+
+이미지 (img) 파일은 기본적으로 글자취급 받기 때문에 글자의 베이스라인처럼 이미지 밑에 하얀색 선이 거슬리게 나올 수 있다. 그때 반드시 `display: block;`을 줘서 없애도록 해보자!
+
+<br><br>
+
+### CSS 스킬 sticky
+
+<br>
+
+- 스크롤해도 상단에 고정하고자 하는 속성에 `position: sticky;`
+- 주고 나서 어느 위치에 고정될 지도 정해준다. ex) top, bottom
+- sticky는 마치 fixed와 유사하다.
+- fixed는 viewport에다가 div 박스나 이미지를 고정시킬 때 쓰는 속성이었다. 그래서 fixed 해버리면 스크롤 해도 그 화면에 딱 고정된다.
+- 즉, sticky는 조건부 fixed이다. 그냥 스크롤 하다가 sticky 부여된 녀석을 만났을 때 조건적으로 fixed 되는 것이다.
+- 부모 박스 넘어서면 sticky는 해제된다.
+
+```css
+.image {
+    float: right;
+    width: 400px;
+    position: sticky;
+    top: 100px;
+}
+```
+
+정리하자면, `position: sticky` <br>
+
+1. 스크롤을 할 만한 부모 박스가 있어야 함
+2. top 등 좌표속성과 함께 써야 제대로 보임 

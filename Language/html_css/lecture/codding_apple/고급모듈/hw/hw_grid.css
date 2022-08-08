@@ -1,0 +1,70 @@
+.grid-container {
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 15rem 30rem 30rem;
+    grid-template-areas: 
+        "헤더 헤더 헤더 헤더"
+        "사이드 본문 본문 본문"
+        "사이드 본문 본문 본문"
+}
+
+.grid-container div {
+    border: 1px solid black;
+}
+
+.grid-nav {
+    grid-area: 헤더;
+}
+
+.grid-sidebar {
+    grid-area: 사이드;
+}
+
+.grid-content {
+    grid-area: 본문;
+}
+
+@media screen and (max-width: 768px) {
+    .grid-container {
+        grid-template-rows: 15rem 15rem 45rem;
+        grid-template-areas:
+        "헤더 헤더 헤더 헤더"
+        "사이드 사이드 사이드 사이드"
+        "본문 본문 본문 본문"
+    }
+}
+
+.grid-container2 {
+    display: grid;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.grid-container2 div {
+    border: 1px solid black;
+}
+
+.grid-container2 img {
+    width: 100%;
+    display: block;
+}
+
+.grid-first-img {
+    grid-column: 1/3;
+    grid-row: 1/3;
+}
+
+@media screen and (max-width: 768px) {
+    .grid-container2 {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-first-img {
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+}

@@ -1,0 +1,92 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "nanum";
+  font-weight: 400;
+  src: url(../../중급모듈/font/NanumSquareR.woff);
+}
+@font-face {
+  font-family: "nanum";
+  font-weight: 700;
+  src: url(../../중급모듈/font/NanumSquareB.woff);
+}
+@font-face {
+  font-family: "nanum";
+  font-weight: 800;
+  src: url(../../중급모듈/font/NanumSquareEB.woff);
+}
+@font-face {
+  font-family: "nanum";
+  font-weight: 300;
+  src: url(../../중급모듈/font/NanumSquareR.woff);
+}
+body {
+  margin: 0;
+  font-family: "nanum";
+}
+
+p,
+h4,
+h3,
+h2,
+h1,
+span,
+ul,
+li,
+button {
+  transform: rotate(0.03deg);
+}
+
+html {
+  line-height: 1.15;
+}
+
+li {
+  list-style: none;
+}
+
+div,
+input,
+textarea {
+  box-sizing: border-box;
+}
+
+.sidebar-container {
+  background-color: #484bb3;
+}
+
+.sidebar-container {
+  position: fixed;
+  width: 12rem;
+  height: 100vh;
+  font-size: 1.2rem;
+  color: white;
+  z-index: 5;
+  transition: all 0.5s;
+  transform: translateX(-8rem);
+}
+.sidebar-container a {
+  text-decoration: none;
+}
+.sidebar-container a:visited {
+  text-decoration: none;
+  color: white;
+}
+.sidebar-container ul {
+  padding-left: 0;
+}
+.sidebar-container ul .sidebar-item {
+  margin: 2rem 0 0 1rem;
+}
+.sidebar-container ul span {
+  margin-left: 1.4rem;
+}
+.sidebar-container:hover {
+  transform: translateX(0rem);
+}
+.sidebar-container i {
+  transition: all 0.5s;
+  transform: translateX(8rem);
+}
+.sidebar-container:hover i {
+  transform: translateX(0rem);
+}/*# sourceMappingURL=hw_adminpage.css.map */
