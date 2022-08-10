@@ -62,7 +62,7 @@ textarea {
   color: white;
   z-index: 5;
   transition: all 0.5s;
-  transform: translateX(-8rem);
+  transform: translateX(-8.5rem);
 }
 .sidebar-container a {
   text-decoration: none;
@@ -85,8 +85,52 @@ textarea {
 }
 .sidebar-container i {
   transition: all 0.5s;
-  transform: translateX(8rem);
+  transform: translateX(8.5rem);
 }
 .sidebar-container:hover i {
   transform: translateX(0rem);
+}
+
+.navbar-container .nav-link {
+  position: relative;
+}
+.navbar-container .nav-link .badge {
+  position: absolute;
+  top: 0;
+  left: 1rem;
+}
+@media screen and (max-width: 768px) {
+  .navbar-container .nav-link .badge {
+    left: 0.5rem;
+  }
+}
+.navbar-container input {
+  width: 12rem;
+  transition: width 1s;
+}
+.navbar-container input:focus {
+  width: 22rem;
+}
+@media screen and (max-width: 768px) {
+  .navbar-container input {
+    width: 100%;
+  }
+  .navbar-container input:focus {
+    width: 100%;
+  }
+}
+
+.content-container .left .card-body {
+  max-height: 6.125rem;
+}
+.content-container .left .card-body p {
+  font-size: 1rem;
+}
+.content-container .left .card-body h4 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.content-container .left .card-body i {
+  font-size: 2rem;
+  color: gray;
 }/*# sourceMappingURL=hw_adminpage.css.map */
