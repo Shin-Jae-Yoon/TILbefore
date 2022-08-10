@@ -678,31 +678,31 @@ h2 {
 
 <br>
 
-- `display: grid`는 격자 모눈종이가 있다면 색칠해나가는 방식으로 생각
-- 부모 div에 `display: grid`, `grid-template-columns: `, `grid-template-rows: ` 주면 자식들은 모눈종이가 된다.
-- rows는 가로칸 갯수, 사이즈 columns는 세로칸 갯수, 사이즈
-- `grid-gap: `은 격자 간격
+-   `display: grid`는 격자 모눈종이가 있다면 색칠해나가는 방식으로 생각
+-   부모 div에 `display: grid`, `grid-template-columns: `, `grid-template-rows: ` 주면 자식들은 모눈종이가 된다.
+-   rows는 가로칸 갯수, 사이즈 columns는 세로칸 갯수, 사이즈
+-   `grid-gap: `은 격자 간격
 
 <br>
 
 가로 2칸, 세로 3칸짜리 모눈종이
 
 ```html
-    <div class="grid-container">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
+<div class="grid-container">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
 ```
 
 ```css
 .grid-container {
     display: grid;
     grid-template-columns: 100px 100px 100px;
-    grid-template-rows : 100px 100px;
+    grid-template-rows: 100px 100px;
 }
 ```
 
@@ -731,9 +731,9 @@ grid 컨테이너에서 사용하기 좋은 단위는 **fr(fraction)** 이다. �
 1. 내부 박스 크기 조절
 2. 그냥 부모 건드리기
 
-<br> 
+<br>
 
-**1번 방법**. 자식 div 높이와 폭을 조정하는 방법이다. 내부 박스에게 그냥 `grid-column`이나 `grid-row`를 줘본다. 
+**1번 방법**. 자식 div 높이와 폭을 조정하는 방법이다. 내부 박스에게 그냥 `grid-column`이나 `grid-row`를 줘본다.
 
 ```css
 .grid-nav {
@@ -741,7 +741,7 @@ grid 컨테이너에서 사용하기 좋은 단위는 **fr(fraction)** 이다. �
 }
 ```
 
-`grid-column`은 세로 선을 의미한다. 이때 `display: grid`의 자식들에만 사용 가능하다. 따라서 여기서는 여러 div 박스를 의미한다. ` 1 / 4 `가 의미하는 바는 세로선 1~4 만큼 차지해달라는 뜻이다.
+`grid-column`은 세로 선을 의미한다. 이때 `display: grid`의 자식들에만 사용 가능하다. 따라서 여기서는 여러 div 박스를 의미한다. `1 / 4`가 의미하는 바는 세로선 1~4 만큼 차지해달라는 뜻이다.
 
 <p align="center"><img src="./img/img_grid02.png"></img></p>
 
@@ -751,7 +751,7 @@ grid 컨테이너에서 사용하기 좋은 단위는 **fr(fraction)** 이다. �
 }
 ```
 
-`grid-row`은 가로 선을 의미한다. 이때 `display: grid`의 자식들에만 사용 가능하다. 따라서 여기서는 여러 div 박스를 의미한다. ` 1 / 3 `가 의미하는 바는 가로선 1~3 만큼 차지해달라는 뜻이다.
+`grid-row`은 가로 선을 의미한다. 이때 `display: grid`의 자식들에만 사용 가능하다. 따라서 여기서는 여러 div 박스를 의미한다. `1 / 3`가 의미하는 바는 가로선 1~3 만큼 차지해달라는 뜻이다.
 
 <p align="center"><img src="./img/img_grid03.png"></img></p>
 
@@ -815,10 +815,10 @@ grid 컨테이너에서 사용하기 좋은 단위는 **fr(fraction)** 이다. �
     display: grid;
     grid-template-columns: 100px 100px 100px 100px;
     grid-template-rows: 100px 100px 100px;
-    grid-template-areas: 
-        "헤더 헤더 헤더 헤더"
-        "사이드 . . ."
-        "사이드 . . ."
+    grid-template-areas:
+        '헤더 헤더 헤더 헤더'
+        '사이드 . . .'
+        '사이드 . . .';
 }
 ```
 
@@ -836,12 +836,12 @@ grid 컨테이너에서 사용하기 좋은 단위는 **fr(fraction)** 이다. �
 
 <br>
 
-- 스크롤해도 상단에 고정하고자 하는 속성에 `position: sticky;`
-- 주고 나서 어느 위치에 고정될 지도 정해준다. ex) top, bottom
-- sticky는 마치 fixed와 유사하다.
-- fixed는 viewport에다가 div 박스나 이미지를 고정시킬 때 쓰는 속성이었다. 그래서 fixed 해버리면 스크롤 해도 그 화면에 딱 고정된다.
-- 즉, sticky는 조건부 fixed이다. 그냥 스크롤 하다가 sticky 부여된 녀석을 만났을 때 조건적으로 fixed 되는 것이다.
-- 부모 박스 넘어서면 sticky는 해제된다.
+-   스크롤해도 상단에 고정하고자 하는 속성에 `position: sticky;`
+-   주고 나서 어느 위치에 고정될 지도 정해준다. ex) top, bottom
+-   sticky는 마치 fixed와 유사하다.
+-   fixed는 viewport에다가 div 박스나 이미지를 고정시킬 때 쓰는 속성이었다. 그래서 fixed 해버리면 스크롤 해도 그 화면에 딱 고정된다.
+-   즉, sticky는 조건부 fixed이다. 그냥 스크롤 하다가 sticky 부여된 녀석을 만났을 때 조건적으로 fixed 되는 것이다.
+-   부모 박스 넘어서면 sticky는 해제된다.
 
 ```css
 .image {
@@ -855,4 +855,16 @@ grid 컨테이너에서 사용하기 좋은 단위는 **fr(fraction)** 이다. �
 정리하자면, `position: sticky` <br>
 
 1. 스크롤을 할 만한 부모 박스가 있어야 함
-2. top 등 좌표속성과 함께 써야 제대로 보임 
+2. top 등 좌표속성과 함께 써야 제대로 보임
+
+<br><br>
+
+### 3D 애니메이션 (사진 뒤집기 예제)
+
+<br>
+
+-   앞면, 뒷면 배치는 `position: absolute` 사용해야함
+-   inner 자체를 뒤집어버리는게 나음
+-   `transform: rotate()`를 사용하는 것이라 처음에 뒷면을 미리 뒤집어놔야함
+-   뒷면의 모습이 안보이게 `transform-style: preserve-3d;`와 `front의 z-index 우선순위 높이기`, `backface-visibility: hidden;`
+-   내용은 [threeD_animation.html](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Language/html_css/lecture/codding_apple/%EA%B3%A0%EA%B8%89%EB%AA%A8%EB%93%88/threeD_animation.html) 참고
