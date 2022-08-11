@@ -868,3 +868,11 @@ grid 컨테이너에서 사용하기 좋은 단위는 **fr(fraction)** 이다. �
 -   `transform: rotate()`를 사용하는 것이라 처음에 뒷면을 미리 뒤집어놔야함
 -   뒷면의 모습이 안보이게 `transform-style: preserve-3d;`와 `front의 z-index 우선순위 높이기`, `backface-visibility: hidden;`
 -   내용은 [threeD_animation.html](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Language/html_css/lecture/codding_apple/%EA%B3%A0%EA%B8%89%EB%AA%A8%EB%93%88/threeD_animation.html) 참고
+
+<br>
+
+### 부트스트랩의 pill badge
+
+<br>
+
+부트스트랩에서 알약 모양 bill badge 썼을 때 알약이 깨지는 경우에는 `box-sizing: border-box;` 확인하자
