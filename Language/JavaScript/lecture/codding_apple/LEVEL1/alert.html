@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>alert</title>
+        <link rel="stylesheet" href="./alert.css" />
+    </head>
+    <body>
+        <div class="firstClass container">
+            <div class="alert-box" id="alert">
+                <div>
+                    <span>Holy guacamole!</span> You should check in on some of
+                    those fields below.
+                </div>
+                <button class="alert-close" onclick="controlAlert('none')">
+                    x
+                </button>
+            </div>
+            <button class="alert-open" onclick="controlAlert('flex')">
+                띄우기
+            </button>
+        </div>
+
+        <div class="secondClass container">
+            <p id="idpwInput">아이디를 입력하세요.</p>
+            <button class="alert-open" onclick="idpwAlert('아이디를 입력하세요.')">아이디 입력</button>
+            <button class="alert-open" onclick="idpwAlert('비밀번호를 입력하세요.')"">비번 입력</button>
+        </div>
+
+        <div class="thirdClass container">
+            <div class="alert-box" id="alert2">
+                <div>
+                    <span>Holy guacamole!</span> You should check in on some of
+                    those fields below.
+                </div>
+                <button class="alert-close" id="alert2_close">
+                    x
+                </button>
+            </div>
+            <button class="alert-open" id="alert2_open">
+                띄우기
+            </button>
+        </div>
+
+        <script>
+            function controlAlert(parameter) {
+                document.getElementById('alert').style.display = parameter;
+            }
+
+            function idpwAlert(parameter) {
+                document.getElementById('idpwInput').innerHTML = parameter;
+            }
+
+            document.getElementById('alert2_close').addEventListener('click', function() {
+                document.getElementById('alert2').style.display = 'none'
+            })
+
+            document.getElementById('alert2_open').addEventListener('click', function() {
+                document.getElementById('alert2').style.display = 'flex'
+            })
+        </script>
+    </body>
+</html>
