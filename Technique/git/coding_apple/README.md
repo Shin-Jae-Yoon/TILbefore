@@ -29,11 +29,14 @@
 
 <br>
 
-1. windows는 powershell, mac은 터미널
-2. `git config --global user.email "github 아이디"`
-3. `git config --global user.name "이름"`
-4. `git config --global core.autocrlf true` windows
-5. `git config --global core.autocrlf input` linux/mac
+```bash
+git config --global init.defaultBranch master
+git config --global core.editor "code --wait"
+git config --global user.email "github 아이디"
+git config --global user.name "이름"
+git config --global core.autocrlf true   # windows
+git config --global core.autocrlf input  # mac
+```
 
 <br>
 
@@ -43,18 +46,15 @@
 
 <p align="center"><img src="./img/img01.png" width="75%"></img></p>
 
--   `git init` : git 사용할 수 있게 폴더를 세팅해주는 명령어
--   `git add 파일명` : 작업 폴더에서 staging area로 올려줌
--   `git commit -m "메모"` : staging area에서 repository로 올려줌
--   작업 폴더에서 staging area로 올릴 파일을 고르는 행위를 **스테이징 한다**라고 함
--   `git status` : 어떤 파일들이 staging area에 있는지 상태창 확인
--   `git log --all --oneline` : commit 내역 조회
+```bash
+git init                 # 초기 폴더를 git 사용할 수 있게
+git add file_name        # 작업 폴더 -> staging area
+git commit -m "memo"     # staging area -> repository
+git status               # staging area 목록 확인
+git log --all --oneline  # commit 내역 한 줄로 조회
+```
 
-<br>
-
-git add, commit을 vscode로 쉽게 하는 방법
-
--   vscode 내장 기능 이용해서도 가능 왼쪽 git 모양에서 `+` 눌러서 add, 취소는 `-`, `체크` 눌러서 commit
+작업 폴더에서 staging area로 올릴 파일을 고르는 행위를 **스테이징 한다** 라고 함
 
 <br>
 
@@ -65,4 +65,31 @@ git add, commit을 vscode로 쉽게 하는 방법
 -   `git diff` : 최근 commit과 현재 파일의 차이점 보여줌
     -   j, k로 스크롤바 조작 / q로 종료
 -   diff가 엔터키 하나, 스페이스바 하나만 했다고 해도 차이점으로 보여주기 때문에 좀 쓰레기 같음
--
+-   `git difftool` : vi 에디터 형태로 비교해서 편하게 보여줌
+    -   vi에디터 기본 동작키 h, j, k, l, `:q` 이런거 사용
+-   `git difftool 커밋아이디` : 현재 파일과 특정커밋 비교 가능
+-   사실 difftool도 쓰레기라... 그냥 vscode로 설정하고 보자
+-   vscode extensions에서 git graph 다운받으면
+
+<br>
+
+```bash
+git config --global diff.tool vscode
+git config --global difftool.vscode.cmd 'code --wait --diff $LOCAL $REMOTE'
+git difftool
+```
+
+<br>
+
+### VScode 이용한 git 사용
+
+<p align="center"><img src="./img/img02.png" width="75%"></img></p>
+
+1. 1번 버튼 누르면 사용 가능
+2. 플러스 모양 눌러서 `작업폴더 -> staging area`
+3. 마이너스 모양 눌러서 `staging area -> 작업폴더`
+4. 체크 모양 눌러서 `staging area -> repository`
+5. 그래프 모양 눌러서 브랜치 별 커밋 내용들, 각 파일 눌러서 diff 모두 확인 가능
+
+<br>
+
