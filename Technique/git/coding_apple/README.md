@@ -135,6 +135,11 @@ git branch -d 브랜치명              # 브랜치 삭제 (로컬저장소)
 git push origin --delete 브랜치명   # 브랜치 삭제 (원격저장소)
 ```
 
+```bash
+git branch -d 브랜치명  # merge 완료된 브랜치 삭제
+git branch -D 브랜치명  # merge 안한 브랜치 삭제
+```
+
 <br>
 
 ### git hist
@@ -154,3 +159,109 @@ git config --global alias.hist "log --graph --all --pretty=format:'%C(yellow)[%a
 -   날짜, 커밋명 간단히, 커밋내용, 커밋작성자, 브랜치 다 보인다.
 -   보면 git config user name을 수정했었는데, `origin/master`, `orign/HEAD` 저기까지가 깃허브에 git push로 올렸던 커밋들이다. 그 이후 user name을 저렇게 수정했었다. 아직은 push 하지 않은 상태라 브랜치가 coupon, HEAD -> master 이렇게 되어있는 모습이다.
 -   vim 환경이기 때문에 j가 아래 방향키, k가 위 방향키로 잘먹는다.
+
+<br> 
+
+### git merge 방법론
+
+<br>
+
+#### 3-way merge
+
+<br>
+
+<p align="center"><img src="./img/img08.png"></img></p>
+
+- 신규 브랜치, merge 하고자 하는 중심 브랜치 각각에 새로운 commit이 있을 때 merge하면 두 브랜치의 코드를 합쳐서 새로운 commit을 자동으로 생성
+- 3-way merge 방식은 merge 했다는 흔적이 남게 된다.
+- 3-way 방식이 싫은 경우 강제로 [rebase하여 fast-forward 방식](#rebase-and-merge)을 사용하거나 [squash and merge 방식](#squash-and-merge)을 사용한다.
+
+<br>
+
+모든 브랜치를 3-way merge 해버리면 나중에 참사가 일어날 수 있다.
+
+<p align="center"><img src="./img/img12.png"></img></p>
+
+- 3-way merge 되면, 흔적이 남아서 매우 복잡하게 보인다.
+
+<p align="center"><img src="./img/img13.png" width="75%"></img></p>
+
+- master branch의 git log를 출력해보면 3-way merge 된 branch들의 commit 내역도 다 같이 출력되어서 보기 더럽다. (ex. 깃허브에서 커밋 내역 볼 때)
+
+이러한 참사를 해결하기 위하여 [squash and merge 방식](#squash-and-merge)을 사용하곤 한다.
+
+<br>
+
+#### fast-forward merge
+
+<br>
+
+<p align="center"><img src="./img/img09.png"></img></p>
+
+- 신규 브랜치에만 새로운 commit이 있고 merge 하고자 하는 브랜치에는 새로운 commit이 없는 경우 사용하는 merge 방식
+- 그냥 신규 브랜치보고 지금부터 너의 이름은 master 브랜치야! 라고 한다.
+- 그래서 merge한 흔적이 남지 않는다.
+- fast-forward merge가 싫은 경우 강제로 `git merge --no --ff 브랜치명`으로 강제로 3-way merge 할 수 있다.
+
+<br>
+
+#### rebase and merge
+
+<br>
+
+<p align="center"><img src="./img/img10.png"></img></p>
+
+- rebase는 브랜치의 시작점을 다른 commit으로 옮겨주는 것
+- 신규 브랜치, merge 하고자 하는 중심 브랜치 각각에 새로운 commit이 있을 때 신규 브랜치의 시작점을 merge 하고자 하는 중심 브랜치의 가장 최근 commit으로 옮기고 fast-forward 방식으로 merge 한다.
+- 3-way merge가 싫을 때 사용할 수 있다.
+- 역시나 merge한 흔적이 남지 않는다.
+- 단, rebase를 사용했기 때문에 master branch의 새로운 커밋과 **conflict 할 가능성이 매우 높아진다.**
+
+<br>
+
+rebase and merge 사용법
+
+1. rebase 할, 시작점 바꾸고 싶은 브랜치로 이동
+2. `git rebase merge할 브랜치명` 
+3. 그 다음 이동하여 fast-forward merge
+
+```bash
+git switch sub
+git rebase master
+
+git switch master
+git merge sub
+```
+
+<br>
+
+#### squash and merge
+
+<br>
+
+<p align="center"><img src="./img/img11.png"></img></p>
+
+- 3-way merge가 너무 많아서 git log 보기 힘들까봐 주로 사용
+- merge 흔적이 남지 않음
+- 브랜치에서 만들어놨던 많은 commit을 모두 합쳐서 하나의 commit으로 master 브랜치에 생성해줌
+
+<br>
+
+squash and merge 사용법
+
+```bash
+git switch master
+git merge --squash 브랜치명
+git commit -m "메세지"
+```
+
+<br>
+
+#### 그래서 어떤 방식으로 merge?
+
+<br>
+
+- 프로젝트 마다, 팀마다 branching/merge 가이드가 존재
+- 예를 들어, 안중요한 잔챙이 브랜치는 **squash**하세요.
+- feature/develop 브랜치는 **3-way merge**하세요.
+- 혼자서 할 때는 대충 쓰세요.
