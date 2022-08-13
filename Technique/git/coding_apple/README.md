@@ -138,6 +138,9 @@ git push origin --delete 브랜치명   # 브랜치 삭제 (원격저장소)
 ```bash
 git branch -d 브랜치명  # merge 완료된 브랜치 삭제
 git branch -D 브랜치명  # merge 안한 브랜치 삭제
+# 깔끔하게 그 브랜치에서 작업한거 싹 날라감
+
+git branch -m 변경전 변경후  # 브랜치명 변경
 ```
 
 <br>
@@ -265,3 +268,70 @@ git commit -m "메세지"
 - 예를 들어, 안중요한 잔챙이 브랜치는 **squash**하세요.
 - feature/develop 브랜치는 **3-way merge**하세요.
 - 혼자서 할 때는 대충 쓰세요.
+
+<br>
+
+### git merge 실습
+
+<br>
+
+실습과정에서, branch를 만드는 시점은 중요하다. 예를 들어, commit2에서 git branch를 이용하며 브랜치를 생성하면 commit2가 시작지점이 되는 것이니까. 이를 잘 이해하며 실습을 시작한다.
+
+#### 3-way merge 실습
+
+
+<p align="center"><img src="./img/img14.png"></img></p>
+
+- 분기되었던 모습, 즉, merge된 흔적이 남아있다.
+- `git branch -d 3-way`로 브랜치를 지워도 그래프 모양으로 나타난다.
+- 3-way merge는 각각의 브랜치가 합쳐져서 새로운걸 만들어내는 형태라 mergetool이 따로 열렸다. 그래서 Merge branch 'commit4'와 같이 커밋을 남겼다.
+
+<br>
+
+#### fast-forward 실습
+
+<p align="center"><img src="./img/img15.png"></img></p>
+
+- fast-forward 방식은 master 브랜치에 새로운 commit이 없으니까 master 브랜치의 HEAD만 fastforward 브랜치로 바뀐 모습이다.
+- 따라서, merge 흔적이 남아있지 않다.
+- HEAD만 바뀌는 형태라 mergetool이 따로 열리지 않았다.
+- HEAD가 `(HEAD -> master, fast)` 이런식으로 나타났다. 
+
+<br>
+
+#### rebase and fast-forward 실습
+
+<p align="center"><img src="./img/img16.png"></img></p>
+
+- rebase 하기 전 모습
+
+<p align="center"><img src="./img/img17.png"></img></p>
+
+- rebase 이후 모습
+- 그래프에서 분기가 사라짐을 확인 가능하다.
+
+<p align="center"><img src="./img/img18.png"></img></p>
+
+- rebase 이후 fast-forward 한 모습
+- fast-forward 방식과 동일하게 HEAD만 바뀐 모습이다.
+
+<br>
+
+#### squash and merge 실습
+
+<p align="center"><img src="./img/img19.png"></img></p>
+
+- squash 하기 이전 모습
+
+<p align="center"><img src="./img/img20.png"></img></p>
+
+- squash를 하고 나서 squash는 되었지만, HEAD는 업데이트가 되지 않았다고 한다. commit을 추가적으로 하고 log를 확인해보면
+
+<p align="center"><img src="./img/img21.png"></img></p>
+
+- commit4가 정상적으로 생성된 모습이다. 하지만 squash 브랜치는 남아있다. 그래서 `git branch -D squash`로 브랜치를 삭제해보면
+
+<p align="center"><img src="./img/img22.png"></img></p>
+
+- 이와 같이 깔끔하게 merge 흔적이 사라진 모습이다.
+- squash로 merge하면 브랜치의 내용이 순간이동하는 개념이라 squash 브랜치는 아직 merge 되지 않았다고 나왔다. 그래서 `git branch -d squash`가 아닌 `git branch -D squash`로 삭제했다.
