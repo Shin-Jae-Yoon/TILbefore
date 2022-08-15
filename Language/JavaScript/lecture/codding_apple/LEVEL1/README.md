@@ -4,8 +4,6 @@
 
 ### 자바스크립트 사용 목적
 
-<br>
-
 JavaScript는 html 파일 내부에 숨어서 **html 조작과 변경**을 담당하는 언어이다.
 
 -   탭, 모달 등 웹페이지 UI 제작 가능
@@ -99,12 +97,8 @@ script 태그를 body 내부에서 상단에 작성하면 잘 안되는 경우�
 
 ### 자바스크립트 이벤트리스너
 
-<br>
+html 버튼 태그에 `onclick` 붙히면 좀 더럽지 않음? 그때 `addEventListener()`을 자바스크립트에서 구현하자. 클릭, 키 입력, 스크롤, 드래그 등 웹 페이지에 조작을 가하는 행위가 **이벤트**이다. 이벤트가 일어나길 귀 기울여서 기다리는 친구가 **이벤트 리스너**이다.
 
--   html 버튼 태그에 `onclick` 붙히면 좀 더럽지 않음?
--   그때 `addEventListener()`을 자바스크립트에서 구현하자
--   클릭, 키 입력, 스크롤, 드래그 등 웹 페이지에 조작을 가하는 행위가 **이벤트**이다.
--   이벤트가 일어나길 귀 기울여서 기다리는 친구가 **이벤트 리스너**이다.
 -   `'click'` : 마우스 클릭
 -   '`mouseover`' : 마우스 갖다대는거
 -   `'scroll'` : 마우스 스크롤
@@ -126,9 +120,7 @@ document.getElementById('alert2_close').addEventListener('click', function () {
 
 ### 자바스크립트 콜백함수
 
-<br>
-
--   위에 addEventListener 사용할 때 파라미터 자리에 들어갔던 function()이 있을거임
+위에 addEventListener 사용할 때 첫번째 파라미터에는 event 요소가 들어가고, 두번째 파라미터 자리에 들어갔던 function()이 있을거임
 
 ```javascript
 셀렉터로찾은요소.addEventListener('event명', function () {
@@ -139,3 +131,191 @@ document.getElementById('alert2_close').addEventListener('click', function () {
 -   이 function()이 바로 콜백함수
 -   자바스크립트에서 코드를 순차적으로 실행하고 싶을 때 콜백함수를 자주 사용
 -   우선 이정도만 알고 넘어가자
+
+<br><br>
+
+### classList, toggle
+
+<br>
+
+navbar 같은 곳에서 주로 사용하는 버튼 눌렀을 때 등장하는 서브메뉴를 구현하려고 한다. 해당하는 UI 제작할 때는
+
+1. 미리 htmml/css 디자인 해놓고 `display: none;`으로 숨긴다.
+2. 버튼 누르면 display 속성 바꿔서 보여준다.
+
+이 경우 `document.getElementById('id').style.display = 'none'`과 같이 작성해도 되지만, class 탈부착식으로 만드는 것이 유지보수에 편리하기 때문이다.
+
+<br>
+
+```css
+.list-group {
+    display: none;
+}
+.show {
+    display: block;
+}
+```
+
+다음과 같이 show 클래스를 list-group 클래스에 붙혔다 뗐다 하는 방식으로 만들면 될 것 같다. 이때 자바스크립트에서 html에 접근하여 클래스를 붙히는 기능을 해주는 것이 **classList**이다.
+
+```javascript
+document.getElementsByClassName("navbar-toggler")
+[0].addEventListener("click", function () {
+
+    document.getElementsByClassName("list-group")
+    [0].classList.add("show");
+    
+    });
+```
+
+만약, 버튼을 한 번 더 누르면 서브메뉴를 숨기고 싶다면 if문, 변수문법을 사용해서 가능하다. 아직 안배웠으니까 쉬운 방법인 **toggle**을 이용한다.
+
+```javascript
+document.getElementsByClassName("navbar-toggler")
+[0].addEventListener("click", function () {
+
+    document.getElementsByClassName("list-group")
+    [0].classList.toggle("show");
+    
+    });
+```
+
+이렇게 코드 작성 시, toggle 기능을 이용하여 show 클래스가 있다면 없애고 없다면 붙히는 방식이다.
+
+<br><br>
+
+### querySelector
+
+<br>
+
+getElementsByClassName, getElementById와 같이 querySelector는 유용하다. css의 셀렉터 기능을 사용할 수 있게 해준다.
+
+```javascript
+document.querySelector('.test').innerHTML = '안녕';
+document.querySelector('#test').innerHTML = '안녕';
+```
+
+단, 클래스 사용 시 제일 최상단 요소만 선택되므로, 예를 들어, 두번째 요소를 선택하고 싶으면 querySelectorAll을 사용하고 인덱스를 줘야 한다.
+
+```html
+<ul class="list-group">
+    <li class="list-group-item">An item</li>
+    <li class="list-group-item">A second item</li>
+    <li class="list-group-item">A third item</li>
+</ul>
+
+<script>
+    document.querySelectorAll('list-group-item')[1]
+    .innerHTML = '두번째 아이템';
+</script>
+```
+
+<br><br>
+
+### jQuery 라이브러리
+
+자바스크립트 코드가 길고 더러워서 HTMl 조작을 쉽게하는 라이브러리들이 대표적으로 jQuery, React, Vue이다. React와 Vue는 자바스크립트 숙련도를 요구하기 때문에 간단하게 jQuery를 배워본다. jQuery는 라이브러리일 뿐 새로운 문법이나 이런게 아니라 함수명만 짧아진다. 예를 들어, `document.querySelect`와 같은 셀렉터는 짧게 `$` 하나로 바뀌고 `addEventListener`는 짧게 `on` 하나로 바뀐다.
+
+<br>
+
+jQuery CDN을 이용하여 사용한다.
+
+```javascript
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+```
+
+거의 모든 자바스크립트 라이브러리는 로딩 속도 때문에 `<body>` 태그 끝나기 전에 넣는 것을 권장한다. jQuery 설치한 곳 **하단**에서 jQuery 문법을 사용 가능하다. 상단에 코드 짜고 안된다고 울지말고 제발 하단에다가 짜라. 강의에서는 편의상 그냥 head 태그 끝에 jQuery를 설치했다. 로딩속도는 조금 느리겠지만, 코드 보기에 좋으니깐 편의상~
+
+<br>
+
+- `$` : querySelectorAll의 역할
+- `.html` : jQuery로 html의 내용 변경
+- `.css('속성', '값')` : jQuery로 css의 내용 변경
+- `.addClass('클래스명')` : jQuery로 클래스 부착
+- `.removeClass('클래스명')` : jQuery로 클래스 제거
+- `.toggleClass('클래스명')` : jQuery로 클래스 토글
+
+```javascript
+document.querySelector('.hello').innerHTML('바보');
+$('.hello').html('바보');
+
+document.querySelector(".hello").style.color = "red";
+$('.hello').css('color', 'red');
+```
+
+querySelector를 쓰면 인덱스 하나하나 지정하고 바꿔줘야해서 양이 늘어난다. (뭐, 클래스명 같게 하고 querySelectorAll 말고 querySelector 쓰면 되긴 함) 근데 jQuery를 쓰면 그냥 한꺼번에 바꿀 수 있다.
+```html
+<p class="hello">안녕</p>
+<p class="hello">안녕</p>
+<p class="hello">안녕</p>
+```
+```javascript
+document.querySelectorAll(".hello")[0].innerHTML = "바보";
+document.querySelectorAll(".hello")[1].innerHTML = "바보";
+document.querySelectorAll(".hello")[2].innerHTML = "바보";
+
+$(".hello").html("바보");
+```
+
+jQuery 이벤트리스너 사용법
+
+```javascript
+$("#test-btn").on("click", function () {
+    어쩌구~
+});
+```
+
+style의 display 속성을 none으로 바꿔도 되지만 jQuery는 편리한 것들을 제공해줌
+
+- `.hide()` : 사라지게
+- `.fadeOut()` : 서서히 사라지게
+- `.slideUp()` : 줄어들며 사라지게
+- `.show()` : 보이게
+- `.fadeIn()` : 서서히 보이게
+- `.slideDown()` : 늘어나며 보이게
+- `.fadeToggle()` : 누를때마다 fade
+
+<br><br>
+
+### 모달(Modal) 창 제작 Tip
+
+<br>
+
+Modal창은 보통 페이지 맨 앞에, 모든 html 요소 제일 위에 존재하기 때문에 **html 맨 위에 적는 것**이 관습이다. 
+
+```css
+/* 모달창 국룰 세팅 */
+.modal {
+    position: fixed;
+    z-index: 5;
+}
+```
+
+```html
+<div class="black-bg">
+    <div class="white-bg">
+        <h4>로그인하세요</h4>
+        <button class="btn btn-danger" id="close">닫기</button>
+    </div>
+</div>
+
+<button id="login">로그인</button>
+
+<script>
+    $("#login").on("click", function () {
+        $(".black-bg").addClass("show-modal");
+    });
+
+    $("#close").on("click", function () {
+        $(".black-bg").removeClass("show-modal");
+    });
+</script>
+```
+
+<br><br>
+
+### UI에 애니메이션 추가
+
+<br>
+
+위의 예제 코드에서 addClass와 removeClass 대신에 fadeIn과 fadeOut을 넣으면 애니메이션을 넣을 수 있지만, 자바스크립트에 애니메이션을 넣는 것은 성능 때문에 좋은 관습은 아니고 css에 넣는 것이 좋다.
