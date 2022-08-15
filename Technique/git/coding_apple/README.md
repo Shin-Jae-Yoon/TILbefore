@@ -56,6 +56,7 @@ git add file_name        # 작업 폴더 -> staging area
 git commit -m "memo"     # staging area -> repository
 git status               # staging area 목록 확인
 git log --all --oneline  # commit 내역 한 줄로 조회
+git commit --ammend -m "메모" # 가장 최근 commit 내용 변경
 ```
 
 작업 폴더에서 staging area로 올릴 파일을 고르는 행위를 **스테이징 한다** 라고 함
