@@ -159,24 +159,22 @@ navbar 같은 곳에서 주로 사용하는 버튼 눌렀을 때 등장하는 �
 다음과 같이 show 클래스를 list-group 클래스에 붙혔다 뗐다 하는 방식으로 만들면 될 것 같다. 이때 자바스크립트에서 html에 접근하여 클래스를 붙히는 기능을 해주는 것이 **classList**이다.
 
 ```javascript
-document.getElementsByClassName("navbar-toggler")
-[0].addEventListener("click", function () {
-
-    document.getElementsByClassName("list-group")
-    [0].classList.add("show");
-    
+document
+    .getElementsByClassName('navbar-toggler')[0]
+    .addEventListener('click', function () {
+        document.getElementsByClassName('list-group')[0].classList.add('show');
     });
 ```
 
 만약, 버튼을 한 번 더 누르면 서브메뉴를 숨기고 싶다면 if문, 변수문법을 사용해서 가능하다. 아직 안배웠으니까 쉬운 방법인 **toggle**을 이용한다.
 
 ```javascript
-document.getElementsByClassName("navbar-toggler")
-[0].addEventListener("click", function () {
-
-    document.getElementsByClassName("list-group")
-    [0].classList.toggle("show");
-    
+document
+    .getElementsByClassName('navbar-toggler')[0]
+    .addEventListener('click', function () {
+        document
+            .getElementsByClassName('list-group')[0]
+            .classList.toggle('show');
     });
 ```
 
@@ -205,8 +203,7 @@ document.querySelector('#test').innerHTML = '안녕';
 </ul>
 
 <script>
-    document.querySelectorAll('list-group-item')[1]
-    .innerHTML = '두번째 아이템';
+    document.querySelectorAll('list-group-item')[1].innerHTML = '두번째 아이템';
 </script>
 ```
 
@@ -221,40 +218,45 @@ document.querySelector('#test').innerHTML = '안녕';
 jQuery CDN을 이용하여 사용한다.
 
 ```javascript
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
 ```
 
 거의 모든 자바스크립트 라이브러리는 로딩 속도 때문에 `<body>` 태그 끝나기 전에 넣는 것을 권장한다. jQuery 설치한 곳 **하단**에서 jQuery 문법을 사용 가능하다. 상단에 코드 짜고 안된다고 울지말고 제발 하단에다가 짜라. 강의에서는 편의상 그냥 head 태그 끝에 jQuery를 설치했다. 로딩속도는 조금 느리겠지만, 코드 보기에 좋으니깐 편의상~
 
 <br>
 
-- `$` : querySelectorAll의 역할
-- `.html` : jQuery로 html의 내용 변경
-- `.css('속성', '값')` : jQuery로 css의 내용 변경
-- `.addClass('클래스명')` : jQuery로 클래스 부착
-- `.removeClass('클래스명')` : jQuery로 클래스 제거
-- `.toggleClass('클래스명')` : jQuery로 클래스 토글
+-   `$` : querySelectorAll의 역할
+-   `.html` : jQuery로 html의 내용 변경
+-   `.css('속성', '값')` : jQuery로 css의 내용 변경
+-   `.addClass('클래스명')` : jQuery로 클래스 부착
+-   `.removeClass('클래스명')` : jQuery로 클래스 제거
+-   `.toggleClass('클래스명')` : jQuery로 클래스 토글
 
 ```javascript
 document.querySelector('.hello').innerHTML('바보');
 $('.hello').html('바보');
 
-document.querySelector(".hello").style.color = "red";
+document.querySelector('.hello').style.color = 'red';
 $('.hello').css('color', 'red');
 ```
 
 querySelector를 쓰면 인덱스 하나하나 지정하고 바꿔줘야해서 양이 늘어난다. (뭐, 클래스명 같게 하고 querySelectorAll 말고 querySelector 쓰면 되긴 함) 근데 jQuery를 쓰면 그냥 한꺼번에 바꿀 수 있다.
+
 ```html
 <p class="hello">안녕</p>
 <p class="hello">안녕</p>
 <p class="hello">안녕</p>
 ```
-```javascript
-document.querySelectorAll(".hello")[0].innerHTML = "바보";
-document.querySelectorAll(".hello")[1].innerHTML = "바보";
-document.querySelectorAll(".hello")[2].innerHTML = "바보";
 
-$(".hello").html("바보");
+```javascript
+document.querySelectorAll('.hello')[0].innerHTML = '바보';
+document.querySelectorAll('.hello')[1].innerHTML = '바보';
+document.querySelectorAll('.hello')[2].innerHTML = '바보';
+
+$('.hello').html('바보');
 ```
 
 jQuery 이벤트리스너 사용법
@@ -267,13 +269,13 @@ $("#test-btn").on("click", function () {
 
 style의 display 속성을 none으로 바꿔도 되지만 jQuery는 편리한 것들을 제공해줌
 
-- `.hide()` : 사라지게
-- `.fadeOut()` : 서서히 사라지게
-- `.slideUp()` : 줄어들며 사라지게
-- `.show()` : 보이게
-- `.fadeIn()` : 서서히 보이게
-- `.slideDown()` : 늘어나며 보이게
-- `.fadeToggle()` : 누를때마다 fade
+-   `.hide()` : 사라지게
+-   `.fadeOut()` : 서서히 사라지게
+-   `.slideUp()` : 줄어들며 사라지게
+-   `.show()` : 보이게
+-   `.fadeIn()` : 서서히 보이게
+-   `.slideDown()` : 늘어나며 보이게
+-   `.fadeToggle()` : 누를때마다 fade
 
 <br><br>
 
@@ -281,7 +283,7 @@ style의 display 속성을 none으로 바꿔도 되지만 jQuery는 편리한 �
 
 <br>
 
-Modal창은 보통 페이지 맨 앞에, 모든 html 요소 제일 위에 존재하기 때문에 **html 맨 위에 적는 것**이 관습이다. 
+Modal창은 보통 페이지 맨 앞에, 모든 html 요소 제일 위에 존재하기 때문에 **html 맨 위에 적는 것**이 관습이다.
 
 ```css
 /* 모달창 국룰 세팅 */
@@ -302,12 +304,12 @@ Modal창은 보통 페이지 맨 앞에, 모든 html 요소 제일 위에 존재
 <button id="login">로그인</button>
 
 <script>
-    $("#login").on("click", function () {
-        $(".black-bg").addClass("show-modal");
+    $('#login').on('click', function () {
+        $('.black-bg').addClass('show-modal');
     });
 
-    $("#close").on("click", function () {
-        $(".black-bg").removeClass("show-modal");
+    $('#close').on('click', function () {
+        $('.black-bg').removeClass('show-modal');
     });
 </script>
 ```
@@ -319,3 +321,388 @@ Modal창은 보통 페이지 맨 앞에, 모든 html 요소 제일 위에 존재
 <br>
 
 위의 예제 코드에서 addClass와 removeClass 대신에 fadeIn과 fadeOut을 넣으면 애니메이션을 넣을 수 있지만, 자바스크립트에 애니메이션을 넣는 것은 성능 때문에 좋은 관습은 아니고 css에 넣는 것이 좋다.
+
+-   [one-way animation](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/html_css/lecture/codding_apple/%EC%A4%91%EA%B8%89%EB%AA%A8%EB%93%88#%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98-%EB%A7%8C%EB%93%9C%EB%8A%94-%EC%9B%90%EB%A6%AC)
+-   [animation 심화](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/html_css/lecture/codding_apple/%EA%B3%A0%EA%B8%89%EB%AA%A8%EB%93%88#%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%8B%AC%ED%99%94-keyframes)
+
+추가로, 애니메이션 제작 시 `display: none;` 보다 `visibility: hidden;`이 낫다.
+
+-   자바스크립트 (jQuery)로 애니메이션 넣은 코드
+
+```html
+<body>
+    <div class="black-bg">
+        <div class="white-bg">
+            <h4>로그인하세요</h4>
+            <button class="btn btn-danger" id="close">닫기</button>
+        </div>
+    </div>
+
+    <button id="login">로그인</button>
+</body>
+
+<script>
+    $('#login').on('click', function () {
+        // fadeIn() 사용
+        $('.black-bg').fadeIn();
+    });
+</script>
+```
+
+```css
+.black-bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+    padding: 30px;
+    /* display: none 사용 */
+    display: none;
+}
+
+.show-modal {
+    /* display: block 사용 */
+    display: block;
+}
+```
+
+-   css로 애니메이션 적용한 코드
+
+```html
+<body>
+    <div class="black-bg">
+        <div class="white-bg">
+            <h4>로그인하세요</h4>
+            <button class="btn btn-danger" id="close">닫기</button>
+        </div>
+    </div>
+
+    <button id="login">로그인</button>
+</body>
+
+<script>
+    $('#login').on('click', function () {
+        // addClass() 사용
+        $('.black-bg').addClass('show-modal');
+    });
+</script>
+```
+
+```css
+.black-bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+    padding: 30px;
+    /* visibility, opacity, transition 사용 */
+    visibility: hidden;
+    opacity: 0;
+    transition: all 1s;
+}
+
+.show-modal {
+    /* visibility, opacity 사용 */
+    visibility: visible;
+    opacity: 1;
+}
+```
+
+-   자바스크립트 (jQuery)로 애니메이션 넣은 서브메뉴바
+
+```html
+<script>
+    $('.navbar-toggler').on('click', function () {
+        $('.list-group').slideToggle();
+    });
+</script>
+```
+
+```css
+.list-group {
+    display: none;
+}
+```
+
+-   css로 애니메이션 적용한 서브메뉴바
+
+```html
+<script>
+    $('.navbar-toggler').on('click', function () {
+        $('.list-group').toggleClass('show-menubar');
+    });
+</script>
+```
+
+```css
+.list-group {
+    display: block;
+    height: 0;
+    overflow: hidden;
+    transition: all 1s;
+}
+
+.show-menubar {
+    height: 210px;
+}
+```
+
+<br><br>
+
+### form태그 만들면서 if/else 조건문 배우기
+
+-   form 태그 다룰 때, 전송 버튼은 반드시 `type="submit"` 해줄 것 명심하자. 일반 버튼은 `type="button"` 이렇게 해야 오류가 없다.
+-   form 태그는 서버로 유저정보 전송하려고 쓰는 것이다.
+-   `<form action="url~~~"></form>` 서버 경로 제대로 설정하자.
+
+<br>
+
+#### 조건문 (if-else)
+
+```javascript
+if (조건) {
+    조건이 참일 때 실행할 코드
+} else {
+    조건이 거짓일 때 실행할 코드
+}
+```
+
+-   조건 사용 시 비교연산자 `==, ===, !=, !==, <, <=, >, >=`
+-   조건 사용 시 boolean `true(1), false(0)` 이용
+-   참고로 `elif`는 파이썬임 `else if`가 자바스크립트
+-   `else if`는 위의 조건이 참이면 실행 안되는 것임
+
+```javascript
+if (1 == 3) {
+    console.log('맞아요1');
+} else if (1 == 1) {
+    console.log('맞아요2');
+}
+
+// 출력 : 맞아요2
+
+if (3 == 3) {
+    console.log('맞아요1');
+} else if (1 == 1) {
+    console.log('맞아요2');
+}
+
+// 출력 : 맞아요1
+// 위에가 참이니까 맞아요2는 출력안되고 그냥 끝남
+
+if (1 == 1) {
+    console.log('맞아요1');
+}
+
+if (2 == 2) {
+    console.log('맞아요2');
+}
+
+// 출력 : 맞아요1
+// 출력 : 맞아요2
+```
+
+<br>
+
+#### 비교 연산자
+
+그냥 비교할 때는 `==`, `!=` 타입까지 맞춰서 비교할 때는 `===`, `!==`
+
+-   동등 연산자(`==`) : 두 피연산자의 자료형을 일치시킨 후 비교 수행
+-   부등 연산자(`!=`) : 두 피연산자의 자료형을 일치시킨 후 비교 수행
+-   일치 연산자(`===`) : 자료형 변환 없이 비교 수행
+-   불일치 연산자(`!==`) : 자료형 변환 없이 비교 수행
+
+<br>
+
+#### 논리 연산자
+
+-   `&&` : AND
+-   `||` : OR
+-   `!` : NOT
+
+<br>
+
+#### truthy, falsy 자료
+
+| truthy 자료 | falsy 자료 |
+| :---------: | :--------: |
+| 0 제외 숫자 |     0      |
+|   '문자'    |     ''     |
+|     []      |    null    |
+|     {}      | undefined  |
+|             |    NaN     |
+
+<br>
+
+#### undefined, null
+
+undefined와 null은 '값이 없다' 라는 점에서 유사하지만 엄밀히 말하면 다른 개념이다. typeof 연산자로 타입을 확인해보면 undefined는 undefined 타입이, null은 object 타입이라고 표시된다.
+
+-   undefiend : 변수는 존재하나, 어떠한 값으로도 할당되지 않아 자료형이 정해지지(undefined) 않은 상태
+-   null : 변수는 존재하나, null 로 (값이) 할당된 상태. 즉 null은 자료형이 정해진(defined) 상태
+
+```javascript
+var var1;
+//undefined (어떤 값도 할당되지 않아서 자료형을 알 수 없음)
+
+var var2 = null;
+//null (null로 (값이) 할당되어서 자료형을 알 수 있음 - null의 자료형은 object)
+```
+
+근데, `undefined == null`을 비교하면 true값이 나온다. 이는 위에서 설명한 비교연산자 때문이다. 엄격한 비교인지 엄격하지 않은 비교인지 때문이다.
+
+```javascript
+undefined == null; //true , 형변환 까지 해줘서 true가 나옴
+undefined === null; //false , 형변환을 하지 않아서 false가 나옴
+```
+
+<br>
+
+#### if문 이용한 form 태그
+
+```javascript
+// 물론 둘다 else if 말고 그냥 if 문들로 해도 됨
+// 근데 else if가 나은듯
+
+document
+    .getElementsByTagName('form')[0]
+    .addEventListener('submit', function (e) {
+        if (document.getElementById('email').value == '') {
+            e.preventDefault();
+            alert('아이디를 입력 해주세요 !');
+        } else if (document.getElementById('pw').value == '') {
+            e.preventDefault();
+            alert('비밀번호를 입력 해주세요 !');
+        } else if (document.getElementById('pw').value.length < 6) {
+            e.preventDefault();
+            alert('비밀번호를 6자리 이상 입력 해주세요 !');
+        } else {
+            alert('정상적으로 제출되었습니다.');
+        }
+    });
+
+// jQuery 사용
+$('form').on('submit', function (e) {
+    if (document.getElementById('email').value == '') {
+        e.preventDefault();
+        alert('아이디를 입력 해주세요 !');
+    } else if (document.getElementById('pw').value == '') {
+        e.preventDefault();
+        alert('비밀번호를 입력 해주세요 !');
+    } else if (document.getElementById('pw').value.length < 6) {
+        e.preventDefault();
+        alert('비밀번호를 6자리 이상 입력 해주세요 !');
+    } else {
+        alert('정상적으로 제출되었습니다.');
+    }
+});
+```
+
+-   getElementsByTagName 할 때도 인덱스 지정해줘야함
+-   제출버튼에 id 지정해줘도 되지만, form 태그의 이벤트를 submit으로 해줘도 됨
+-   input의 값은 value로 가져옴
+-   전송을 원하지 않으면 function의 괄호 안에 `e`를 넣고 `e.preventDefault();` 해주면 됨
+
+<br>
+
+#### input 태그에서 일어나는 input 이벤트
+
+```javascript
+document.getElementById('email').addEventListener('input', function () {});
+
+document.getElementById('email').addEventListener('change', function () {});
+```
+
+-   불러온 id 태그가 input 태그일 때 addEventListener 이벤트에 input / change 준 경우
+-   input 태그에 유저가 입력한 값이 변할 때 실행된다는 의미
+-   이벤트 input 일 때 : input 태그에 입력한 값이 바뀔 때마다 실행
+-   이벤트 change 일 때 : input 태그에 입력한 값이 바뀌고 **포커스를 잃을 때** 실행
+-   응용하면 비밀번호 6자리 이상 입력해야할 때 그것보다 작게 입력하고 있으면 계속 ui 띄우는 경우가 있겠네
+
+<br>
+
+### 변수 문법
+
+```javascript
+var 변수명 = 넣을자료;
+```
+
+변수를 사용하는 이유
+
+-   길고 복잡한 자료들 저장 가능
+-   특정 값을 기억하게 하려고 (count 같은거)
+
+<br>
+
+변수는 **변수의 선언, 할당, 범위** 세 가지만 잘 기억하면 된다.
+
+-   변수의 선언 : 변수 만들겠습니다.
+-   변수의 할당 : 변수에 자료 넣기
+-   변수의 범위
+    -   함수 안에서 변수 만들면 사용가능 범위는 함수 내부 <br> 함수 안에서 만든 변수를 함수 밖에서 사용하려고 하면 사용 불가능
+
+```javascript
+var 이름; // 변수의 선언
+이름 = 'kim'; // 변수의 할당
+
+var 이름 = 'kim'; // 변수의 선언과 할당
+이름 = 'park'; // 변수의 재할당
+```
+
+```javascript
+function 함수() {
+    var 이름 = 'kim';
+    console.log(이름);
+}
+// 출력 : kim
+
+function 함수() {
+    var 이름 = 'kim';
+}
+
+console.log(이름);
+// 출력 : Uncaught ReferenceError: 이름 is not defined
+```
+
+<br>
+
+#### var let const 차이
+
+|                var                 |             let             |            const            |
+| :--------------------------------: | :-------------------------: | :-------------------------: |
+|              재선언O               |           재선언X           |           재선언X           |
+|              재할당O               |           재할당O           |           재할당X           |
+| 범위 function <br> Function-scoped | 범위{ } <br> {Block-scoped} | 범위{ } <br> {Block-scoped} |
+
+-   let 변수 : 재선언 불가
+    -   코드가 길어지면 사용한 변수를 까먹고 또 만들 수 있다. <br> let은 이것을 방지 가능
+
+```javascript
+let 이름 = 'kim';
+let 이름 = 'park';
+
+// 출력 : Uncaught SyntaxError: Identifier '이름' has already been declared
+```
+
+-   const 변수 : 재선언 불가, 재할당 불가
+    -   변하는 안되는 값을 보관할 때 좋다. 상수
+
+```javascript
+const 이름 = 'kim';
+이름 = 'park';
+
+// 출력 : Uncaught TypeError: Assignment to constant variable.
+```
+
+-   추가로, let과 const는 function뿐만 아니라 중괄호 `{}` 내부는 모두 범위로 취급한다.
+
+```javascript
+if () {
+    let 이름;
+}
+
+// 이것도 밖에서 이름 사용 못함
+```

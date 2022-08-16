@@ -21,7 +21,10 @@
     <body>
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
-                <span class="navbar-brand">Navbar</span>
+                <span class="navbar-brand">JS_CoddingApple</span>
+                <span class="badge bg-dark ms-auto mx-3 fs-4" id="darkBtn"
+                    >Dark 🔄</span
+                >
                 <button class="navbar-toggler" type="button">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -39,15 +42,116 @@
         <div class="black-bg">
             <div class="white-bg">
                 <h4>로그인하세요</h4>
-                <button class="btn btn-danger" id="close">닫기</button>
+                <form action="./navbar_form.html">
+                    <div class="my-3">
+                        <input type="text" class="form-control" id="email" />
+                    </div>
+                    <div class="my-3">
+                        <input type="password" class="form-control" id="pw" />
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="send">
+                        전송
+                    </button>
+                    <button type="button" class="btn btn-danger" id="close">
+                        닫기
+                    </button>
+                </form>
             </div>
         </div>
 
-        <button id="login">로그인</button>
+        <div class="main-bg">
+            <h4>Shirts on Sale</h4>
+            <button id="login" class="btn btn-danger">로그인</button>
+        </div>
 
         <script>
-            $("#login").on("click", function () {
-                $(".black-bg").fadeIn();
+            // 로그인 버튼
+
+            // document
+            //     .getElementById('login')
+            //     .addEventListener('click', function () {
+            //         document
+            //             .getElementsByClassName('black-bg')[0]
+            //             .classList.add('show-modal');
+            //     });
+
+            $('#login').on('click', function () {
+                $('.black-bg').addClass('show-modal');
+            });
+
+            // 닫기 버튼
+            $('#close').on('click', function () {
+                $('.black-bg').removeClass('show-modal');
+            });
+
+            // 햄버거 버튼
+            $('.navbar-toggler').on('click', function () {
+                $('.list-group').toggleClass('show-menubar');
+            });
+
+            // 다크 버튼
+
+            var count = 0;
+
+            // document
+            //     .getElementById('darkBtn')
+            //     .addEventListener('click', function () {
+            //         if (count % 2 == 0) {
+            //             document.getElementById('darkBtn').innerText =
+            //                 'Light 🔄';
+            //             count += 1;
+            //         } else {
+            //             document.getElementById('darkBtn').innerText =
+            //                 'Dark 🔄';
+            //             count += 1;
+            //         }
+            //     });
+
+            $('.badge').on('click', function () {
+                count += 1;
+                if (count % 2 == 1) {
+                    $('.badge').html('Light 🔄');
+                    $('.badge').removeClass('bg-dark');
+                    $('.badge').addClass('bg-primary');
+                } else {
+                    $('.badge').html('Dark 🔄');
+                    $('.badge').removeClass('bg-primary');
+                    $('.badge').addClass('bg-dark');
+                }
+            });
+
+            // form 태그 제출 시 input 값 공백이면 제출 안하기
+
+            // document
+            //     .getElementsByTagName('form')[0]
+            //     .addEventListener('submit', function (e) {
+            //         if (document.getElementById('email').value == '') {
+            //             e.preventDefault();
+            //             alert('아이디를 입력 해주세요 !');
+            //         } else if (document.getElementById('pw').value == '') {
+            //             e.preventDefault();
+            //             alert('비밀번호를 입력 해주세요 !');
+            //         } else if (document.getElementById('pw').value.length < 6) {
+            //             e.preventDefault();
+            //             alert('비밀번호를 6자리 이상 입력 해주세요 !');
+            //         } else {
+            //             alert('정상적으로 제출되었습니다.');
+            //         }
+            //     });
+
+            $('form').on('submit', function (e) {
+                if (document.getElementById('email').value == '') {
+                    e.preventDefault();
+                    alert('아이디를 입력 해주세요 !');
+                } else if (document.getElementById('pw').value == '') {
+                    e.preventDefault();
+                    alert('비밀번호를 입력 해주세요 !');
+                } else if (document.getElementById('pw').value.length < 6) {
+                    e.preventDefault();
+                    alert('비밀번호를 6자리 이상 입력 해주세요 !');
+                } else {
+                    alert('정상적으로 제출되었습니다.');
+                }
             });
         </script>
 
