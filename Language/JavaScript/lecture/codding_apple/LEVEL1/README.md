@@ -43,6 +43,53 @@ document.getElementById('id').src = './img/주소';
 
 <br><br>
 
+### querySelector
+
+<br>
+
+getElementsByClassName, getElementById와 같이 querySelector는 유용하다. css의 셀렉터 기능을 사용할 수 있게 해준다.
+
+```javascript
+document.querySelector('.test').innerHTML = '안녕';
+document.querySelector('#test').innerHTML = '안녕';
+```
+
+단, 클래스 사용 시 제일 최상단 요소만 선택되므로, 예를 들어, 두번째 요소를 선택하고 싶으면 querySelectorAll을 사용하고 인덱스를 줘야 한다.
+
+```html
+<ul class="list-group">
+    <li class="list-group-item">An item</li>
+    <li class="list-group-item">A second item</li>
+    <li class="list-group-item">A third item</li>
+</ul>
+
+<script>
+    document.querySelectorAll('list-group-item')[1].innerHTML = '두번째 아이템';
+</script>
+```
+
+<br><br>
+
+### getElementById, querySelector 뭘 써야해?
+
+<br>
+
+[벤치마크 결과](https://www.measurethat.net/Benchmarks/ShowResult/11974)를 살펴보면, getElement가 querySelector보다 약 1.2배 빠른 것을 확인 가능하다. getElement가 성능이 좋은 것은 확실하다.
+
+<br>
+
+하지만, id는 getElementById, class는 getElementByClassName 등 요소마다 다른 것을 사용하는 것은 querySelector를 이용하여 셀렉터를 취급하는 것보다 분명 피곤한 일이다. 또, querySelector는 `id, class, [data-*=""], input[name=""]`등 다양한 셀렉터를 사용할 수 있다.
+
+<br>
+
+querySelector가 성능이 약간 떨어질 수 있지만 생산성이 높다는 말이다. 실제로 조금 더 느리다고는 하지만, querySelector는 초당 약 7,000,000 건의 작업을 처리할 수 있다. querySelector도 충분히 빠르다는 말이다. 성능 때문에 querySelector를 지양하고 getElement를 사용하라는 건 조금 받아드리기 힘들다. 실제로, querySelector보다 느린 [jQuery의 시장 점유율](https://w3techs.com/technologies/history_overview/javascript_library/all/y)을 보면 2022년 8월 17일 기준 77.4%이다. 느려서 querySelector를 쓰지 말아야 한다면, jQuery도 사용하지 말아야 하는 것 아닌가?
+
+<br>
+
+물론, 생산성 측면에서 봤을 때 jQuery가 querySelector보다 훨씬 높으니까 조~금 어불성설일 수 있지만, 말하고자 하는 것은 속도때문에 querySelector를 포기해야 할 이유가 있는가 하는 것이다. 하나의 주장일 뿐이지만 나도 굳이 getElement를 쓰기 보다는 querySelector를 쓰는 것에 한 표 던진다.
+
+<br><br>
+
 ### UI 만드는 법칙
 
 1. HTML/CSS로 미리 디자인 (필요하면 미리 숨김)
@@ -130,7 +177,7 @@ document.getElementById('alert2_close').addEventListener('click', function () {
 
 -   이 function()이 바로 콜백함수
 -   자바스크립트에서 코드를 순차적으로 실행하고 싶을 때 콜백함수를 자주 사용
--   우선 이정도만 알고 넘어가자
+-   콜백함수 자리에 만든 함수 넣어도 됨. 단, `함수()`의 형태가 아닌 `함수`로 넣어야 오류 없이 작동할 것
 
 <br><br>
 
@@ -179,33 +226,6 @@ document
 ```
 
 이렇게 코드 작성 시, toggle 기능을 이용하여 show 클래스가 있다면 없애고 없다면 붙히는 방식이다.
-
-<br><br>
-
-### querySelector
-
-<br>
-
-getElementsByClassName, getElementById와 같이 querySelector는 유용하다. css의 셀렉터 기능을 사용할 수 있게 해준다.
-
-```javascript
-document.querySelector('.test').innerHTML = '안녕';
-document.querySelector('#test').innerHTML = '안녕';
-```
-
-단, 클래스 사용 시 제일 최상단 요소만 선택되므로, 예를 들어, 두번째 요소를 선택하고 싶으면 querySelectorAll을 사용하고 인덱스를 줘야 한다.
-
-```html
-<ul class="list-group">
-    <li class="list-group-item">An item</li>
-    <li class="list-group-item">A second item</li>
-    <li class="list-group-item">A third item</li>
-</ul>
-
-<script>
-    document.querySelectorAll('list-group-item')[1].innerHTML = '두번째 아이템';
-</script>
-```
 
 <br><br>
 
