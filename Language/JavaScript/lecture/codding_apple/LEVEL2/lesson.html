@@ -17,66 +17,82 @@
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"
         ></script>
+        <script defer src="./lesson.js"></script>
     </head>
     <body>
-        <div class="alert alert-danger">
+        <nav class="navbar navbar-light bg-light m-0 pb-0">
+            <div class="container-fluid mb-0">
+                <span class="navbar-brand" id="spanFont">JS_CoddingApple</span>
+                <span class="badge bg-dark ms-auto mx-3 fs-4" id="darkBtn"
+                    >Dark 🔄</span
+                >
+                <button class="navbar-toggler" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <ul class="list-group mt-2 pb-0">
+                <li class="list-group-item">An item</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+                <li class="list-group-item">A fourth item</li>
+                <li class="list-group-item">And a fifth one</li>
+            </ul>
+        </nav>
+
+        <div class="black-bg">
+            <div class="white-bg">
+                <h4>로그인하세요</h4>
+                <form action="./success.html">
+                    <div class="my-3">
+                        <input type="text" class="form-control" id="email" />
+                    </div>
+                    <div class="my-3">
+                        <input type="password" class="form-control" id="pw" />
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="send">
+                        전송
+                    </button>
+                    <button type="button" class="btn btn-danger" id="close">
+                        닫기
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="main-bg">
+            <h4>Shirts on Sale</h4>
+            <button id="login" class="btn btn-danger">로그인</button>
+        </div>
+
+        <div class="alert alert-danger mb-0">
             <span id="alert-sec">5</span>초 이내 구매시 사은품 증정!
         </div>
 
-        <form action="./success.html">
-            <div class="my-3">
-                <input type="text" class="form-control" id="email" />
+        <div style="overflow: hidden">
+            <div class="slide-container">
+                <div class="slide-box"><img src="./img/img01.png" /></div>
+                <div class="slide-box"><img src="./img/img02.png" /></div>
+                <div class="slide-box"><img src="./img/img03.png" /></div>
             </div>
-            <div class="my-3">
-                <input type="password" class="form-control" id="pw" />
-            </div>
-            <button type="submit" class="btn btn-primary" id="send">
-                전송
-            </button>
-            <button type="button" class="btn btn-danger" id="close">
-                닫기
-            </button>
-        </form>
-        <script>
-            let alert_num = parseInt(
-                document.querySelector('#alert-sec').innerHTML
-            );
+        </div>
 
-            function 알림창제거() {
-                document.querySelector('.alert').style.display = 'none';
-            }
+        <button class="slide-1">1</button>
+        <button class="slide-2">2</button>
+        <button class="slide-3">3</button>
+        <button class="before-btn">이전</button>
+        <button class="after-btn">다음</button>
 
-            let 타이머 = setInterval(function () {
-                if (alert_num > 0) {
-                    alert_num -= 1;
-                    document.querySelector('#alert-sec').innerHTML = alert_num;
-                } else {
-                    알림창제거();
-                    clearTimeout(타이머);
-                }
-            }, 1000);
+        <div
+            class="lorem"
+            style="width: 200px; height: 100px; overflow-y: scroll"
+        >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
+            voluptatum tenetur laudantium, numquam voluptates nobis, at velit
+            eius voluptate vitae libero explicabo consequuntur magnam corporis.
+            Non, porro. Vel, quae dolore.
+        </div>
 
-            $('form').on('submit', function (e) {
-                let 아이디 = document.getElementById('email').value;
-                let 비번 = document.getElementById('pw').value;
-
-                if (아이디 == '') {
-                    alert('아이디를 입력 해주세요 !');
-                    e.preventDefault();
-                } else if (/\S+@\S+\.\S+/.test(아이디) == false) {
-                    alert('이메일 형식이 아닙니다 !');
-                    e.preventDefault();
-                } else if (비번 == '') {
-                    alert('비밀번호를 입력 해주세요 !');
-                    e.preventDefault();
-                } else if (비번.length < 6) {
-                    alert('비밀번호를 6자리 이상 입력 해주세요 !');
-                    e.preventDefault();
-                } else {
-                    alert('정상적으로 제출되었습니다.');
-                }
-            });
-        </script>
+        <div style="height: 2000px"></div>
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

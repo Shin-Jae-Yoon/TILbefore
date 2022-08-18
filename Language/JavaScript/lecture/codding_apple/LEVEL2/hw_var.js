@@ -1,14 +1,14 @@
 // Q1. 변수 만들기
 let age = 27;
-const place = '김해';
+const place = "김해";
 // console.log(age, place);
 
 // Q2. 변수 동작하지 않는 이유, 출력결과 예측
-var name = 'park';
+var name = "park";
 var id = 0;
 
 function showName() {
-    var name = 'kim';
+    var name = "kim";
     var id = 1;
     // console.log(name);
 }
@@ -56,4 +56,27 @@ let coffee2 = 360;
 let coffee2_r = 2 / 3;
 
 let total2 = coffee2 / (1 - coffee2_r);
-console.log(total2);
+// console.log(total2);
+
+// 함수의 return 문법 숙제
+// Q1. 함수에 분과 초를 찰례로 파라미터로 입력하면 ms 단위로 출력하는 함수
+// 1sec = 1000ms
+
+function ms변환(min, sec) {
+    return (min * 60 + sec) * 1000;
+}
+
+// console.log(ms변환(1, 30));
+// console.log(ms변환(2, 10));
+
+// Q2. 가격을 파라미터로 입력하면 10% 할인가를 출력하는 함수
+function 할인가(가격, 첫구매) {
+    if (첫구매 == true) {
+        return 가격 * 0.9 - 1.5;
+    } else {
+        return 가격 * 0.9;
+    }
+}
+
+console.log(할인가(70, false));
+console.log(할인가(10, true));

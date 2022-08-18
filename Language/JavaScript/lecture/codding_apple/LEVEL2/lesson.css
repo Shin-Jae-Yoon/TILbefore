@@ -1,0 +1,66 @@
+.navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+}
+
+.navbar-brand {
+    font-size: 30px;
+    transition: all 0.5s;
+}
+
+.list-group {
+    display: block;
+    height: 0;
+    width: 100%;
+    overflow: hidden;
+    transition: all 1s;
+}
+
+
+.show-menubar {
+    height: 206px;
+}
+
+.black-bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+    padding: 30px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.white-bg {
+    background: white;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.show-modal {
+    visibility: visible;
+    opacity: 1;
+}
+
+.main-bg {
+    padding: 100px 20px;
+    background: lightgrey;
+}
+
+
+.slide-container {
+    width: 300vw;
+    display: flex;
+    transition: all 1s;
+}
+
+.slide-box {
+    width: 100vw;
+}
+
+.slide-box img {
+    width: 100%;
+}
