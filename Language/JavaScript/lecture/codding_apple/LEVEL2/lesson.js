@@ -1,15 +1,13 @@
-// 스크롤바 내리면 글자 작아지게
-window.addEventListener("scroll", function () {
-    if (this.window.scrollY > 100) {
-        this.document.querySelector(".navbar-brand").style.fontSize = "20px";
-    } else {
-        this.document.querySelector(".navbar-brand").style.fontSize = "30px";
-    }
-});
-
 // 로그인하기 버튼
 $("#login").on("click", function () {
     $(".black-bg").addClass("show-modal");
+});
+
+// 검은배경 누르면 모달창 닫기 버튼
+$(".black-bg").on("click", function (e) {
+    if ($(e.target).is($(".black-bg"))) {
+        $(".black-bg").removeClass("show-modal");
+    }
 });
 
 // 닫기 버튼
@@ -121,10 +119,36 @@ document.querySelector(".before-btn").addEventListener("click", 이전버튼클�
 
 document.querySelector(".after-btn").addEventListener("click", 다음버튼클릭);
 
+// 회원약관 알림창
 document.querySelector(".lorem").addEventListener("scroll", function () {
     let 스크롤양 = document.querySelector(".lorem").scrollTop;
     let 실제높이 = document.querySelector(".lorem").scrollHeight;
     let 눈높이 = document.querySelector(".lorem").clientHeight;
-
     console.log(스크롤양, 실제높이, 눈높이);
+
+    if (스크롤양 + 눈높이 > 실제높이 - 10) {
+        alert("약관을 모두 읽으셨네요!");
+    }
+});
+
+// 스크롤바 내리면 글자 작아지게
+// 현재 페이지 바닥 감지
+window.addEventListener("scroll", function () {
+    if (this.window.scrollY > 100) {
+        this.document.querySelector(".navbar-brand").style.fontSize = "20px";
+    } else {
+        this.document.querySelector(".navbar-brand").style.fontSize = "30px";
+    }
+    let 페이지실제높이 = document.querySelector("html").scrollHeight;
+    let 페이지눈높이 = document.querySelector("html").clientHeight;
+    let 페이지스크롤양 = document.querySelector("html").scrollTop;
+    let 스크롤퍼센트 = (페이지스크롤양 / (페이지실제높이 - 페이지눈높이)) * 100;
+    console.log(스크롤퍼센트);
+
+    this.document.querySelector(".page_progress").style.width =
+        스크롤퍼센트 + "%";
+
+    // if (페이지스크롤양 + 페이지눈높이 > 페이지실제높이 - 10) {
+    //     alert("페이지 끝이지롱!");
+    // }
 });

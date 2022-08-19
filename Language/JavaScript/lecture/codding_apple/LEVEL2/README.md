@@ -467,6 +467,10 @@ Math.ceil(num * precision) / precision
 
 ### scroll 이벤트 활용 (window 객체)
 
+1. 스크롤바 조작할 때마다 코드실행 가능
+2. 박스의 실제 높이 / 보이는 높이 구할 수 있음
+3. 스크롤 얼마나 했는지 스크롤양 구할 수 있음
+
 ```javascript
 window.addEventListener('scroll', function() {
     this.window.scrollY ~
@@ -475,6 +479,7 @@ window.addEventListener('scroll', function() {
 - 왼쪽이 스크롤 될 때 마다 안에 코드 실행해줌
 - 현재 그냥 html 페이지 그 자체를 의미하는건 window, DOM이 있다.
 - 스크롤 이벤트를 감지하고 싶으면 보통 window에 이벤트리스너 부착
+- 추가로 html에서 임의로 스크롤 만들거면 `overflow-y` 다루셈 혹은 `height 굉장히 큰 div박스` 만들던가
 
 <p align="center"><img src="./img/img05.png" width="60%"></img></p>
 
@@ -520,8 +525,84 @@ document.querySelector(".lorem").addEventListener("scroll", function () {
 });
 ```
 
-- `188.29 + 100 = 288?` 같이 약간 오차가 생길 수 있기 때문에 등호(`==`)를 이용하여 비교하기 보다 (끝까지 스크롤 내렸는지 비교하기 보다) **여유를 가지고 비교하는 것이 좋다.** 맨 밑에서부터 10px 정도 남기고 스크롤 했는지?처럼
+<br>
+
+- `188.29 + 100 = 288?` 같이 약간 오차가 생길 수 있고 OS 마다 부정확해서 등호(`==`)를 이용하여 비교하기 보다 (끝까지 스크롤 내렸는지 비교하기 보다) **여유를 가지고 비교하는 것이 좋다.** 맨 밑에서부터 10px 정도 남기고 스크롤 했는지?처럼
+```javascript
+if (스크롤양 + 눈높이 > 실제높이 - 10) {
+    alert("약관을 모두 읽으셨네요!");
+}
+```
+
+<br>
+
 - console을 찍어보면, clientHeight와 scrollHeight는 고정인데 scrollTop의 값이 변하는 것을 확인 가능. 즉, 위에 `눈에 보이는 div 박스 높이 + 스크롤양 = 실제높이`는 끝까지 내렸을 때 성립하는 공식임
+
+<br>
+
+#### div 박스말고 현재페이지 끝까지 스크롤 체크는?
+
+- html 문서의 그냥 html 태그의 높이를 이용하여 구한다.
+- 페이지의 scrollHeight는 페이지 로드가 다되고 나서야 정확해서 `<body>` 끝나기 전에 넣는게 좋은 관습이다.
+
+```javascript
+window.addEventListener("scroll", function () {
+    
+    let 페이지실제높이 = document.querySelector("html").scrollHeight;
+    let 페이지눈높이 = document.querySelector("html").clientHeight;
+    let 페이지스크롤양 = document.querySelector("html").scrollTop;
+
+    if (페이지스크롤양 + 페이지눈높이 > 페이지실제높이 - 10) {
+        alert("페이지 끝이지롱!");
+    }
+});
+```
+
+- `document.documentElement` 이거나 `document.querySelector('html')` 이거나 같음
+
+<br>
+
+#### scroll 내린 만큼 상단에 진행바 (스크롤퍼센트)
+
+- **스크롤퍼센트 = (페이지스크롤양 / (페이지실제높이 - 페이지눈높이)) * 100**
+
+```html
+<div class="page_progress"></div>
+```
+
+- 고정시켜야해서 `position: fixed` 이런거 필요한데 navbar에 붙히는게 나은듯
+- navbar 맨위에 고정시킬 때 `position: fixed; width: 100%; z-index: 5;` 알지?
+```css
+.page_progress {
+    display: block;
+    background-color: black;
+    width: 0%;
+    height: 3px;
+    transition: all 0.1s;
+}
+```
+
+```javascript
+window.addEventListener("scroll", function () {
+    let 페이지실제높이 = document.querySelector("html").scrollHeight;
+    let 페이지눈높이 = document.querySelector("html").clientHeight;
+    let 페이지스크롤양 = document.querySelector("html").scrollTop;
+
+    let 스크롤퍼센트 = (페이지스크롤양 / (페이지실제높이 - 페이지눈높이)) * 100;
+
+    this.document.querySelector(".page_progress").style.width =
+        스크롤퍼센트 + "%";
+});
+```
+
+
+<br>
+
+#### scroll 다룰 때 주의점
+
+1. scroll 이벤트리스너 안의 코드는 1초에 60번 이상 실행됨
+    - 컴퓨터에 부담을 줄 수 있어서 너무 많이 쓰면 안됨
+2. 바닥체크도 여러 번 중복으로 할 것
 
 <br>
 
@@ -532,3 +613,348 @@ document.querySelector(".lorem").addEventListener("scroll", function () {
 - div 실제높이 : `.scrollHeight`
 - div 화면높이 : `.clientHeight`
 - jQuery 페이지 스크롤 : `$(window).scrollTop()`
+
+<br><br>
+
+### 자바스크립트 for 반복문, 탭기능 만들기
+
+<br>
+
+#### 탭기능
+
+- 탭은 위에 버튼 누르면 그에 걸맞는 div 박스 내용 보이게 하는거
+- 역시 탭을 만들 때도 하나하나 display: none~ block~ 하는것보다 `show`라는 클래스 하나 만들어서 탈부착하는 방식으로 만들기
+
+```html
+<div class="container mt-5">
+    <ul class="list">
+        <li class="tab-button">Products</li>
+        <li class="tab-button orange">Information</li>
+        <li class="tab-button">Shipping</li>
+    </ul>
+    <div class="tab-content">
+        <p>상품설명입니다. Product</p>
+    </div>
+    <div class="tab-content show">
+        <p>스펙설명입니다. Information</p>
+    </div>
+    <div class="tab-content">
+        <p>배송정보입니다. Shipping</p>
+    </div>
+</div>
+```
+
+```css
+ul.list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+}
+.tab-button {
+    padding: 10px 20px 10px 20px;
+    margin-right: -1px;
+    margin-bottom: -1px;
+    color: grey;
+    text-decoration: none;
+    cursor: pointer;
+}
+.orange {
+    border-top: 2px solid orange;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid white;
+    border-left: 1px solid #ccc;
+    color: black;
+    margin-top: -2px;
+}
+.tab-content {
+    display: none;
+    padding: 10px;
+}
+.show {
+    display: block;
+}
+```
+
+1. tab-button 누르면 모든 버튼에서 orange 클래스 제거
+2. 누른 버튼에 orange 클래스 부착
+3. 모든 tab-content에서 show 클래스 제거
+4. 누른 버튼의 tab-content에 show 클래스 부착
+
+- 해당하는 기능을 바닐라js로 짜든, jQuery로 짜든, 반복되는 부분이 굉장히 많이 나올 것이다. 이때, **자주쓰는 셀렉터는 변수에 넣어쓰자. 셀렉터 문법은 느리다.** 그리고 여기서 필요한 것이 반복문이다.
+
+<br>
+
+#### for 반복문
+
+```javascript
+for (let i = 0; i < 3; i++>) {
+    반복할 코드 ~
+}
+```
+
+- 탭만들기를 예제로, 반복문 이용하여 코드 짜보면
+```javascript
+var 탭버튼 = $(".tab-button");
+var 탭내용 = $(".tab-content");
+
+for (var i = 0; i < 탭버튼.length; i++) {
+    탭버튼.eq(i).on("click", function () {
+        탭버튼.removeClass("orange");
+        탭버튼.eq(i).addClass("orange");
+        탭내용.removeClass("show");
+        탭내용.eq(i).addClass("show");
+    });
+}
+```
+이러면, 코드가 잘 돌아가지 않을 것이다. **var가 아닌 let을 사용하면 잘 될 것이다.**
+
+<br>
+
+#### var가 제대로 작동 안한 이유
+
+1. 코드를 위에서부터 한줄한줄 차례로 해석함
+2. for문을 만나서 내부 코드를 반복실행 하려고함
+3. 이벤트리스너 만남. 이벤트리스너 내부의 코드는 바로 실행되는 코드가 아니고 이벤트가 발생해야 실행되는 코드임
+4. **이벤트리스너 내부 코드 실행되지 않고 넘어감**
+5. 이 상태로 반복문 3번 실행
+6. 한참 뒤 사용자가 버튼 클릭 (현재 `var i = 3`인 상태)
+7. `var i = 3`인 상태지만, var 범위는 for문 밖에도 적용이 됨
+8. 그래서 `eq(i)`에 3을 대입하려고 함. 하지만, 4번 버튼은 없으니까 에러
+
+<br>
+
+<p align="center"><img src="./img/img07.png"></img></p>
+
+[LEVEL1 var, let, const 차이](https://github.com/Shin-Jae-Yoon/TIL/tree/master/Language/JavaScript/lecture/codding_apple/LEVEL1#var-let-const-%EC%B0%A8%EC%9D%B4)에서 var와 let의 범위를 보면, **let은 block-scoped 범위**이다. 따라서, 반복문 안에서 선언한 var i는 반복문이 끝났음에도 i의 값에 영향을 끼치는 상태이지만, let은 반복문 안에서만 영향을 끼치고 밖에서는 영향을 끼치지 못해서 괜찮은 것이다. c언어에서 배웠던 상식적인 반복문 내부 변수 선언의 범위가 let인 것으로 생각하자.
+
+<br>
+
+#### 탭기능 함수 이용 축약
+
+- 아래의 코드를 함수로 축약해보자.
+
+```javascript
+let 탭버튼 = $(".tab-button");
+let 탭내용 = $(".tab-content");
+
+for (let i = 0; i < 탭버튼.length; i++) {
+    탭버튼.eq(i).on("click", function () {
+        탭버튼.removeClass("orange");
+        탭버튼.eq(i).addClass("orange");
+        탭내용.removeClass("show");
+        탭내용.eq(i).addClass("show");
+    });
+}
+```
+- 축약한 코드
+```javascript
+let 탭버튼 = $(".tab-button");
+let 탭내용 = $(".tab-content");
+
+for (let i = 0; i < 탭버튼.length; i++) {
+    탭버튼.eq(i).on("click", function () {
+        탭열기();
+    });
+}
+
+function 탭열기() {
+    탭버튼.removeClass("orange");
+    탭버튼.eq(i).addClass("orange");
+    탭내용.removeClass("show");
+    탭내용.eq(i).addClass("show");
+}
+```
+하지만, 이렇게 작성하면 함수 탭열기에 변수 i를 따로 선언한 적이 없기 때문에 코드가 제대로 돌아가지 않을 것이다. **축약할 코드에 변수가 있으면 변수를 파라미터로 바꿔야 잘 작동한다.** 
+
+<br>
+
+- 파라미터 넣은 코드
+```javascript
+let 탭버튼 = $(".tab-button");
+let 탭내용 = $(".tab-content");
+
+for (let i = 0; i < 탭버튼.length; i++) {
+    탭버튼.eq(i).on("click", function () {
+        탭열기(i);
+    });
+}
+
+function 탭열기(구멍) {
+    탭버튼.removeClass("orange");
+    탭버튼.eq(구멍).addClass("orange");
+    탭내용.removeClass("show");
+    탭내용.eq(구멍).addClass("show");
+}
+```
+<br><br>
+
+### 이벤트 버블링(event bubbling)
+
+<br>
+
+lesson.html의 로그인 모달창에서 검은 배경을 눌러도 닫히도록 코드를 짜보자.
+
+```javascript
+// 검은배경 누르면 모달창 닫기 버튼
+document.querySelector(".black-bg").addEventListener("click", function () {
+    document.querySelector(".black-bg").classList.remove("show-modal");
+});
+```
+
+이때, 검은 배경이 아닌 그냥 모달창 아무데나 눌러도 모달창이 닫히는 것을 확인할 수 있다. 이는 이벤트 버블링 때문이다. **모든 브라우저는 이벤트 버블링이 일어난다.** 
+
+- 이벤트 버블링 : 이벤트가 **상위 html로 퍼지는** 현상
+
+```html
+<div class="black-bg">
+    <div class="white-bg">
+        <h4>로그인하세요</h4>
+        <form action="./success.html">
+            <div class="my-3">
+                <input type="text" class="form-control" id="email" />
+            </div>
+            <div class="my-3">
+                <input type="password" class="form-control" id="pw" />
+            </div>
+            <button type="submit" class="btn btn-primary" id="send">
+                전송
+            </button>
+            <button type="button" class="btn btn-danger" id="close">
+                닫기
+            </button>
+        </form>
+    </div>
+</div>
+```
+
+- white-bg 클릭 시 : white-bg, black-bg 2번 클릭한거임
+- h4 클릭 시 : h4, white-bg, black-bg 3번 클릭한거임
+
+현재, js 코드를 `black-bg` 클릭 시 모달창이 닫히도록 코드를 짜놨다. 그러면 만약 input 태그를 클릭했다고 하면  div.my-3도 눌리고 div.white-bg도 눌리고 div.black-bg도 눌린 효과가 되어서 결국 모달창이 닫히는 것이다.
+
+<br>
+
+맨 처음 누른 요쇼가 진짜 black-bg 이면 모달창이 닫히도록 코드를 짜면 된다.
+
+<br>
+
+#### 유용한 이벤트관련 함수들
+
+- 콜백함수 파라미터에 `e`를 넣어보자. 그러면 사용가능한 함수들이 있다.
+
+```javascript
+document.querySelector(".black-bg").addEventListener("click", function (e) {
+    document.querySelector(".black-bg").classList.remove("show-modal");
+});
+```
+
+- `e.target;` : 이벤트 발생한 곳 (ex. 유저가 실제로 클릭한 곳)
+- `e.currentTarget;` : 이벤트리스너 달린 곳 (`=this`)
+- `e.preventDefault();` : 이벤트 기본동작 막아줌, 이벤트 발생 안한것처럼
+- `e.stopPropagation();` : 내 상위요소로 이벤트 버블링 막아줌
+
+<br>
+
+최종본
+
+- javascript
+```javascript
+document.querySelector(".black-bg").addEventListener("click", function (e) {
+    if (e.target == document.querySelector(".black-bg")) {
+        document.querySelector(".black-bg").classList.remove("show-modal");
+    }
+});
+```
+
+- jQuery
+
+    jQuery는 애초에 셀렉터끼리 비교가 불가능해서 `if ( $(e.target) == $('.black-bg') )`는 안된다. `is()`를 이용하여 `if ( $(e.target).is($(".black-bg")) )` 이렇게 작성하자.
+
+```javascript
+$(".black-bg").on("click", function (e) {
+    if ($(e.target).is($(".black-bg"))) {
+        $(".black-bg").removeClass("show-modal");
+    }
+});
+```
+
+<br><br>
+
+### 이벤트버블링 응용
+
+<br>
+
+#### 탭기능 다르게 만들기 (이벤트리스너 1개만 사용)
+
+위에서 만들었던 탭기능은 반복문을 사용해서 이벤트리스너를 3개 사용했다. 이벤트리스너 1개를 쓸 때 마다 램 용량을 차지하기 때문에 성능적인 이점을 가지기 위하여 줄여보겠다.
+
+```html
+<ul class="list">
+    <li class="tab-button">Products</li>
+    <li class="tab-button orange">Information</li>
+    <li class="tab-button">Shipping</li>
+</ul>
+```
+
+해당하는 코드의 `.list` 1개에만 이벤트리스너를 부착한다고 하자. 이벤트버블링은 항상 일어나니까 `.tab-button` 무엇을 클릭하든 `.list`를 클릭한 효과가 생긴다.
+
+```javascript
+// 이벤트리스너 1개 버전
+let 탭버튼 = $(".tab-button");
+let 탭내용 = $(".tab-content");
+
+function 탭열기(구멍) {
+    탭버튼.removeClass("orange");
+    탭버튼.eq(구멍).addClass("orange");
+    탭내용.removeClass("show");
+    탭내용.eq(구멍).addClass("show");
+}
+
+$(".list").on("click", function (e) {
+    if ($(e.target).is(탭버튼.eq(0))) {
+        탭열기(0);
+    }
+    if ($(e.target).is(탭버튼.eq(1))) {
+        탭열기(1);
+    }
+    if ($(e.target).is(탭버튼.eq(2))) {
+        탭열기(2);
+    }
+});
+```
+
+<br><br>
+
+### Datasest
+
+<br>
+
+- `data-자료이름=값`을 이용하여 html 태그에 몰래 정보숨기기 가능하다.
+- `셀렉터.dataset.자료이름`을 이용하여 숨겼던 자료 출력 가능
+
+```html
+<li class="tab-button" data-id="0">Products</li>
+```
+```javascript
+console.log(document.querySelector('.tab-button').dataset.id)
+// 0
+```
+
+#### dataset 이용하여 탭기능 코드 줄이기
+
+```html
+<ul class="list">
+    <li class="tab-button" data-id="0">Products</li>
+    <li class="tab-button orange" data-id="1">Information</li>
+    <li class="tab-button" data-id="2">Shipping</li>
+</ul>
+```
+
+```javascript
+$(".list").on("click", function (e) {
+    탭열기(parseInt(e.target.dataset.id));
+});
+```
+- 내가 누른 것에 숨겨져있는 dataset이 id인 녀석의 값을 가져오는 것을 이용

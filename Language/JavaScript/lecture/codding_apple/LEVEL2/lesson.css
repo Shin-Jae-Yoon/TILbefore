@@ -17,6 +17,13 @@
     transition: all 1s;
 }
 
+.page_progress {
+    display: block;
+    background-color: black;
+    width: 0%;
+    height: 3px;
+    transition: all 0.1s;
+}
 
 .show-menubar {
     height: 206px;
