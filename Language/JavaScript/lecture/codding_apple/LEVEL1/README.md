@@ -249,6 +249,7 @@ jQuery CDN을 이용하여 사용한다.
 <br>
 
 -   `$` : querySelectorAll의 역할
+-   `.eq()` : querySelectorAll의 인덱스 역할
 -   `.html` : jQuery로 html의 내용 변경
 -   `.css('속성', '값')` : jQuery로 css의 내용 변경
 -   `.addClass('클래스명')` : jQuery로 클래스 부착
@@ -654,6 +655,7 @@ var 변수명 = 넣을자료;
 
 -   길고 복잡한 자료들 저장 가능
 -   특정 값을 기억하게 하려고 (count 같은거)
+-   **좋은 관습 : 자주쓰는 셀렉터 변수에 넣어쓰기**
 
 <br>
 
