@@ -56,12 +56,12 @@ git add file_name        # 작업 폴더 -> staging area
 git commit -m "memo"     # staging area -> repository
 git status               # staging area 목록 확인
 git log --all --oneline  # commit 내역 한 줄로 조회
-git commit --ammend -m "메모" # 가장 최근 commit 내용 변경
+git commit --amend -m "메모" # 가장 최근 commit 내용 변경
 ```
 
 작업 폴더에서 staging area로 올릴 파일을 고르는 행위를 **스테이징 한다** 라고 함
 
-    git add는 파일을 새로 추적할 때도 사용하고 
+    git add는 파일을 새로 추적할 때도 사용하고
     수정한 파일을 staged 상태로 만들 때도 사용한다.
 
 <br>
@@ -172,7 +172,7 @@ git config --global alias.hist "log --graph --all --pretty=format:'%C(yellow)[%a
 -   보면 git config user name을 수정했었는데, `origin/master`, `orign/HEAD` 저기까지가 깃허브에 git push로 올렸던 커밋들이다. 그 이후 user name을 저렇게 수정했었다. 아직은 push 하지 않은 상태라 브랜치가 coupon, HEAD -> master 이렇게 되어있는 모습이다.
 -   vim 환경이기 때문에 j가 아래 방향키, k가 위 방향키로 잘먹는다.
 
-<br> 
+<br>
 
 ### git merge 방법론
 
@@ -184,9 +184,9 @@ git config --global alias.hist "log --graph --all --pretty=format:'%C(yellow)[%a
 
 <p align="center"><img src="./img/img08.png"></img></p>
 
-- 신규 브랜치, merge 하고자 하는 중심 브랜치 각각에 새로운 commit이 있을 때 merge하면 두 브랜치의 코드를 합쳐서 새로운 commit을 자동으로 생성
-- 3-way merge 방식은 merge 했다는 흔적이 남게 된다.
-- 3-way 방식이 싫은 경우 강제로 [rebase하여 fast-forward 방식](#rebase-and-merge)을 사용하거나 [squash and merge 방식](#squash-and-merge)을 사용한다.
+-   신규 브랜치, merge 하고자 하는 중심 브랜치 각각에 새로운 commit이 있을 때 merge하면 두 브랜치의 코드를 합쳐서 새로운 commit을 자동으로 생성
+-   3-way merge 방식은 merge 했다는 흔적이 남게 된다.
+-   3-way 방식이 싫은 경우 강제로 [rebase하여 fast-forward 방식](#rebase-and-merge)을 사용하거나 [squash and merge 방식](#squash-and-merge)을 사용한다.
 
 <br>
 
@@ -194,11 +194,11 @@ git config --global alias.hist "log --graph --all --pretty=format:'%C(yellow)[%a
 
 <p align="center"><img src="./img/img12.png"></img></p>
 
-- 3-way merge 되면, 흔적이 남아서 매우 복잡하게 보인다.
+-   3-way merge 되면, 흔적이 남아서 매우 복잡하게 보인다.
 
 <p align="center"><img src="./img/img13.png" width="75%"></img></p>
 
-- master branch의 git log를 출력해보면 3-way merge 된 branch들의 commit 내역도 다 같이 출력되어서 보기 더럽다. (ex. 깃허브에서 커밋 내역 볼 때)
+-   master branch의 git log를 출력해보면 3-way merge 된 branch들의 commit 내역도 다 같이 출력되어서 보기 더럽다. (ex. 깃허브에서 커밋 내역 볼 때)
 
 이러한 참사를 해결하기 위하여 [squash and merge 방식](#squash-and-merge)을 사용하곤 한다.
 
@@ -210,10 +210,10 @@ git config --global alias.hist "log --graph --all --pretty=format:'%C(yellow)[%a
 
 <p align="center"><img src="./img/img09.png"></img></p>
 
-- 신규 브랜치에만 새로운 commit이 있고 merge 하고자 하는 브랜치에는 새로운 commit이 없는 경우 사용하는 merge 방식
-- 그냥 신규 브랜치보고 지금부터 너의 이름은 master 브랜치야! 라고 한다.
-- 그래서 merge한 흔적이 남지 않는다.
-- fast-forward merge가 싫은 경우 강제로 `git merge --no --ff 브랜치명`으로 강제로 3-way merge 할 수 있다.
+-   신규 브랜치에만 새로운 commit이 있고 merge 하고자 하는 브랜치에는 새로운 commit이 없는 경우 사용하는 merge 방식
+-   그냥 신규 브랜치보고 지금부터 너의 이름은 master 브랜치야! 라고 한다.
+-   그래서 merge한 흔적이 남지 않는다.
+-   fast-forward merge가 싫은 경우 강제로 `git merge --no --ff 브랜치명`으로 강제로 3-way merge 할 수 있다.
 
 <br>
 
@@ -223,18 +223,18 @@ git config --global alias.hist "log --graph --all --pretty=format:'%C(yellow)[%a
 
 <p align="center"><img src="./img/img10.png"></img></p>
 
-- rebase는 브랜치의 시작점을 다른 commit으로 옮겨주는 것
-- 신규 브랜치, merge 하고자 하는 중심 브랜치 각각에 새로운 commit이 있을 때 신규 브랜치의 시작점을 merge 하고자 하는 중심 브랜치의 가장 최근 commit으로 옮기고 fast-forward 방식으로 merge 한다.
-- 3-way merge가 싫을 때 사용할 수 있다.
-- 역시나 merge한 흔적이 남지 않는다.
-- 단, rebase를 사용했기 때문에 master branch의 새로운 커밋과 **conflict 할 가능성이 매우 높아진다.**
+-   rebase는 브랜치의 시작점을 다른 commit으로 옮겨주는 것
+-   신규 브랜치, merge 하고자 하는 중심 브랜치 각각에 새로운 commit이 있을 때 신규 브랜치의 시작점을 merge 하고자 하는 중심 브랜치의 가장 최근 commit으로 옮기고 fast-forward 방식으로 merge 한다.
+-   3-way merge가 싫을 때 사용할 수 있다.
+-   역시나 merge한 흔적이 남지 않는다.
+-   단, rebase를 사용했기 때문에 master branch의 새로운 커밋과 **conflict 할 가능성이 매우 높아진다.**
 
 <br>
 
 rebase and merge 사용법
 
 1. rebase 할, 시작점 바꾸고 싶은 브랜치로 이동
-2. `git rebase merge할 브랜치명` 
+2. `git rebase merge할 브랜치명`
 3. 그 다음 이동하여 fast-forward merge
 
 ```bash
@@ -253,9 +253,9 @@ git merge sub
 
 <p align="center"><img src="./img/img11.png"></img></p>
 
-- 3-way merge가 너무 많아서 git log 보기 힘들까봐 주로 사용
-- merge 흔적이 남지 않음
-- 브랜치에서 만들어놨던 많은 commit을 모두 합쳐서 하나의 commit으로 master 브랜치에 생성해줌
+-   3-way merge가 너무 많아서 git log 보기 힘들까봐 주로 사용
+-   merge 흔적이 남지 않음
+-   브랜치에서 만들어놨던 많은 commit을 모두 합쳐서 하나의 commit으로 master 브랜치에 생성해줌
 
 <br>
 
@@ -273,10 +273,10 @@ git commit -m "메세지"
 
 <br>
 
-- 프로젝트 마다, 팀마다 branching/merge 가이드가 존재
-- 예를 들어, 안중요한 잔챙이 브랜치는 **squash**하세요.
-- feature/develop 브랜치는 **3-way merge**하세요.
-- 혼자서 할 때는 대충 쓰세요.
+-   프로젝트 마다, 팀마다 branching/merge 가이드가 존재
+-   예를 들어, 안중요한 잔챙이 브랜치는 **squash**하세요.
+-   feature/develop 브랜치는 **3-way merge**하세요.
+-   혼자서 할 때는 대충 쓰세요.
 
 <br>
 
@@ -288,12 +288,11 @@ git commit -m "메세지"
 
 #### 3-way merge 실습
 
-
 <p align="center"><img src="./img/img14.png"></img></p>
 
-- 분기되었던 모습, 즉, merge된 흔적이 남아있다.
-- `git branch -d 3-way`로 브랜치를 지워도 그래프 모양으로 나타난다.
-- 3-way merge는 각각의 브랜치가 합쳐져서 새로운걸 만들어내는 형태라 mergetool이 따로 열렸다. 그래서 Merge branch 'commit4'와 같이 커밋을 남겼다.
+-   분기되었던 모습, 즉, merge된 흔적이 남아있다.
+-   `git branch -d 3-way`로 브랜치를 지워도 그래프 모양으로 나타난다.
+-   3-way merge는 각각의 브랜치가 합쳐져서 새로운걸 만들어내는 형태라 mergetool이 따로 열렸다. 그래서 Merge branch 'commit4'와 같이 커밋을 남겼다.
 
 <br>
 
@@ -301,10 +300,10 @@ git commit -m "메세지"
 
 <p align="center"><img src="./img/img15.png"></img></p>
 
-- fast-forward 방식은 master 브랜치에 새로운 commit이 없으니까 master 브랜치의 HEAD만 fastforward 브랜치로 바뀐 모습이다.
-- 따라서, merge 흔적이 남아있지 않다.
-- HEAD만 바뀌는 형태라 mergetool이 따로 열리지 않았다.
-- HEAD가 `(HEAD -> master, fast)` 이런식으로 나타났다. 
+-   fast-forward 방식은 master 브랜치에 새로운 commit이 없으니까 master 브랜치의 HEAD만 fastforward 브랜치로 바뀐 모습이다.
+-   따라서, merge 흔적이 남아있지 않다.
+-   HEAD만 바뀌는 형태라 mergetool이 따로 열리지 않았다.
+-   HEAD가 `(HEAD -> master, fast)` 이런식으로 나타났다.
 
 <br>
 
@@ -312,17 +311,17 @@ git commit -m "메세지"
 
 <p align="center"><img src="./img/img16.png"></img></p>
 
-- rebase 하기 전 모습
+-   rebase 하기 전 모습
 
 <p align="center"><img src="./img/img17.png"></img></p>
 
-- rebase 이후 모습
-- 그래프에서 분기가 사라짐을 확인 가능하다.
+-   rebase 이후 모습
+-   그래프에서 분기가 사라짐을 확인 가능하다.
 
 <p align="center"><img src="./img/img18.png"></img></p>
 
-- rebase 이후 fast-forward 한 모습
-- fast-forward 방식과 동일하게 HEAD만 바뀐 모습이다.
+-   rebase 이후 fast-forward 한 모습
+-   fast-forward 방식과 동일하게 HEAD만 바뀐 모습이다.
 
 <br>
 
@@ -330,20 +329,20 @@ git commit -m "메세지"
 
 <p align="center"><img src="./img/img19.png"></img></p>
 
-- squash 하기 이전 모습
+-   squash 하기 이전 모습
 
 <p align="center"><img src="./img/img20.png"></img></p>
 
-- squash를 하고 나서 squash는 되었지만, HEAD는 업데이트가 되지 않았다고 한다. commit을 추가적으로 하고 log를 확인해보면
+-   squash를 하고 나서 squash는 되었지만, HEAD는 업데이트가 되지 않았다고 한다. commit을 추가적으로 하고 log를 확인해보면
 
 <p align="center"><img src="./img/img21.png"></img></p>
 
-- commit4가 정상적으로 생성된 모습이다. 하지만 squash 브랜치는 남아있다. 그래서 `git branch -D squash`로 브랜치를 삭제해보면
+-   commit4가 정상적으로 생성된 모습이다. 하지만 squash 브랜치는 남아있다. 그래서 `git branch -D squash`로 브랜치를 삭제해보면
 
 <p align="center"><img src="./img/img22.png"></img></p>
 
-- 이와 같이 깔끔하게 merge 흔적이 사라진 모습이다.
-- squash로 merge하면 브랜치의 내용이 순간이동하는 개념이라 squash 브랜치는 아직 merge 되지 않았다고 나왔다. 그래서 `git branch -d squash`가 아닌 `git branch -D squash`로 삭제했다.
+-   이와 같이 깔끔하게 merge 흔적이 사라진 모습이다.
+-   squash로 merge하면 브랜치의 내용이 순간이동하는 개념이라 squash 브랜치는 아직 merge 되지 않았다고 나왔다. 그래서 `git branch -d squash`가 아닌 `git branch -D squash`로 삭제했다.
 
 <br>
 
@@ -353,8 +352,8 @@ git commit -m "메세지"
 
 #### git restore
 
-- 파일 하나를 수정하고 싶은데 ctrl + z로 수정하기에 수정사항이 너무 많다면 사용
-- 해당하는 commit 시점으로 파일 내용 되돌림
+-   파일 하나를 수정하고 싶은데 ctrl + z로 수정하기에 수정사항이 너무 많다면 사용
+-   해당하는 commit 시점으로 파일 내용 되돌림
 
 ```bash
 git restore 파일명
@@ -376,16 +375,16 @@ git restore --staged 파일명
 
 #### git revert
 
-- commit을 취소하고 싶은 경우 revert 사용
-- commit을 없애는 건 아니고 commit 하나를 취소한 commit을 하나 생성해줌
+-   commit을 취소하고 싶은 경우 revert 사용
+-   commit을 없애는 건 아니고 commit 하나를 취소한 commit을 하나 생성해줌
 
 <p align="center"><img src="./img/img23.png"></img></p>
 
-- 예를 들어, b파일을 만든 **244ef15** commit을 취소하고싶음.
-- `git revert 244ef15`를 입력하면 에디터가 열림. 그리고 새로운 commit을 하나 추가해줌.
-- 결과적으로 244ef15에서 일어난 commit을 취소해줌
-- 작업폴더에서 a파일과 c파일만 있고 b파일은 사라져있을 것
-- merge로 생성된 commit도 취소 가능
+-   예를 들어, b파일을 만든 **244ef15** commit을 취소하고싶음.
+-   `git revert 244ef15`를 입력하면 에디터가 열림. 그리고 새로운 commit을 하나 추가해줌.
+-   결과적으로 244ef15에서 일어난 commit을 취소해줌
+-   작업폴더에서 a파일과 c파일만 있고 b파일은 사라져있을 것
+-   merge로 생성된 commit도 취소 가능
 
 ```bash
 git revert 커밋아이디
@@ -399,7 +398,7 @@ git revert HEAD  # 가장 최근 commit 취소
 
 <br>
 
-- 특정 commit 시절로 아예 모든 것을 되돌려버림
+-   특정 commit 시절로 아예 모든 것을 되돌려버림
 
 ```bash
 git reset --hard 커밋아이디
@@ -408,9 +407,9 @@ git push -f  # 원격저장소에도 업데이트 하기
 
 <p align="center"><img src="./img/img24.png"></img></p>
 
-- git revert 예제에서 git reset --hard 한 모습
-- 아예 c파일 생성, revert b 커밋 자체가 날라간 모습
-- (주의) 따라서, 협업시 사용금지. 갑자기 커밋을 다 날려버릴 수도 있기 때문이다.
+-   git revert 예제에서 git reset --hard 한 모습
+-   아예 c파일 생성, revert b 커밋 자체가 날라간 모습
+-   (주의) 따라서, 협업시 사용금지. 갑자기 커밋을 다 날려버릴 수도 있기 때문이다.
 
 <br>
 
@@ -422,19 +421,19 @@ git push -f  # 원격저장소에도 업데이트 하기
 git reset --soft 커밋아이디
 ```
 
-- 리셋이긴 한데, 변동사항을 지우지는 않고 staging area에 올려놓는다. 사용하려면 git commit 하면 됨
+-   리셋이긴 한데, 변동사항을 지우지는 않고 staging area에 올려놓는다. 사용하려면 git commit 하면 됨
 
 ```bash
 git reset --mixed 커밋아이디
 ```
 
-- 리셋이긴 한데, 변동사항을 지우지는 않고 staging area에도 올려놓지 않는다. 사용하려면 git add, git commit 둘다 해야함
+-   리셋이긴 한데, 변동사항을 지우지는 않고 staging area에도 올려놓지 않는다. 사용하려면 git add, git commit 둘다 해야함
 
 <br>
 
 ### git push
 
-- 로컬 repository를 원격 repository로 올리기
+-   로컬 repository를 원격 repository로 올리기
 
 ```bash
 git push -u 원격저장소주소 올릴로컬브랜치명
@@ -444,11 +443,11 @@ git remote -v      # 변수목록 확인
 git clone 원격저장소주소  # 원격저장소 받아오기
 ```
 
-- `git push -u https://github.com/Shin-Jae-Yoon/TIL.git master`라고 하면 로컬의 master 브랜치가 해당하는 원격저장소에 push 된다.
-- 매번 주소 치기 귀찮으니까 remote 기능 이용해보자.
-- `git remote add origin https://github.com/Shin-Jae-Yoon/TIL.git`이라고 하면 git 주소를 origin 변수에 저장한 것이다.
-- `git push -u origin master`이라고 하면 위의 것과 같은 말이다.
-- `-u` 옵션은 주소를 기억하라는 옵션이라서 앞으로는 `git push`만 입력해도 될 것 이다.
+-   `git push -u https://github.com/Shin-Jae-Yoon/TIL.git master`라고 하면 로컬의 master 브랜치가 해당하는 원격저장소에 push 된다.
+-   매번 주소 치기 귀찮으니까 remote 기능 이용해보자.
+-   `git remote add origin https://github.com/Shin-Jae-Yoon/TIL.git`이라고 하면 git 주소를 origin 변수에 저장한 것이다.
+-   `git push -u origin master`이라고 하면 위의 것과 같은 말이다.
+-   `-u` 옵션은 주소를 기억하라는 옵션이라서 앞으로는 `git push`만 입력해도 될 것 이다.
 
 <br>
 
@@ -464,8 +463,8 @@ git clone 원격저장소주소  # 원격저장소 받아오기
 
 ### github 이용 협업
 
-- 기본적으로 `git clone 원격저장소` 하는 것부터 시작한다.
-- 팀원도 push 하고 싶으면 깃허브의 settings -> Access -> Collaborators -> Manage access에서 팀원 깃헙아이디를 등록해놔야 push 가능해진다.
+-   기본적으로 `git clone 원격저장소` 하는 것부터 시작한다.
+-   팀원도 push 하고 싶으면 깃허브의 settings -> Access -> Collaborators -> Manage access에서 팀원 깃헙아이디를 등록해놔야 push 가능해진다.
 
 <br>
 
@@ -486,13 +485,13 @@ git pull은 엄밀히 말하면 `git fetch + git merge`이다. 원격 저장소�
 
 <br>
 
-- 프로젝트를 할 때 branch를 쪼개서 작업하는 경우가 많아질 것
-- 예를 들어, `git push origin feature`로 feature 브랜치를 로컬에서 생성하고 작업하고 있다고 가정하자. (물론, 깃허브에서 브랜치 생성하고 pull 해왔어도 가능)
-- feature가 잘 작동해서 master 브랜치에 merge 하려고 한다.
-    - github에서 merge 하거나
-    - 로컬에서 merge 한 다음 push 하거나
-- 협업할 때는 merge 하기 전에 검토를 하는 경우가 일반적
-- github의 pull request 기능을 이용해보자.
+-   프로젝트를 할 때 branch를 쪼개서 작업하는 경우가 많아질 것
+-   예를 들어, `git push origin feature`로 feature 브랜치를 로컬에서 생성하고 작업하고 있다고 가정하자. (물론, 깃허브에서 브랜치 생성하고 pull 해왔어도 가능)
+-   feature가 잘 작동해서 master 브랜치에 merge 하려고 한다.
+    -   github에서 merge 하거나
+    -   로컬에서 merge 한 다음 push 하거나
+-   협업할 때는 merge 하기 전에 검토를 하는 경우가 일반적
+-   github의 pull request 기능을 이용해보자.
 
 <br>
 
@@ -530,7 +529,7 @@ git pull은 엄밀히 말하면 `git fetch + git merge`이다. 원격 저장소�
 
 merge 전략 3가지 역시 깃허브에 반영되어있음.
 
-1. create a merge commit 
+1. create a merge commit
 
     새로운 merge commit 생성해주는 [3-way-merge](#3-way-merge) 실행한다. master 브랜치 조회해보면 합쳐진 브랜치의 commit 내역도 전부 나온다. 역시 git log를 보면 합쳐진 브랜치도 나오기 때문에 commit 내역이 많으면 복잡하고 더러워 보일 수 있다.
 
@@ -546,7 +545,7 @@ merge 전략 3가지 역시 깃허브에 반영되어있음.
 
 ### git flow / trunk-based 브랜치 전략
 
-- 프로젝트 커지고 사람 많아져도 branch, merge를 깔끔하게 하려고 사용하는 전략들이 있다. **GitFlow, Github Flow, Trunk-based, Gitlab Flow**
+-   프로젝트 커지고 사람 많아져도 branch, merge를 깔끔하게 하려고 사용하는 전략들이 있다. **GitFlow, Github Flow, Trunk-based, Gitlab Flow**
 
 <br>
 
@@ -560,11 +559,11 @@ merge 전략 3가지 역시 깃허브에 반영되어있음.
 
 **GitFlow** 개발 전략은 게임 개발 같이 항상 안정적인 release를 해야하는 경우에 사용하기 적합하다. 크게 5개 브랜치를 운영한다.
 
-- main 브랜치
-- develop 브랜치 (개발용, main 브랜치의 복사본)
-- feature 브랜치 (develop에 기능 추가용)
-- hotfix 브랜치 (main 브랜치 버그 픽스용)
-- release 브랜치 (develop 브랜치를 main 브랜치에 merge 하기 전 최종 테스트본, 가끔 사용)
+-   main 브랜치
+-   develop 브랜치 (개발용, main 브랜치의 복사본)
+-   feature 브랜치 (develop에 기능 추가용)
+-   hotfix 브랜치 (main 브랜치 버그 픽스용)
+-   release 브랜치 (develop 브랜치를 main 브랜치에 merge 하기 전 최종 테스트본, 가끔 사용)
 
 장점은 안정적이지만, 단점은 간단한 개발의 경우 리소스 낭비가 심할 수 있다. 간단한 작업임에도 매번 develop 브랜치~ release 브랜치~ 이런식으로 진행해야하니까. 최근 CI/CD를 도입하는 회사가 많이 늘었는데, 그런 경우에 git flow 전략은 적합하지 않다.
 
@@ -590,10 +589,10 @@ merge 전략 3가지 역시 깃허브에 반영되어있음.
 
 ### git stash
 
-- 코드를 작성하다가 잠시 보관하고 싶을 때 사용
-- 최근 commit과 차이점 있는 부분 전부 보관
-- 스테이징 되었든 안되었든 모두 stash 된다
-- 하지만, 스테이징 안해놓은 새로운 파일 (untranked file 인듯)은 stash 안될 수도 있다.
+-   코드를 작성하다가 잠시 보관하고 싶을 때 사용
+-   최근 commit과 차이점 있는 부분 전부 보관
+-   스테이징 되었든 안되었든 모두 stash 된다
+-   하지만, 스테이징 안해놓은 새로운 파일 (untranked file 인듯)은 stash 안될 수도 있다.
 
 <br>
 
@@ -601,14 +600,15 @@ merge 전략 3가지 역시 깃허브에 반영되어있음.
 stash란 아래에 해당하는 파일들을 보관해두는 장소 이다.
 
 1. Modified이면서 Tracked 상태인 파일
-   - Tracked 상태인 파일을 수정한 경우
-   - Tracked: 과거에 이미 commit하여 스냅샷에 넣어진 관리 대상 상태의 파일
+
+    - Tracked 상태인 파일을 수정한 경우
+    - Tracked: 과거에 이미 commit하여 스냅샷에 넣어진 관리 대상 상태의 파일
 
 2. Staging Area에 있는 파일(Staged 상태의 파일)
 
-   - git add 명령을 실행한 경우
-   - staged 상태로 만들려면 git add 명령을 실행해야 한다.
-   - git add는 **파일을 새로 추적할 때도 사용**하고 **수정한 파일을 Staged 상태로 만들 때**도 사용한다.
+    - git add 명령을 실행한 경우
+    - staged 상태로 만들려면 git add 명령을 실행해야 한다.
+    - git add는 **파일을 새로 추적할 때도 사용**하고 **수정한 파일을 Staged 상태로 만들 때**도 사용한다.
 
 ```bash
 git stash
@@ -620,7 +620,7 @@ git stash drop 번호  # stash 1개 삭제
 git stash clear      # stash 전부 삭제
 ```
 
-- git stash pop은 pop에서 알 수 있다시피 가장 최근 것부터 가져온다. stash는 스택에 새로운 stash가 만들어지면서 저기에 넣고 working directory, 작업공간이 깔끔해지는 효과이다.
+-   git stash pop은 pop에서 알 수 있다시피 가장 최근 것부터 가져온다. stash는 스택에 새로운 stash가 만들어지면서 저기에 넣고 working directory, 작업공간이 깔끔해지는 효과이다.
 
 <br>
 
