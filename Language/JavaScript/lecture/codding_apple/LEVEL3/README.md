@@ -127,6 +127,8 @@ input과 사용법이 비슷하기에 역시 **value**를 가져와서 처리할
 document
     .querySelectorAll('.form-select')[0]
     .addEventListener('input', function () {
+        // this는 여기서 이벤트리스너에 function() 썼으니까
+        // e.currentTarget을 의미
         let value = this.value;
 
         if (value == '셔츠') {
@@ -203,6 +205,8 @@ $('#test').append(템플릿);
 document
     .querySelectorAll('.form-select')[0]
     .addEventListener('input', function () {
+        // this는 여기서 이벤트리스너에 function() 썼으니까
+        // e.currentTarget을 의미
         let value = this.value;
 
         if (value == '셔츠') {
@@ -234,3 +238,192 @@ document
 ```
 
 이렇게 하면 HTML 파일에 하드코딩 했다기보다 JS 조작을 통해 셔츠 사이즈를 다 날려버리고 바지 선택하면 바지 사이즈가 나오게 됨. 추가로, **JS에서 html 저렇게 만들 때 문자열 기호에 넣고 하면 엔터키 치면 안내려갈거임. 백틱 키 쓰셈**
+
+<br><br>
+
+### Select 03 : forEach, for in 반복문
+
+<br>
+
+위에서 자바스크립트로 html 만들어서 html에 박는 것을 배웠다. 하지만 아직까지는 자바스크립트로 html 코드 그대로 짰으니까 여전히 하드코딩이다. 만약, 셔츠/바지 사이즈가 매일매일 달라진다면? **실제로 서버에서 데이터 가져와서 갯수만큼 option 태그 생성하도록 해보자.**
+
+<br>
+
+-   for 반복문 : `for (let i = 0; i < 어쩌구; i++)`
+-   forEach 반복문 : **Array 자료형** 뒤에 붙일 수 있는 기본 함수, 반복문 역할
+-   for in 반복문 : **Object 자료형** 반복문 돌리고 싶을 때 사용
+
+<br>
+
+    array 자료형이나 object 자료형의 자료를
+    전부 꺼내어서 사용하고 싶을 때
+    forEach, for in 반복문은 매우 유용하다.
+
+<br>
+
+    array 자료형에서 기본함수 .forEach() 말고
+    for in 같은 반복문 for of가 있다.
+    단, index를 얻지 못한다는 단점 있음
+
+<br>
+
+#### forEach
+
+-   forEach 반복문은 **콜백함수** 써줘야 한다.
+-   콜백함수에 파라미터 2개까지 넣을 수 있다.
+    -   첫번째 파라미터 : **반복문 돌 때 마다 array 안에 있던 하나하나의 데이터**
+    -   두번째 파라미터 : **반복문 돌 때 마다 0부터 1씩 증가하는 정수**
+
+```javascript
+let pants = [28, 30, 32];
+pants.forEach(function () {
+    console.log('안녕');
+});
+// 안녕
+// 안녕
+// 안녕
+
+pants.forEach(function (a, i) {
+    console.log(a); // 28 30 32
+    console.log(i); // 0 1 2
+});
+
+for (let pant of pants) {
+    console.log(pant); // 28 30 32
+}
+```
+
+```javascript
+// 서버에서 보내준 데이터라고 가정
+let shirts = [90, 95, 100, 105];
+let pants = [28, 30, 32, 34];
+
+document
+    .querySelectorAll('.form-select')[0]
+    .addEventListener('input', function () {
+        // this는 여기서 이벤트리스너에 function() 썼으니까
+        // e.currentTarget을 의미
+        let value = this.value;
+        let optionSelector = document.querySelectorAll('.form-select')[1];
+
+        if (value == '셔츠') {
+            optionSelector.classList.remove('form-hide');
+            optionSelector.innerHTML = '';
+
+            // for 반복문
+            for (let i = 0; i < shirts.length; i++) {
+                optionSelector.insertAdjacentHTML(
+                    'beforeend',
+                    `<option>${shirts[i]}</option>`
+                );
+            }
+
+            // forEach 반복문
+            shirts.forEach(function (data) {
+                optionSelector.insertAdjacentHTML(
+                    'beforeend',
+                    `<option>${data}</option>`
+                );
+            });
+
+            // forEach 반복문 arrow function 사용
+            shirts.forEach((data) => {
+                optionSelector.insertAdjacentHTML(
+                    'beforeend',
+                    `<option>${data}</option>`
+                );
+            });
+        }
+    });
+```
+
+<br>
+
+#### for in 반복문
+
+-   object 자료 갯수만큼 반복문 돌리고 싶으면 사용 가능
+-   key라고 작명한 부분은 object 자료형의 key 부분
+-   key, value 모두 출력 가능
+
+```javascript
+let obj = {name: 'shin', age: 27};
+
+for (let key in obj) {
+    console.log('안녕');
+}
+// 안녕
+// 안녕
+
+for (let key in obj) {
+    console.log(key);
+    console.log(obj[key]);
+}
+
+// name
+// shin
+// age
+// 27
+```
+
+<br>
+
+#### arrow function 맛보기
+
+-   함수 만드는 또다른 문법이 arrow function 이다.
+-   기본적으로 함수와 this 빼고 거의 동일한 역할을 한다.
+-   **특히, 콜백함수 만들 때 자주 사용**
+-   `function() {}`는 `() => {}`와 같다.
+-   심지어 파라미터가 1개라면 소괄호 생략하고 사용하기도 한다.
+    `function(a) {}`는 `a => {}`와 같다.
+
+```javascript
+let pants = [28, 30, 32];
+
+pants.forEach(function (a) {
+    console.log(a);
+});
+
+pants.forEach((a) => {
+    console.log(a);
+});
+```
+
+-   함수 표현식의 형태로 쓰는 사람도 있다.
+
+```javascript
+let 함수1 = function () {
+    console.log('안녕');
+};
+let 함수2 = () => {
+    console.log('안녕');
+};
+```
+
+<br>
+
+함수 안에서 **this**를 사용해야할 경우 `함수`와 `화살표 함수`는 **기능적인 차이**가 존재한다.
+
+-   `function()` : 함수 안에서 this를 알맞게 **재정의** 해줌
+-   `arrow function` : 함수 안에서 this를 재정의하지 않고 **바깥에 있던 this를 그대로 사용**
+
+<br>
+
+위에서 사용했던 this를 살펴보겠다.
+
+```javascript
+document
+    .querySelectorAll('.form-select')[0]
+    .addEventListener('input', function () {
+        // this는 여기서 이벤트리스너에 function() 썼으니까
+        // e.currentTarget을 의미
+        let value = this.value;
+    });
+```
+
+현재 **function()**을 썼기 때문에 함수 안에서 this가 재정의 되어서 `document.querySelectorAll('.form-select')[0].addEventListener`가 동작했을 때를 뜻하니까 `e.currentTarget`이 된다. 하지만, 만약 여기서 **화살표함수를 사용해버리면 함수 바깥의 this를 가져와서 사용하기 때문에 의도와 다르게 동작할 수 있다.** 따라서 주의가 필요하다.
+
+<br>
+
+> 이벤트리스너 콜백함수 안에서 this를 사용해야하면 **arrow function 사용 시에 의도와 다르게 동작할 수 있으니까** 그런데서 사용하지말고 조심해서 사용하자.
+
+> 참고로, 브라우저 환경의 전역객체는 **window** node 환경의 전역객체는 **global**이다. 예시 코드에서 밖에 특별한 this가 없다면, 화살표 함수를 썼을 때 this는 window를 뜻하게 된다.

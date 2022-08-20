@@ -13,35 +13,51 @@ for (let i = 0; i < products.length; i++) {
     cardPrice.innerHTML = `가격 : ${products[i].price}`;
 }
 
+// 서버에서 보내준 데이터라고 가정
+let shirts = [90, 95, 100, 105];
+let pants = [28, 30, 32, 34];
+
 document
     .querySelectorAll('.form-select')[0]
     .addEventListener('input', function () {
         let value = this.value;
+        let optionSelector = document.querySelectorAll('.form-select')[1];
 
         if (value == '셔츠') {
-            document
-                .querySelectorAll('.form-select')[1]
-                .classList.remove('form-hide');
-            let 셔츠 = `
-                <option>95</option>
-                <option>100</option>
-            `;
+            optionSelector.classList.remove('form-hide');
+            optionSelector.innerHTML = '';
 
-            document.querySelectorAll('.form-select')[1].innerHTML = 셔츠;
+            // for (let i = 0; i < shirts.length; i++) {
+            //     optionSelector.insertAdjacentHTML(
+            //         'beforeend',
+            //         `<option>${shirts[i]}</option>`
+            //     );
+            // }
+
+            shirts.forEach(function (data) {
+                optionSelector.insertAdjacentHTML(
+                    'beforeend',
+                    `<option>${data}</option>`
+                );
+            });
         } else if (value == '바지') {
-            document
-                .querySelectorAll('.form-select')[1]
-                .classList.remove('form-hide');
+            optionSelector.classList.remove('form-hide');
+            optionSelector.innerHTML = '';
 
-            let 바지 = `
-                <option>28</option>
-                <option>30</option>
-            `;
+            // pants.forEach(function (data) {
+            //     optionSelector.insertAdjacentHTML(
+            //         'beforeend',
+            //         `<option>${data}</option>`
+            //     );
+            // });
 
-            document.querySelectorAll('.form-select')[1].innerHTML = 바지;
+            pants.forEach((data) => {
+                optionSelector.insertAdjacentHTML(
+                    'beforeend',
+                    `<option>${data}</option>`
+                );
+            });
         } else {
-            document
-                .querySelectorAll('.form-select')[1]
-                .classList.add('form-hide');
+            optionSelector.classList.add('form-hide');
         }
     });
