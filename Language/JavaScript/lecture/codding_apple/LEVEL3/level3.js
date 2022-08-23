@@ -61,3 +61,20 @@ document
             optionSelector.classList.add('form-hide');
         }
     });
+
+// $.get('https://codingapple1.github.io/price.json')
+//     .done(function (data) {
+//         console.log(data.price);
+//     })
+//     .fail(function () {
+//         console.log('실패함');
+//     });
+
+fetch('https://codingapple1.github.io/price.json')
+    .then((res) => res.json())
+    .then((data) => {
+        console.log(data.price);
+    })
+    .catch((error) => {
+        console.log(error);
+    });

@@ -420,10 +420,209 @@ document
     });
 ```
 
-현재 **function()**을 썼기 때문에 함수 안에서 this가 재정의 되어서 `document.querySelectorAll('.form-select')[0].addEventListener`가 동작했을 때를 뜻하니까 `e.currentTarget`이 된다. 하지만, 만약 여기서 **화살표함수를 사용해버리면 함수 바깥의 this를 가져와서 사용하기 때문에 의도와 다르게 동작할 수 있다.** 따라서 주의가 필요하다.
+현재 **function()** 을 썼기 때문에 함수 안에서 this가 재정의 되어서 `document.querySelectorAll('.form-select')[0].addEventListener`가 동작했을 때를 뜻하니까 `e.currentTarget`이 된다. 하지만, 만약 여기서 **화살표함수를 사용해버리면 함수 바깥의 this를 가져와서 사용하기 때문에 의도와 다르게 동작할 수 있다.** 따라서 주의가 필요하다.
 
 <br>
 
 > 이벤트리스너 콜백함수 안에서 this를 사용해야하면 **arrow function 사용 시에 의도와 다르게 동작할 수 있으니까** 그런데서 사용하지말고 조심해서 사용하자.
 
 > 참고로, 브라우저 환경의 전역객체는 **window** node 환경의 전역객체는 **global**이다. 예시 코드에서 밖에 특별한 this가 없다면, 화살표 함수를 썼을 때 this는 window를 뜻하게 된다.
+
+<br><br>
+
+### Ajax (jQuery 이용 서버 통신)
+
+<br>
+
+**서버**는 데이터 보내달라고 요청하면 데이터를 보내주는 것이다. 예를 들어, 네이버 웹툰 서버라고 하면 네이버 웹툰 달라고 하면 웹툰 보내주는 것이다. 서버는 데이터를 보내주기도 하고 유저 데이터를 받아서 DB에 저장하기도 하는 역할을 한다.
+
+1. 어떤 데이터인지 : 데이터의 url
+
+    - 예를 들어, comic.naver.com 이라는 url
+    - 데이터 url은 서버 개발자가 작성한 api 문서에 따라 요청한다.
+
+2. 어떤 방법으로 데이터를 요청할건지 : get인지, post인지 정확히
+    - **get은 데이터 읽을 때, post는 데이터를 보낼 때**
+
+<br>
+
+Q. 특정 url로 get 요청하는 법?
+
+-   인터넷의 주소창에 url을 입력하는 것이 일종의 get 요청하는 것이다. 즉, **주소창이 get 요청하는 곳**이라고 이해하면 된다.
+
+Q. 특정 url로 post 요청하는 법?
+
+-   `<form action="/url" method="post"></form>`태그를 이용한다. 전송버튼을 누르면 서버에 post 요청 하는 것이다.
+
+<br><br>
+
+#### ajax의 등장
+
+단순히 get요청과 post요청하면 **브라우저가 새로고침이 된다는 것이 단점**이다. 새로고침이 매번 발생하면 불편하기 때문에 **새로고침 없이 get, post 요청할 수 있도록 ajax**가 등장하는 것이다. 예를 들어, 쇼핑몰의 경우에 상품더보기 버튼을 누르면 새로고침 없이 서버와 통신하여 새로운 상품 목록을 불러오는 것이다.
+
+    참고로, ajax를 편하게 쓰고 싶을 때 사용하는 것이
+    axios 라이브러리 이다. 리액트나 뷰에서는 주로
+    axios 라이브러리를 사용할 것이다.
+
+<br>
+
+-   ajax로 get요청 하는 방법
+
+```javascript
+$.get('url~~');
+```
+
+예시로, `https://codingapple1.github.io/hello.txt`로 get요청 하면 인삿말 보내준다. 그리고, `.done()` 함수를 이용하면 get요청이 성공했을 때 콜백함수 실행시킬 수 있다.
+
+```javascript
+$.get('https://codingapple1.github.io/hello.txt').done(function (data) {
+    console.log(data);
+});
+
+// '안녕하세요 반갑습니다요.'
+```
+
+-   ajax로 post요청 하는 방법
+
+```javascript
+$.post('url~~', data);
+
+$.post('https://codingapple1.github.io/hello.txt', {name: 'kim'}).done(
+    function (data) {
+        console.log(data);
+    }
+);
+```
+
+-   ajax 실패시 특정 코드 실행 `.fail()`
+    -   보통 **404 error**는 서버에 url이 없다는 오류
+
+```javascript
+$.get('https://codingapple1.github.io/hello.txt')
+    .done(function (data) {
+        console.log(data);
+    })
+    .fail(function () {
+        console.log('실패함');
+    });
+```
+
+<br><br>
+
+#### 브라우저 기본 함수 fetch
+
+ajax말고 브라우저 기본 함수를 써서 쌩 자바스크립트로 구현할 수도 있다.
+
+```javascript
+// ajax 사용
+$.get('https://codingapple1.github.io/price.json')
+    .done(function (data) {
+        console.log(data.price);
+    })
+    .fail(function () {
+        console.log('실패함');
+    });
+
+// fetch 사용
+fetch('https://codingapple1.github.io/price.json')
+    .then((res) => res.json())
+    .then((data) => {
+        console.log(data.price);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+```
+
+#### JSON 자료형
+
+서버와 클라이언트는 **문자자료만 주고 받을 수 있다.** object, array를 보내고 싶으면 ""를 쳐서 문자처럼 만들고 보내야한다. 이렇게 **따옴표 친 object, array 자료가 바로 JSON**이라고 한다.
+
+```javascript
+// object
+{price : 5000}
+
+// JSON
+"{"price" : 5000}"
+```
+
+JSON으로 변환하면 문자형 자료라서 원하는 자료만 뽑아쓰기 힘들다. 그래서 JSON자료를 다시 object나 array로 변환해서 사용하면 뽑아쓰기 편하다. fetch를 사용할 때 `((res) => res.json())`이 응답받은 response를 json으로 변환해주는 과정이다. ajax는 자동으로 변환해주기 때문에 신경쓰지 않았다.
+
+<br><br>
+
+### Array 정렬하는 법
+
+<br>
+
+기본적으로 `.sort()` 함수는 **문자정렬**이다. 숫자를 그냥 정렬시켜보면 아래와 같이 원하지 않는 결과가 나온다.
+
+```javascript
+let 어레이 = [7, 3, 5, 2, 40];
+어레이.sort();
+console.log(어레이);
+
+// [2, 3, 40, 5, 7]
+```
+
+<br>
+
+array **숫자 정렬**은 콜백함수를 사용하고 return 값을 따로 지정해줘야 한다. 아래와 같이 코드를 작성하면 **오름차순 숫자 정렬**이다.
+
+```javascript
+let 어레이 = [7, 3, 5, 2, 40];
+어레이.sort(function (a, b) {
+    return a - b;
+});
+
+console.log(어레이);
+// [2, 3, 5, 7, 40]
+```
+
+<br>
+
+#### javscript array 오름차순 숫자정렬 원리
+
+1. 콜백함수의 a와 b는 array 안에 있던 자료들이다.
+
+    ex) `7, 3`
+
+2. return 결과가 양수면 a를 오른쪽으로 보낸다.
+
+3. return 결과가 음수면 b를 오른쪽으로 보낸다.
+
+    ex) `7 - 3 = 4` 양수니까, a가 b보다 크다는 의미이다. 따라서, a를 오른쪽으로 보낸다.
+
+<br>
+
+#### javascript 문자 가나다순 정렬
+
+-   그냥 `.sort()` 사용
+
+```javascript
+let 어레이2 = ['a', 'c', 'b'];
+어레이2.sort();
+console.log(어레이2);
+// ['a', 'b', 'c']
+```
+
+```javascript
+let 어레이3 = ['a', 'd', 'c', 'b'];
+어레이3.sort(function (a, b) {
+    if (a > b) {
+        return 1;
+    } else {
+        return -1;
+    }
+});
+console.log(어레이3);
+```
+
+#### javascript 정렬 결론
+
+`sort()` 함수는 배열의 요소를 compareFunction에게 2개씩 반복해서 보낸 뒤, compareFunction이 반환하는 값을 기준으로 정렬한다. 보내는 요소들의 이름을 a, b라고 했을 때 기준은 아래와 같다.
+
+-   `반환 값 < 0` : a가 b보다 앞에 있어야 한다.
+-   `반환 값 = 0` : a와 b의 순서를 바꾸지 않는다
+-   `반환 값 > 0` : b가 a보다 앞에 있어야 한다.
+
+자세한 설명은 [링크](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)에서 참조하도록 하자.
