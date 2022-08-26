@@ -2,7 +2,7 @@
 
 <br><br>
 
-### Array, object
+### Array, Object
 
 <br>
 
@@ -49,7 +49,7 @@ console.log(car.slice(1, 3));
 
 <br>
 
-#### object 자료형
+#### Object 자료형
 
 -   `let 변수 = {key1: value1, key2: value2};` 중괄호 이용, **순서 X**
 -   이름을 **key**, 자료를 **value**라고 함.
@@ -550,11 +550,13 @@ JSON으로 변환하면 문자형 자료라서 원하는 자료만 뽑아쓰기 
 
 <br><br>
 
-### Array 정렬하는 법
+### Array 자주 쓰는 함수 - sort()
 
 <br>
 
-기본적으로 `.sort()` 함수는 **문자정렬**이다. 숫자를 그냥 정렬시켜보면 아래와 같이 원하지 않는 결과가 나온다.
+-   `sort()` 함수는 **문자정렬**이다.
+-   `sort()` 함수는 **원본을 변형**시킨다.
+-   문자가 아닌 숫자를 그냥 정렬하려고 하면 아래와 같이 원치 않는 결과가 나온다.
 
 ```javascript
 let 어레이 = [7, 3, 5, 2, 40];
@@ -576,6 +578,29 @@ let 어레이 = [7, 3, 5, 2, 40];
 
 console.log(어레이);
 // [2, 3, 5, 7, 40]
+```
+
+<br>
+
+array 안에 object가 있는 형태라면? ex) `[ {}, {}, {} ]` 그 경우 return 값이 `{} - {}`이니까 양수나 음수가 나오는 구조가 아니다. object의 value를 가져와서 비교해주고 return 해주면 되겠구나.
+
+```javascript
+let 상품배열 = [
+    {id: 0, price: 70000, title: 'Blossom Dress'},
+    {id: 1, price: 50000, title: 'Springfield Shirt'},
+    {id: 2, price: 60000, title: 'Black Monastery'},
+];
+
+상품배열.sort(function (a, b) {
+    return a.price - b.price;
+});
+
+console.log(상품배열);
+// [
+//   { id: 1, price: 50000, title: 'Springfield Shirt' },
+//   { id: 2, price: 60000, title: 'Black Monastery' },
+//   { id: 0, price: 70000, title: 'Blossom Dress' }
+// ]
 ```
 
 <br>
@@ -621,8 +646,158 @@ console.log(어레이3);
 
 `sort()` 함수는 배열의 요소를 compareFunction에게 2개씩 반복해서 보낸 뒤, compareFunction이 반환하는 값을 기준으로 정렬한다. 보내는 요소들의 이름을 a, b라고 했을 때 기준은 아래와 같다.
 
--   `반환 값 < 0` : a가 b보다 앞에 있어야 한다.
+-   `반환 값 > 0` : b가 a보다 앞에 있어야 한다. **a가 우측으로 감**
+-   `반환 값 < 0` : a가 b보다 앞에 있어야 한다. **b가 우측으로 감**
 -   `반환 값 = 0` : a와 b의 순서를 바꾸지 않는다
--   `반환 값 > 0` : b가 a보다 앞에 있어야 한다.
 
 자세한 설명은 [링크](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)에서 참조하도록 하자.
+
+<br><br>
+
+### Array 자주 쓰는 함수 - filter()
+
+<br>
+
+-   `filter()` 함수는 array 자료에서 원하는 것만 고르고 싶을 때 사용하는 함수
+-   `filter()` 함수는 **원본을 변형시키지 않기 때문**에 결과를 변수에 저장해서 사용해야 한다.
+
+```javascript
+let 어레이 = [7, 3, 5, 2, 40];
+
+// a는 array에 있던 자료들
+let 새어레이 = 어레이.filter(function (a) {
+    return a < 4;
+});
+
+console.log(어레이);
+// [7, 3, 5, 2, 40]
+
+console.log(새어레이);
+// [3, 2]
+```
+
+<br><br>
+
+### Array 자주 쓰는 함수 - map()
+
+<br>
+
+-   `map()` 함수는 array 자료 전부 변형할 때 사용하는 함수
+-   `map()` 함수는 **원본을 변형시키지 않기 때문**에 결과를 변수에 저장해서 사용해야 한다.
+
+```javascript
+let 어레이 = [7, 3, 5, 2, 40];
+
+// a는 array에 있던 자료들
+let 새어레이 = 어레이.map(function (a) {
+    return a * 4;
+});
+
+console.log(새어레이);
+// [28, 12, 20, 8, 160]
+```
+
+<br><br>
+
+### DOM (Document Object Model)
+
+<br>
+
+자바스크립트가 html을 어떻게 조작할까? 이는 DOM이 있기에 가능한데, DOM은 HTML을 파싱한 결과물이다. HTML은 단순 텍스트로 이루어진 문자열이라서 브라우저가 이해하도록 객체 자료구조로 변환시켜야 한다. document에 객체를 저장한다는 느낌이다.
+
+```html
+<div style="color : red;">안녕하세요</div>
+```
+
+```javascript
+let document = {
+    div1 : {
+        style : {color : 'red'};
+        innerHTML : '안녕하세요';
+    }
+}
+```
+
+이런식으로 HTML 문서를 파싱해서 object 자료형으로 바꿔주는 것이다. (_실제 DOM의 형태가 저렇지는 않고 간단하게 설명한 것이다._) 실제로는 파싱하여 가장 최소단위인 토큰부터 토큰을 다시 노드로 바꾸는 등 복잡하다. 모던 자바스크립트 딥다이브 667페이지를 참조하자.
+
+<hr>
+
+-   script 태그 위치의 중요성
+
+HTML을 파싱하여 DOM을 생성하는 것은 위에서부터 아래로 차례로 읽어나가며 진행된다.
+
+```html
+<script>
+    document.getElementById('test').innerHTML = '안녕';
+</script>
+
+<p id="test">임시글자</p>
+```
+
+이 코드는 당연히 에러가 날 것이다. 위에서부터 읽어내려오며 파싱을 하고 있는데 아직 DOM에 추가하지도 않은 p 태그를 불러오려고 하니까.
+
+<br>
+
+1. head의 script 태그
+2. body 마지막의 script 태그
+3. 외부 자바스크립트 파일
+
+뭔가 이상하다면 이 경우에 HTML이 파싱이 됐는지 안됐는지 잘 생각해보자. html 파일 내부의 script 태그에 자바스크립트 코드를 작성할 때는 웬만하면 body 끝에다가 작성하자. **HTML을 파싱하다가 script 태그를 만나면 HTML 파싱을 멈추고 자바스크립트 파싱을 하기 때문에, head에 작성하면 문제가 생긴다.**
+
+<br>
+
+외부 자바스크립트 파일을 불러올 때 **src** 속성을 주는 이유가 바로 이때문이다. 위에서부터 차례대로 코드를 실행한다는 것은 **동기적**으로 실행하고 있다는 의미이다. HTML5 이후 추가된 script src 속성에는 `async`와 `defer`가 있다. 두 속성 다 비동기적으로 js 파일을 로드해온다. HTML을 파싱해오면서 동시에 js파일을 로드한다는 의미이다.
+
+-   `<script async src="js파일"></script>`
+    -   HTML 파싱, js파일 로드 동시 -> js파일 로드 다되면 HTML 파싱 멈추고 js 파싱, 실행
+-   `<script defer src="js파일"></script>`
+    -   HTML 파싱, js파일 로드 동시 -> HTML 파싱 끝나면 그때 js 파싱, 실행
+
+<hr>
+
+코딩애플 강의에서는 자바스크립트 실행을 약간 나중으로 미루는 방법을 addEventListener 방식으로 소개했다. **이 코드는 HTML 전부 다 읽고 실행해주세요**라는 의미이다. 자바스크립트 파일을 어디에 작성하는지 위치를 내가 정할 수 없을 경우에 유용한 방법이기는 하지만, 개인적인 생각으로 잘 안쓸듯하다.
+
+```javascript
+// jQuery
+$(document).ready(function() {실행할 코드})
+
+// javascript
+document.addEventListener('DOMContentLoaded', function() {실행할 코드})
+```
+
+```html
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('test').innerHTML = '안녕';
+    });
+</script>
+
+<p id="test">임시글자</p>
+```
+
+<br>
+
+**load 이벤트리스너**를 사용하면, DOM 생성뿐만 아니라 이미지, css, js파일 로드 모두 체크 가능하다.
+
+```javascript
+셀렉터로찾은이미지.addEventListener('load', function () {
+    // 이미지 로드 완료 시 실행할 코드
+});
+```
+
+하지만, 만약 외부 자바스크립트 파일에 load를 작성해놓으면 js파일보다 이미지가 더 먼저 로드되는 경우에는 이벤트 발생 체크를 못할 것이다.
+
+```javascript
+// jQuery
+$(window).on('load', function () {
+    // document 안의 이미지, js 파일 포함 전부 로드가
+    // 되었을 경우 실행할 코드
+});
+
+window.addEventListener('load', function () {
+    // document 안의 이미지, js 파일 포함 전부 로드가
+    // 되었을 경우 실행할 코드
+});
+```
+
+이렇게 window에 붙혀도 된다.
