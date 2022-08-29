@@ -801,3 +801,103 @@ window.addEventListener('load', function () {
 ```
 
 이렇게 window에 붙혀도 된다.
+
+<br><br>
+
+### localStorage
+
+<br>
+
+쇼핑몰 장바구니 기능을 만든다고 하자. 장바구니에 물품을 담는다고 쳤을 때, 저장해야할 공간이 필요할 것이다. (현재 서버는 없다고 가정) 이때, 변수에 저장하는 것은 적합하지 않다. **변수는 브라우저 새로고침 시 초기화 되기 때문**이다. 그래서 생각한 방법이 **브라우저 안에 localStorage에 몰래 데이터를 저장하는 방법**이다.
+
+<br>
+
+크롬의 개발자도구에서 Application에 가보면 Storage가 있다.
+
+-   localStorage, sessionStorage
+    -   `key: value` 형태로 저장 가능
+    -   `localStorage` : 사이트 재접속해도 유지 (유저가 브라우저 청소하지 않는 이상)
+    -   `sessionStorage` : 사이트 나가면 자동 삭제
+-   IndexedDB
+    -   데이터가 크고 복잡할 때 구조화 시켜서 저장 시
+-   Cookies
+    -   유저의 인증 정보, 보통 로그인정보 저장
+-   Cache Storage
+    -   웹 사이트 접속했을 때 html css js 파일을 새로 다운받는 것이 아니라 하드에 몰래 저장하는 것
+
+<br>
+
+localStorage, sessionStorage의 **용량은 약 5MB**, 그리고 array나 object 이런거는 저장 못하고 **문자/숫자만 저장 가능**하다. 문자만 5MB는 엄청난 양이다. 걱정 ㄴㄴ
+
+<br>
+
+### localStorage 사용법
+
+-   sessionStorage는 local만 session으로 바꿔주면 됨
+
+```javascript
+// 로컬스토리지에 데이터 저장
+localStorage.setItem('key', 'value');
+
+// 로컬스토리지 데이터 출력
+localStorage.getItem('key');
+
+// 로컬스토리지 데이터 삭제
+localStorage.removeItem('key');
+```
+
+<br>
+
+localStorage에 array, object를 그냥 저장하면 깨져서 저장된다. 문자만 저장되니까.
+
+```javascript
+localStorage.setItem('num', [1, 2, 3]);
+// num   1, 2, 3
+// 대괄호가 사라지고 그냥 1, 2, 3만 저장된거
+```
+
+그래서 array, object 저장하고 싶으면 **JSON으로 변환해서 저장해야한다.** JSON은 문자 취급을 받기 때문이다.
+
+-   `JSON.stringify()` : array/object -> JSON
+-   `JSON.parse()` : JSON -> array/object
+
+```javascript
+let arrTest = [1, 2, 3];
+let newArrTest = JSON.stringify(arrTest);
+
+localStorage.setItem('num', newwArrTest);
+let getArrTest = localStorage.getItem('num');
+console.log(JSON.parse(getArrTest));
+```
+
+<br>
+
+localStorage에 저장된 데이터를 수정하는 함수는 없다. 따라서 아래의 과정을 수행한다.
+
+1. 자료를 꺼낸다
+2. 꺼낸 자료를 수정한다.
+3. 다시 localStorage에 수정한 자료를 넣는다.
+
+<br>
+
+추가로, localStorage 내부에 값이 있나 없나 확인할 때 사용했는데 find와 findIndex 함수는 **배열**의 요소에 관한 함수이다.
+
+-   `.find( (a) => {return } )`
+-   `.findIndex( (a) => {return } )`
+
+둘다 콜백함수 써줘야하고, 나는 findIndex 함수 이용했음. findIndex 함수는 배열 내부 요소의 값에 없다면 -1을 return, 있다면 해당하는 인덱스 번호를 return
+
+```javascript
+let outItem = JSON.parse(localStorage.getItem('cart'));
+let outItemIndex = outItem.findIndex((a) => {
+    return a === storageItem;
+});
+
+if (outItemIndex === -1) {
+    outItem.push(storageItem);
+    localStorage.setItem('cart', JSON.stringify(outItem));
+    alert('장바구니에 등록되었습니다.');
+} else {
+    alert('장바구니에 이미 물품이 있습니다.');
+}
+```
