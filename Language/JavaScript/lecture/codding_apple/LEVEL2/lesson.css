@@ -61,7 +61,7 @@
 .slide-container {
     width: 300vw;
     display: flex;
-    transition: all 1s;
+    /* transition: all 1s; */
 }
 
 .slide-box {

@@ -901,3 +901,97 @@ if (outItemIndex === -1) {
     alert('장바구니에 이미 물품이 있습니다.');
 }
 ```
+
+<br><br>
+
+### scroll 애니메이션 심화
+
+<br>
+
+LEVEL2 scroll에서는 one-way 방식을 생각했다면, 이제는 간단한 1차함수를 도입한다.
+
+```javascript
+window.addEventListener("scroll", function () {
+    let 높이 = this.window.scrollY;
+    let y = (-1 / 500) * 높이 + 115 / 50;
+    let z = (-1 / 5000) * 높이 + 565 / 500;
+    
+    this.document.querySelectorAll(".card-box")[0].style.opacity = y;
+    this.document.querySelectorAll(
+        ".card-box"
+    )[0].style.transform = `scale(${z})`;
+    console.log(z);
+});
+```
+
+예를 들어, 스크롤 650px ~ 1150px 구간에 opacity를 1~0으로 조정하기를 원한다고 하면, 간단한 함수 개념을 도입한다. 
+
+```javascript
+y = 650 * a + b
+y = 1150 * a + b
+
+식 2개, 미지수 2개니까 값 구할 수 있음
+```
+
+<br><br>
+
+### 캐러셀 심화 (스와이프)
+
+<br>
+
+캐러셀을 드래그 했을 때 다음 사진으로 넘어가냐 마냐 하는 것은 마우스에 관련된 이벤트를 추가로 학습할 필요가 있다.
+
+- `mousedown` : 어떤 요소에 마우스버튼 눌렀을 때
+- `mouseup` : 어떤 요소에 마우스버튼 뗐을 때
+- `mousemove` : 어떤 요소 위에서 마우스 이동할 때
+
+<br>
+
+추가적인 이벤트 관련 함수
+- `e.clientX` : 현재 마우스 X 좌표
+- `e.clientY` : 현재 마우스 Y 좌표
+
+<br>
+
+모바일 관련
+
+- `touchstart` : 터치 했을 때
+- `touchmove` : 터치하고 드래그 할 때
+- `touchend` : 터치 뗐을 때
+
+<br>
+
+모바일 관련 이벤트 함수
+
+- `e.touches[0].clientX` : 손가락 여러 개 눌릴 수 있으니까 지정해줘야함
+- `e.changedTouches[0].clientX` : touchend에는 `touches[0]`이 아닌 `changedTouches[0]`을 해줘야 함
+
+실습 예제는 [LEVEL2 - lesson.js](https://github.com/Shin-Jae-Yoon/TIL/blob/master/Language/JavaScript/lecture/codding_apple/LEVEL2/lesson.js)를 참고하도록 하자.
+
+<br><br>
+
+### switch 문법
+
+<br>
+
+- switch는 if문과 비슷한 역할을 한다.
+- 소괄호 안에 특정 값을 넣어서 **조건 분기**를 일으키는 것이다.
+- 용도가 끝나면 `break`로 switch문을 빠져나간다.
+- 즉, break가 없다면 밑에 코드도 다 실행할 것
+- if는 다양한 조건식 가능하지만, switch는 변수 1개만 테스트 가능
+- `default`로 어떤 case에도 해당 안될 때를 지정할 수 있음
+
+```javascript
+let 변수 = 2 + 2;
+
+switch (변수) {
+    case 3:
+        alert('변수가 3이네요');
+        break;
+    case 4:
+        alert('변수가 4이네요');
+        break;
+    default:
+        alert('아무것도 해당안됨');
+}
+```

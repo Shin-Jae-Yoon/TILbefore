@@ -119,12 +119,101 @@ document.querySelector(".before-btn").addEventListener("click", 이전버튼클�
 
 document.querySelector(".after-btn").addEventListener("click", 다음버튼클릭);
 
+// 캐러셀 심화
+let 시작좌표 = 0;
+let 눌렀냐 = false;
+
+document
+    .querySelectorAll(".slide-box")[0]
+    .addEventListener("mousedown", function (e) {
+        시작좌표 = e.clientX;
+        눌렀냐 = true;
+    });
+
+document
+    .querySelectorAll(".slide-box")[0]
+    .addEventListener("mousemove", function (e) {
+        if (눌렀냐 === true) {
+            document.querySelector(
+                ".slide-container"
+            ).style.transform = `translateX(${e.clientX - 시작좌표}px)`;
+        }
+    });
+
+document
+    .querySelectorAll(".slide-box")[0]
+    .addEventListener("mouseup", function (e) {
+        눌렀냐 = false;
+        console.log(e.clientX - 시작좌표);
+
+        if (e.clientX - 시작좌표 < -100) {
+            document.querySelector(".slide-container").style.transform =
+                "translateX(-100vw)";
+            document.querySelector(".slide-container").style.transition =
+                "all 0.5s";
+        } else {
+            document.querySelector(".slide-container").style.transform =
+                "translateX(0vw)";
+            document.querySelector(".slide-container").style.transition =
+                "all 0.5s";
+        }
+
+        setTimeout(() => {
+            document.querySelector(".slide-container").style.transition =
+                "none";
+        }, 500);
+    });
+
+// 캐러셀 심화 모바일
+document
+    .querySelectorAll(".slide-box")[0]
+    .addEventListener("touchstart", function (e) {
+        시작좌표 = e.touches[0].clientX;
+        눌렀냐 = true;
+    });
+
+document
+    .querySelectorAll(".slide-box")[0]
+    .addEventListener("touchmove", function (e) {
+        if (눌렀냐 === true) {
+            document.querySelector(
+                ".slide-container"
+            ).style.transform = `translateX(${
+                e.touches[0].clientX - 시작좌표
+            }px)`;
+        }
+    });
+
+document
+    .querySelectorAll(".slide-box")[0]
+    .addEventListener("touchend", function (e) {
+        눌렀냐 = false;
+        console.log(e.changedTouches[0].clientX - 시작좌표);
+
+        if (e.changedTouches[0].clientX - 시작좌표 < -100) {
+            document.querySelector(".slide-container").style.transform =
+                "translateX(-100vw)";
+            document.querySelector(".slide-container").style.transition =
+                "all 0.5s";
+        } else {
+            document.querySelector(".slide-container").style.transform =
+                "translateX(0vw)";
+            document.querySelector(".slide-container").style.transition =
+                "all 0.5s";
+        }
+
+        setTimeout(() => {
+            document.querySelector(".slide-container").style.transition =
+                "none";
+        }, 500);
+    });
+
 // 회원약관 알림창
 document.querySelector(".lorem").addEventListener("scroll", function () {
     let 스크롤양 = document.querySelector(".lorem").scrollTop;
     let 실제높이 = document.querySelector(".lorem").scrollHeight;
     let 눈높이 = document.querySelector(".lorem").clientHeight;
-    console.log(스크롤양, 실제높이, 눈높이);
+    // console.log(스크롤양, 실제높이, 눈높이);
 
     if (스크롤양 + 눈높이 > 실제높이 - 10) {
         alert("약관을 모두 읽으셨네요!");
@@ -143,7 +232,7 @@ window.addEventListener("scroll", function () {
     let 페이지눈높이 = document.querySelector("html").clientHeight;
     let 페이지스크롤양 = document.querySelector("html").scrollTop;
     let 스크롤퍼센트 = (페이지스크롤양 / (페이지실제높이 - 페이지눈높이)) * 100;
-    console.log(스크롤퍼센트);
+    // console.log(스크롤퍼센트);
 
     this.document.querySelector(".page_progress").style.width =
         스크롤퍼센트 + "%";
