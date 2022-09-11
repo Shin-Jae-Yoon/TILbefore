@@ -18,3 +18,7 @@
 
 1. 인텔리제이 pro버전 다운로드 체크는 전부 다 체크하고 맨 밑에 association만 java파일 연관 체크
 2. 깃허브 권한 설정으로 아이디 연동
+
+<br>
+
+[do it 자바 프로그래밍 입문 깃허브](https://github.com/easyspubjava)
