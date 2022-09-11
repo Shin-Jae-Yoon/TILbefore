@@ -177,7 +177,7 @@ public class Constant {
 
 <br>
 
-### Java 리터럴
+## Java 리터럴
 
 - 리터럴(literal)은 프로그램에서 사용하는 모든 숫자, 문자, 논리값을 일컫는 말
 - 리터럴 혹은 리터럴 상수라고 함
@@ -189,3 +189,91 @@ public class Constant {
 <br>
 
 long형에서 식별자 L을 사용해주는 이유가 이때문이다. 자바에서 정수를 표현하는 메모리의 기본 크기는 4바이트인데, 상수 풀에서도 마찬가지다. 리터럴은 int형으로 처리되는데 long형은 4바이트 크기에 들어갈 수 없어서 8바이트로 처리하라고 컴파일러에게 알려주어야 한다. 이 때문에 **이 리터럴은 long형으로 저장되어야 한다는 의미로 리터럴 뒤에 식별자 L 이나 l을 붙혀주는 것**이다.
+
+<br>
+
+## Java 형 변환
+
+형 변환 기본 원칙 (작고 덜 정밀 -> 크고 더 정밀은 자동)
+
+1. **바이트 크기가 작은 자료형 -> 큰 자료형** : 자동으로 형 변환
+2. **덜 정밀한 자료형 -> 더 정밀한 자료형** : 자동으로 형 변환
+
+<p align="center"><img src="./img/img02.png"></img></p>
+
+<br> 
+
+### 묵시적 형 변환 (자동)
+
+<br>
+
+- 바이트 크기가 작은 자료형 -> 큰 자료형으로 대입하는 경우
+
+```java
+byte bNum = 10;
+int iNum = bNum;
+```
+1바이트 -> 4바이트이므로 자료 손실 없이 다 저장됨. 남은 3바이트는 0으로 채워짐
+
+<br>
+
+- 덜 정밀한 자료형 -> 더 정밀한 자료형으로 대입하는 경우
+
+```java
+int iNum2 = 20;
+float fNum = iNum2;
+```
+4바이트 -> 4바이트이지만, float 자료형이 더 정밀하게 표현가능해서 변환됨
+
+<br>
+
+- 연산 중 자동 형 변환
+
+```java
+int iNum = 20;
+float fNum = iNum;
+dobule dNum;
+dNum = fNum + iNum;
+```
+
+대입 전 float + int 해서 float형으로 먼저 되고, float -> double로 형 변환 됨.
+
+<br>
+
+### 명시적 형 변환 (강제)
+
+<br>
+
+- 바이트 크기가 큰 자료형 -> 작은 자료형
+
+```java
+int iNum = 10;
+byte bNum = (byte)iNum;
+System.out.println(bNum);
+// 10
+
+int iNum2 = 1000;
+byte bNum2 = (byte)iNum2;
+System.out.println(bNum2);
+// -24
+```
+
+4바이트 -> 1바이트이므로 자료 손실 발생 가능하다. <br>
+예를 들어, 10은 1바이트에 표현 가능하니까 자료손실 X <br>
+하지만, 1000의 경우 byte 범위 (-128~127) 벗어나니까 자료손실 O
+
+<br>
+
+- 더 정밀한 자료형 -> 덜 정밀한 자료형
+
+```java
+double dNum = 3.14;
+int iNum = (int)dNum;
+
+System.out.println(dNum);
+System.out.println(iNum);
+// 3.14
+// 3
+```
+
+더 정밀 -> 덜 정밀이니까 자료 손실 발생 가능. 실수의 소수점 이하 부분이 생략되고 정수 부분만 대입되는 것을 확인 가능
