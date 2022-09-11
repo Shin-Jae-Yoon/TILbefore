@@ -277,3 +277,28 @@ System.out.println(iNum);
 ```
 
 더 정밀 -> 덜 정밀이니까 자료 손실 발생 가능. 실수의 소수점 이하 부분이 생략되고 정수 부분만 대입되는 것을 확인 가능
+
+<br>
+
+- 연산 중 형 변환
+
+```java
+package chapter2;
+
+public class ExplicitConversion {
+    public static void main(String[] args) {
+        double dNum1 = 1.2;
+        float fNum2 = 0.9F;
+
+        int iNum3 = (int)dNum1 + (int)fNum2;
+        int iNum4 = (int)(dNum1 + fNum2);
+        System.out.println(iNum3);
+        System.out.println(iNum4);
+    }
+}
+
+// 1
+// 2
+```
+
+형 변환이 언제 이루어지는 지도 key point. 위에는 형 변환을 하고 더하기 때문에 소수점 아래를 버려버리면 `1 + 0 = 1`의 결과가 나오고, 아래에는 더한 이후 형 변환을 하기 때문에 `1.2 + 0.9 = 2.1을 소수점 아래 버리면 2`이다.
