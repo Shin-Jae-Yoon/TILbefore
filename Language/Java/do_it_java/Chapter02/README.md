@@ -86,10 +86,30 @@ char myChar = 'A';
 
 <br>
 
+### 문자형 - 유니코드
+
 유니코드를 표현하는 인코딩 방법은 **UTF-8**, **UTF-16**이 있음 <br>
 **자바의 기본 인코딩 방식은 모든 문자를 2바이트로 표현하는 UTF-16** <br><br>
 
 모두 2바이트로 표현하니까 알파벳 같은 자료(1바이트 자료)를 저장하는 경우 낭비가 있을 수 있음. 반면에, UTF-8은 각 문자마다 1바이트에서 4바이트를 사용하여 문자를 나타내는 방식임. 따라서, UTF-8은 UTF-16에 비해 메모리 낭비가 적고 전송 속도가 빠름. 이러한 특성으로 인터넷에서 많이 사용 (예를 들어, HTML emmet 해보면 UTF-8로 나옴)
+
+<br>
+
+- `\u`를 붙히고 뒤에 유니코드를 적는다.
+- [한글 유니코드](https://www.unicode.org/charts/PDF/UAC00.pdf)에서 코드 참조
+
+```java
+package chapter2;
+
+public class ExQ5 {
+    public static void main(String[] args) {
+        char ch = '\uAE00';
+        System.out.println(ch);
+    }
+}
+
+// 글
+```
 
 <br>
 
