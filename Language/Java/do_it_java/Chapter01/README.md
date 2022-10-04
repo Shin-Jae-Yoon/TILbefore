@@ -1,4 +1,4 @@
-# Chapter 01 - Java Programming
+# Chapter 01 - 자바 프로그래밍
 
 <br>
 
