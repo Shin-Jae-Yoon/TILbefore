@@ -1,7 +1,5 @@
 # Chapter 04 - 자바의 제어문
 
-<br>
-
 ## Java 조건문
 
 ### Java if문
