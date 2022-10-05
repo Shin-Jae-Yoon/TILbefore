@@ -448,3 +448,367 @@ public class StudentTest2 {
 - `주소 값` = `해시 코드(hash code) 값`
 - 해시 코드 값은 자바 가상 머신(JVM)에서 객체가 생성되었을 때, **생성된 객체에 할당하는 가상 주소 값**
 - 즉, `student1`이 참조 변수, `주소 값`이 참조 값
+
+<br>
+
+## 생성자
+
+```java
+package constructor;
+
+public class Person {
+    String name;
+    float height;
+    float weight;
+}
+```
+
+```java
+package constructor;
+
+public class PersonTest {
+    public static void main(String[] args) {
+        Person personLee = new Person();
+    }
+}
+```
+
+- 클래스의 멤버 변수는 메서드에 의해 값이 변경될 수도 있지만, 처음 클래스를 생성할 때 값을 정해야 하는 경우도 있음
+- 생성자 : 클래스 처음 생성 시, 멤버 변수나 상수를 초기화하는 것
+
+<br>
+
+**디폴트 생성자** <br>
+
+디폴트 생성자(default constructor) : 생성자가 없는 클래스는 클래스 파일을 컴파일할 때 자바 컴파일러에서 자동으로 생성자를 만들어주는데, 이때, 자동으로 만들어진 생성자
+
+```java
+package constructor;
+
+public class Person {
+    String name;
+    float height;
+    float weight;
+
+    // 자바 컴파일러가 자동으로 제공하는 디폴트 생성자
+    public Person() {}
+}
+```
+
+<br>
+
+### 생성자 만들기
+
+필요한 경우, 프로그래머가 직접 생성자 구현할 수 있음.
+1. 멤버 변수에 대한 값들을 매개변수로 받음
+2. 인스턴스가 생성될 때, 멤버 변수 값들을 초기화
+
+즉, 인스턴스가 생성됨과 동시에 멤버 변수의 값을 지정하고 인스턴스를 초기화하기 위해 생성자를 직접 구현해서 사용하기도 함.
+
+<br>
+
+**생성자 직접 구현한 경우**
+- 프로그래머가 직접 구현한 새로운 생성자는 문자열 String형 매개변수를 입력받아서 이름을 지정함.
+```java
+package constructor;
+
+public class Perseon {
+    String name;
+    float height;
+    float weight;
+
+    public Person(String pname) {
+        name = pname;
+    }
+}
+```
+
+<br>
+
+**생성자를 구현하여 디폴트 생성자 없는 경우**
+```java
+package constructor;
+
+public class PersonTest {
+    public static void main(String[] args) {
+        Person personLee = new Person();
+    }
+}
+```
+
+오류 발생. 위에서 String 문자열 하나를 매개변수로 받도록 하는 생성자를 만들면서, **default 생성자가 없음**. 뭐, 쓰고싶으면 디폴트 생성자 하나 만들어서 사용하면 됨
+
+<br>
+
+**생성자를 구현하고 디폴트 생성자도 구현**
+```java
+package constructor;
+
+public class Perseon {
+    String name;
+    float height;
+    float weight;
+
+    public Person() {}
+
+    public Person(String pname) {
+        name = pname;
+    }
+}
+```
+
+이 경우, 클래스를 실행하면 **두 생성자 중 하나를 선택해서 사용 가능**. 보안 수업 생각해보면 라이브러리 불러와서 쓸 때 import로 막 받아와서 쓰잖음? 그게 클래스를 불러와서 사용할 수 있는거. 그때 그냥 `new keygenerator()` 이런식으로 쓰기도 하지만 매개변수로 값을 넣어서도 쓸 수 있었음. 이는 라이브러리 열어보면 생성자가 여러 개 정의되어 있는 것을 확인가능 !
+
+<br>
+
+### 생성자 오버로드
+
+- 클래스에 생성자가 두 개 이상 제공되는 경우가 **생성자 오버로드(constructor overload)**
+- 매개변수가 있는 생성자를 추가한다고 해서 디폴트 생성자를 꼭 추가해야 하는 것은 아님
+
+<br>
+
+    객체 지향 프로그램에서 메서드 이름이 같고
+    매개변수만 다른 경우를 "오버로드"라고 함
+
+<br>
+
+학생이 생성될 때 반드시 학번이 있어야 한다면, 아래 처럼 생성자 제공 가능
+```java
+public class Student {
+    int studentID;
+
+    public Student(int studentID) {
+        this.studentID = studentID;
+    }
+}
+```
+- 학번을 매개변수로 입력받아, Student 클래스를 생성하는 생성자를 추가함
+- 학생을 생성할 때 학번이 꼭 필요하니까, 그냥 만들면 안만들어짐
+
+<br>
+
+### this 맛보기
+
+```java
+public class Student {
+    int studentID;
+
+    public Student(int studentID) {
+        studentID = studentID
+    }
+}
+```
+
+- 현재, 인스턴스 변수인 studentID와 매개변수로 전달받은 studentID가 있음
+- 나의 마음은 앞의 studentID은 인스턴스 변수로, 뒤의 studentID는 매개변수로 전달받은 것으로 생각할 수 있다. 하지만, 컴파일러는 그렇게 하지 못한다.
+
+```java
+public class Student {
+    int studentID;
+
+    public Student(int mystudentID) {
+        studentID = mystudentID
+    }
+}
+```
+
+- 그럼 인스턴스 변수와 매개변수로 전달받은 변수의 이름을 바꾸면 된다. 위에서 pname 사용한 것처럼. 그러나, 이렇게하면 인생이 피곤하지 않을까? 그래서 this 투입
+
+```java
+public class Student {
+    int studentID;
+
+    public Student(int studentID) {
+        this.studentID = studentID;
+    }
+}
+```
+- 매개변수로 전달받은 것은 studentID. 납득하지?
+- this는 인스턴스 자기 자신을 가리킨다. 이거 지금 내가 만든 클래스라서 명확하게 인스턴스랑은 다른거 아닌가?라고 생각하고 삐딱선 탄 것 같은데.. 그냥 객체 자기 자신을 가리킨다고 생각하자.
+
+<br>
+
+추가로, 정보 은닉과 관련된 이야기인데, 어떤 멤버 변수들은 외부 클래스에서 값을 지정하지 못하는 경우도 있다. (ex. `personLee.name = "이소룡"` 이런거 안된다는 말) public이냐 private이냐 등등 접근제어자 신경 안쓸거면 **매개변수가 있는 생성자를 구현하고 이를 사용하는 것이 편리한 경우가 많다.**
+
+<br>
+
+## 참조 자료형
+
+<br>
+
+- 자료형 = 기본 자료형(int, float 등) + 참조 자료형(String, Date, Student 등)
+- 즉, 필요하다면 클래스를 분리하여 참조 자료형으로 다른 클래스를 참조하여 코드를 짤 수 있음
+- 참조 자료형은 프로그래머가 필요에 의해 만든 클래스 or JDK에서 제공하느 클래스를 사용할 수 있음
+
+```java
+package reference;
+
+public class Subject {
+    String SubjectName;
+    int scorePoint;
+}
+
+public class Student3 {
+    int studentID;
+    String studentName;
+    Subject korean;
+    Subject math;
+}
+```
+
+<br>
+
+## 정보 은닉
+
+### 접근 제어자
+
+접근 제어자(access modifier)는 **클래스 내부의 변수/메서드/생성자에 대한 접근 권한을 지정**할 수 있는 예약어이다. 
+
+- public : public으로 선언한 변수나 메서드는 **외부 클래스에서 접근 가능**
+- private : private으로 선언한 변수나 메서드는 **외부 클래스에서 접근 불가능**
+
+```java
+package hiding;
+
+public class Student {
+    int studentID;
+    private String studentName;
+    int grade;
+    String address;
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+}
+```
+
+```java
+package hiding;
+
+public class StudentTest {
+    public static void main(String[] args) {
+        Student studentLee = new Student();
+        studentLee.studentName = "이상원";
+
+        System.out.println(studentLee.getStudentName());
+    }
+}
+```
+
+Student 클래스의 studentName 변수의 접근 제어자를 private으로 바꾸고 StudentTest 클래스에서 studentName을 접근하려고 하니 바로 오류가 출력된다. `studentLee.studentName = "이상원";` 여기부터 바로 오류 출력
+
+<br>
+
+접근 제어자가 public일 때는 외부 클래스인 StudentTest에서 접근 가능했지만, private으로 바뀌자 접근이 불가능해졌다.
+
+<br>
+
+### get(), set() 메서드
+
+private으로 선언한 studentName 변수를 외부 코드에서 사용하려면 어떻게?
+- studentName 변수를 사용할 수 있도록 public 메서드를 제공해야 함
+- 그것이 바로 `get()`, `set()` 메서드.
+- 값을 얻는 get() 메서드를 getter, 값을 저장하는 set() 메서드를 setter 라고도 함
+
+<br>
+
+```java
+package hiding;
+
+public class Student {
+    int studentID;
+    private String studentName;
+    int grade;
+    String address;
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+}
+```
+
+```java
+package hiding;
+
+public class StudentTest {
+    public static void main(String[] args) {
+        Student studentLee = new Student();
+        // studentLee.studentName = "이상원";
+        studentLee.setStudentName("이상원");
+
+        System.out.println(studentLee.getStudentName());
+    }
+}
+```
+
+- studentName 변수에 직접 값을 대입하는 방식 (X)
+- public인 setStudentName() 메서드를 활용하여 값 대입
+
+<br>
+
+### 정보 은닉이란?
+
+그래서 변수를 public으로 선언하고 접근하는 것과 private으로 선언하고 public인 메서드로 접근하는 것의 차이가 뭔데? 어차피 접근하는거 똑같은데
+
+<br>
+
+```java
+public class Mydate {
+    public int day;
+    public int month;
+    public int year;
+}
+```
+
+```java
+public class MydateTest {
+    public static void main(String[] args) {
+        Mydate date = new Mydate();
+        date.month = 2;
+        date.day = 31;
+        date.year = 2022;
+    }
+}
+```
+
+당연히 Mydate 클래스에 변수들을 전부 public으로 선언했으니까 막 접근해서 값 대입 가능하다. 그러나, 2월은 알다시피 28일이나 29일까지인데 31을 넣어버렸다. **public으로 선언하면 접근이 제한되지 않으니까 정보의 오류가 발생할 수 있다.** 
+
+<br>
+
+그래서, 단순히 값을 변수에 대입하는 형태가 아니라, 메서드 형태로 값을 대입하도록 하면 if문과 같은 제어문을 넣어서 잘못된 값인지 아닌지 알려줄 수 있다.
+
+<br>
+
+```java
+public class Mydate {
+    private int day;
+    private int month;
+    private int year;
+
+    public setDay(int dau) {
+        if (month == 2) {
+            if (day < 1 || day > 28) {
+                System.out.println("오류입니다.");
+            } else {
+                this.day = day;
+            }
+        }
+    }
+}
+```
+
+|접근 제어자|설명|
+|:--:|:--:|
+|public|외부 클래스 어디에서나 접근 O|
+|protected|같은 패키지 내부, 상속 관계의 클래스에서만 접근 O, 그외 X|
+|아무것도 없는 경우| default, 같은 패키지 내부에서만 접근 O|
+|private|같은 클래스 내부에서만 접근 O|
