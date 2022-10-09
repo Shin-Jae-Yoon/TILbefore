@@ -1,13 +1,16 @@
 # 스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술
 
-- 인프런 김영한님의 첫 번째 강의
-- 해당 [강의 링크](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%9E%85%EB%AC%B8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8)
+-   인프런 김영한님의 첫 번째 강의
+-   해당 [강의 링크](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%9E%85%EB%AC%B8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8)
 
 <br>
 
-## 프로젝트 생성
+## 프로젝트 환경설정
+
+### 프로젝트 생성
 
 1. https://start.spring.io/ 스프링 프로젝트 생성
+
     - 프로젝트 생성
         - Project : Gradle
         - Spring Bookt : (SNAPSHOT), (M~)는 정식 버전 아니니까 아무 것도 없고 숫자만 써진 버전으로 설정
@@ -23,6 +26,7 @@
         - Thymeleaf 추가 (프리마커 쓰는 회사도 있음)
 
 2. 인텔리제이로 프로젝트 오픈
+
     - 자바11로 프로젝트 생성했으니, 인텔리제이도 세팅 변경
     - 프로젝트 JDK 설정
         - File - Project Structure - Project Settings - Project
@@ -35,8 +39,6 @@
             - Run tests using : Gradle -> IntelliJ (속도향상)
             - Gradle JVM : 11 Oracle OpenJDK
 
-
-
 3. 프로젝트 내용물 설명
     - gradle/wrapper : gradle 관련하여 사용하는 폴더
     - src : 기본적으로 main/test 두 갈래 생성
@@ -45,6 +47,7 @@
     - gitignore : github에 올릴 때 제외할 파일들
     - gradlew, bradlew.bat, settings.gradle : 그래들 설정 관련
     - build.gradle : 예전에는 실제로 타이핑하고 코드 잤으나, 최근에는 start.spring.io와 같은 스프링부트 덕에 설정 파일이 제공됨
+
 ```java
 plugins {
     // 선택한 스프링부트 버전과 자바 언어 등
@@ -105,41 +108,137 @@ public class HelloSpringApplication {
 
 <br>
 
-## 라이브러리 살펴보기
+### 라이브러리 살펴보기
 
-- Maven, Gradle 같은 빌드 툴은 의존관계를 관리해준다. 실제 우리가 추가한 의존관계는 `Spring Web, Thymeleaf`인데, 외부 라이브러리를 확인해보면 수많은 라이브러리가 다운받아져있다. **의존관계에 따라 자기가 필요한 라이브러리들을 알아서 당겨온다.**
-- 인텔리제이 우측에 작은 Gradle 클릭해보면, 여러 의존관계 살펴볼 수 있음
+-   Maven, Gradle 같은 빌드 툴은 의존관계를 관리해준다. 실제 우리가 추가한 의존관계는 `Spring Web, Thymeleaf`인데, 외부 라이브러리를 확인해보면 수많은 라이브러리가 다운받아져있다. **의존관계에 따라 자기가 필요한 라이브러리들을 알아서 당겨온다.**
+-   인텔리제이 우측에 작은 Gradle 클릭해보면, 여러 의존관계 살펴볼 수 있음
 
 <br>
 
 **compileClassPath : 스프링 부트 라이브러리**
 
-- spring-boot-starter-web
-    - spring-boot-starter-tomcat : 웹서버
-    - spring-webmvc : 웹 MVC
-- spring-boot-starter-thymeleaf : 타임리프 템플릿 엔진 (View)
-    - spring-boot-starter
-        - spring-boot
-            - spring-boog-core
-        - spring-boot-starter-logging
-            - logback
-            - slf4j
+-   spring-boot-starter-web
+    -   spring-boot-starter-tomcat : 웹서버
+    -   spring-webmvc : 웹 MVC
+-   spring-boot-starter-thymeleaf : 타임리프 템플릿 엔진 (View)
 
-- 톰캣은 WAS(Web-Application-Server)이다. 
-    - 예전에는 서버에 톰캣같은 웹서버를 설치해놓고 거기에 자바 코드를 밀어놓는 식으로 개발했음. 웹서버와 개발 라이브러리가 완전히 분리되어 있었음
-    - 최근에는 소스 라이브러리에서 이런 웹서버를 알아서 들고있음(임베디드, 내장) 그래서 자바 메인 메서드만 실행해도 따로 설정 필요없이 웹서버가 뜬다. 8080포트로 들어갈 수도 있음
+    -   spring-boot-starter
+        -   spring-boot
+            -   spring-boog-core
+        -   spring-boot-starter-logging
+            -   logback
+            -   slf4j
 
-- 실무에서, `system.out.println()` 방식으로 출력하지 않고 log를 사용한다.
-    - 심각한 로그를 따로 관리하거나, 로그 파일이 관리가 됨
-    - slf4j는 인터페이스이고 logback은 실제 로그를 어떤 구현체로 출력할 지
-    - 최근에는 slf4j + logback 조합을 보통 사용한다. 성능도 빠르고 지원하는 기능 많음
+-   톰캣은 WAS(Web-Application-Server)이다.
+
+    -   예전에는 서버에 톰캣같은 웹서버를 설치해놓고 거기에 자바 코드를 밀어놓는 식으로 개발했음. 웹서버와 개발 라이브러리가 완전히 분리되어 있었음
+    -   최근에는 소스 라이브러리에서 이런 웹서버를 알아서 들고있음(임베디드, 내장) 그래서 자바 메인 메서드만 실행해도 따로 설정 필요없이 웹서버가 뜬다. 8080포트로 들어갈 수도 있음
+
+-   실무에서, `system.out.println()` 방식으로 출력하지 않고 log를 사용한다.
+    -   심각한 로그를 따로 관리하거나, 로그 파일이 관리가 됨
+    -   slf4j는 인터페이스이고 logback은 실제 로그를 어떤 구현체로 출력할 지
+    -   최근에는 slf4j + logback 조합을 보통 사용한다. 성능도 빠르고 지원하는 기능 많음
 
 <br>
 
 **testCompileClasspath : 테스트 라이브러리**
 
-- spring-boot-starter-test
-    - junit : 테스트 프레임워크 (최근에는 junit 5버전 사용, 핵심)
-    - mockito : 목 라이브러리
-    - assertj : 테스트 코드 작성을 더 쉽게 해주는 라이브러리
-    - spring-test : 스프링 통합 테스트 지원
+-   spring-boot-starter-test
+    -   junit : 테스트 프레임워크 (최근에는 junit 5버전 사용, 핵심)
+    -   mockito : 목 라이브러리
+    -   assertj : 테스트 코드 작성을 더 쉽게 해주는 라이브러리
+    -   spring-test : 스프링 통합 테스트 지원
+
+<br>
+
+### View 환경설정
+
+**Welcome Page 만들기** <br>
+
+`resources/static/` 경로에 `index.html` 파일을 추가하면, welcome page의 기능을 한다. 이는 단순한 정적 페이지이다.
+
+-   [spring boot docs - welcomepage](https://docs.spring.io/spring-boot/docs/current/reference/html/web.html#web.servlet.spring-mvc.welcome-page)
+-   [스프링 공식 튜토리얼](https://spring.io/guides/gs/serving-web-content/)
+
+**thymeleaf 템플릿 엔진** <br>
+
+템플릿 엔진을 사용하여, 동적인 페이지를 구현할 수 있다.
+
+-   [thymeleaf official homepage](https://www.thymeleaf.org/index.html)
+-   [스프링부트 템플릿 엔진 메뉴얼](https://docs.spring.io/spring-boot/docs/current/reference/html/web.html#web.servlet.spring-mvc.template-engines)
+
+<br>
+
+웹 어플리케이션에서 첫 번째 진입점이 바로 **Controller, 컨트롤러**이다.
+
+1. `hello/hellospring/controller` 패키지 생성
+2. 패키지에 `HelloController.java` 생성
+3. `resources/templates/hello.html` 생성
+
+```java
+// HelloController.java
+package hello.hellospring.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class HelloController {
+
+    @GetMapping("hello")
+    public String hello(Model model) {
+        model.addAttribute("data", "hello!!");
+        return "hello";
+    }
+}
+```
+
+-   `@GetMapping("hello")` : get/post 방식 말할 때 그 get이다. `localhost:8080/hello`와 mapping
+-   model의 속성으로 키 : data, 값 : hello!!를 넘긴다.
+-   `return "hello"`로 `/resources/templates/hello`를 찾아서 렌더링 함
+
+```html
+// hello.html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Hello</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <p th:text="'안녕하세요. ' + ${data}">안녕하세요. 손님</p>
+    </body>
+</html>
+```
+
+-   `http://www.thymeleaf.org`를 추가함으로써 타임리프 문법 사용 가능
+
+<p align="center"><img src="./img/img01.png"></img></p>
+
+1. 웹 브라우저에서 `localhost:8080/hello`로 get 요청
+2. 내장된 톰캣이 웹서버의 역할을 하여 받아서 controller로 전달
+3. controller인 helloController의 메서드가 실행된다. 이때 스프링이 Model을 만들어서 model을 controller에 넣어준다.
+4. controller는 이 model에다가 키 : data, 값 : hello!!를 넣는다.
+5. `/resources/templeates/hello`를 찾고 model을 화면에 넘기면서 화면을 렌더링해라
+    - 즉, 컨트롤러에서 리턴 값으로 문자를 반환하면 뷰 리졸버( viewResolver )가 화면을 찾아서 처리하게 된다.
+        - 찾을 때, 스프링 부트 템플릿엔진 기본 viewName에 매핑
+        - `resources:templates/` + {ViewName} + `.html`
+
+<br>
+
+**서버 재시작 없이 View 파일 리로드**
+
+1. `build.gradle`에 의존성 추가 (spring-boot-devtools 라이브러리 설치해준 것)
+    - `developmentOnly 'org.springframework.boot:spring-boot-devtools'`
+2. `/resources/application.properties`에 아래 코드 추가 (필수는 아님)
+
+```java
+spring.devtools.livereload.enabled=true
+spring.devtools.restart.enabled=true
+```
+
+3. File - Settings - Advanced Settings - Compiler에서 `Allow auto-make to start~` 체크
+4. File - Settings - Build, Execution~ - Compiler에서 `Build project automatically` 체크
+
+이제 View 파일 수정하면 한 5초 뒤에 서버가 알아서 리로드 되면서 크롬 가서 새로고침 해보면 확인 가능하다. 만약, 새로고침 없이 보고 싶으면 크롬 확장 프로그램 Livereload 설치하셈
