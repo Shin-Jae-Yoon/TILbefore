@@ -13,7 +13,7 @@
 
     - 프로젝트 생성
         - Project : Gradle
-        - Spring Bookt : (SNAPSHOT), (M~)는 정식 버전 아니니까 아무 것도 없고 숫자만 써진 버전으로 설정
+        - Spring Boot : (SNAPSHOT), (M~)는 정식 버전 아니니까 아무 것도 없고 숫자만 써진 버전으로 설정
         - Language : Java
         - Packaging : Jar
         - Java : 11
@@ -46,7 +46,7 @@
     - src/main/resources : 실제 java 코드 제외한 xml, properties, html 등 나머지 전부
     - gitignore : github에 올릴 때 제외할 파일들
     - gradlew, bradlew.bat, settings.gradle : 그래들 설정 관련
-    - build.gradle : 예전에는 실제로 타이핑하고 코드 잤으나, 최근에는 start.spring.io와 같은 스프링부트 덕에 설정 파일이 제공됨
+    - build.gradle : 예전에는 실제로 타이핑하고 코드 짰으나, 최근에는 start.spring.io와 같은 스프링부트 덕에 설정 파일이 제공됨
 
 ```java
 plugins {
