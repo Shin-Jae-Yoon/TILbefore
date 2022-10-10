@@ -376,6 +376,10 @@ public class CarTest {
 
 <br>
 
+    다이아몬드 표시는 포함 관계를 나타내는 것
+
+<br>
+
 **Player 클래스**
 
 ```java
