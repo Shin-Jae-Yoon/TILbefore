@@ -68,6 +68,40 @@
 3. `sudo update-alternatives --config java` 이거 해보면 알아서 적용 되어있음. 아마 환경설정할때 경로 다 날리고 JAVA_HOME만 냅둬서 그런듯
 4. 저기서 원하는 모드 선택하면 버전 왔다갔다 끝
 
+<br>
+
+### Mac (M1)
+
+homebrew를 이용한 jdk 설치는 인텔 맥을 기반으로 되어있어서, arm 칩셋인 M1은 다른 방식으로 설치하여야 한다.
+
+<br>
+
+[zulu](https://www.azul.com/downloads/?version=java-17-lts&os=macos&architecture=arm-64-bit&package=jdk)에서 제공하는 java 버전, ARM-64bit, JDK를 선택하고 설치가 편한 dmg파일로 설치한다.
+
+- `/usr/libexec/java_home -V` : 설치된 자바 버전 목록
+- `java -version` : 현재 설정된 자바 버전 (상세한 버전)
+- `javac -version` : 현재 설정된 자바 버전 (간단히)
+
+<br>
+
+이후 환경변수 설정을 위하여 zsh 설정 파일을 연다. (bash 쓰면 bash로)
+
+- `code ~/.zshrc`
+    - 혹시 zsh 커맨드가 안먹으면 vscode 명령 팔레트에서 **셀 명령 : PATH에 코드 명령 설치**를 이용하여 설치하자.
+
+```bash
+# JAVA settings
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+alias setJava8='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
+alias setJava11='export JAVA_HOME=$(/usr/libexec/java_home -v 11)'
+alias setJava17='export JAVA_HOME=$(/usr/libexec/java_home -v 17)'
+export PATH=${PATH}:$JAVA_HOME/bin:
+```
+
+이와 같은 코드를 추가한다. alias를 추가해준 이유는 버전 왔다갔다하면서 사용하려고 추가한 것이다.
+
+
+
 ## IntelliJ settings
 
 1. 인텔리제이 pro버전 다운로드 체크는 전부 다 체크하고 맨 밑에 association만 java파일 연관 체크
